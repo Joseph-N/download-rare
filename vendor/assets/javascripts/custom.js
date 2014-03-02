@@ -47,79 +47,79 @@ $('.style-toggle-btn').on('click', function() {
 // Navbar Style Change
 // =================
 
-$('#opt-navbar-dark').on('change', function() {
-	$(".mini-navbar").addClass("mini-navbar-dark");
-	$(".mini-navbar").removeClass("mini-navbar-white");
-	$(".navbar").addClass("navbar-dark");
-	$(".navbar").removeClass("navbar-white");
-	return false;
-});
+// $('#opt-navbar-dark').on('change', function() {
+// 	$(".mini-navbar").addClass("mini-navbar-dark");
+// 	$(".mini-navbar").removeClass("mini-navbar-white");
+// 	$(".navbar").addClass("navbar-dark");
+// 	$(".navbar").removeClass("navbar-white");
+// 	return false;
+// });
 
-$('#opt-navbar-white').on('change', function() {
-	$(".mini-navbar").addClass("mini-navbar-white");
-	$(".mini-navbar").removeClass("mini-navbar-dark");
-	$(".navbar").addClass("navbar-white");
-	$(".navbar").removeClass("navbar-dark");
-	return false;
-});
+// $('#opt-navbar-white').on('change', function() {
+// 	$(".mini-navbar").addClass("mini-navbar-white");
+// 	$(".mini-navbar").removeClass("mini-navbar-dark");
+// 	$(".navbar").addClass("navbar-white");
+// 	$(".navbar").removeClass("navbar-dark");
+// 	return false;
+// });
 
-$('#opt-navbar-mixed').on('change', function() {
-	$(".mini-navbar").addClass("mini-navbar-dark");
-	$(".mini-navbar").removeClass("mini-navbar-white");
-	$(".navbar").addClass("navbar-white");
-	$(".navbar").removeClass("navbar-dark");
-	return false;
-});
+// $('#opt-navbar-mixed').on('change', function() {
+// 	$(".mini-navbar").addClass("mini-navbar-dark");
+// 	$(".mini-navbar").removeClass("mini-navbar-white");
+// 	$(".navbar").addClass("navbar-white");
+// 	$(".navbar").removeClass("navbar-dark");
+// 	return false;
+// });
 
 // Footer Style Change
 // =================
 
-$('#opt-footer-dark').on('change', function() {
-	$("footer").addClass("footer-dark");
-	$("footer").removeClass("footer-white");
-	return false;
-});
+// $('#opt-footer-dark').on('change', function() {
+// 	$("footer").addClass("footer-dark");
+// 	$("footer").removeClass("footer-white");
+// 	return false;
+// });
 
-$('#opt-footer-white').on('change', function() {
-	$("footer").addClass("footer-white");
-	$("footer").removeClass("footer-dark");
-	return false;
-});
+// $('#opt-footer-white').on('change', function() {
+// 	$("footer").addClass("footer-white");
+// 	$("footer").removeClass("footer-dark");
+// 	return false;
+// });
 
 // Body Style Change
 // =================
 
-$('.style-toggle-body .colors > .green').on('click', function() {
-	$("body").addClass("body-green");
-	$("body").removeClass("body-blue");
-	$("body").removeClass("body-orange");
-	$("body").removeClass("body-red");
-	return false;
-});
+// $('.style-toggle-body .colors > .green').on('click', function() {
+// 	$("body").addClass("body-green");
+// 	$("body").removeClass("body-blue");
+// 	$("body").removeClass("body-orange");
+// 	$("body").removeClass("body-red");
+// 	return false;
+// });
 
-$('.style-toggle-body .colors > .blue').on('click', function() {
-	$("body").addClass("body-blue");
-	$("body").removeClass("body-green");
-	$("body").removeClass("body-orange");
-	$("body").removeClass("body-red");
-	return false;
-});
+// $('.style-toggle-body .colors > .blue').on('click', function() {
+// 	$("body").addClass("body-blue");
+// 	$("body").removeClass("body-green");
+// 	$("body").removeClass("body-orange");
+// 	$("body").removeClass("body-red");
+// 	return false;
+// });
 
-$('.style-toggle-body .colors > .orange').on('click', function() {
-	$("body").addClass("body-orange");
-	$("body").removeClass("body-green");
-	$("body").removeClass("body-blue");
-	$("body").removeClass("body-red");
-	return false;
-});
+// $('.style-toggle-body .colors > .orange').on('click', function() {
+// 	$("body").addClass("body-orange");
+// 	$("body").removeClass("body-green");
+// 	$("body").removeClass("body-blue");
+// 	$("body").removeClass("body-red");
+// 	return false;
+// });
 
-$('.style-toggle-body .colors > .red').on('click', function() {
-	$("body").addClass("body-red");
-	$("body").removeClass("body-green");
-	$("body").removeClass("body-blue");
-	$("body").removeClass("body-orange");
-	return false;
-});
+// $('.style-toggle-body .colors > .red').on('click', function() {
+// 	$("body").addClass("body-red");
+// 	$("body").removeClass("body-green");
+// 	$("body").removeClass("body-blue");
+// 	$("body").removeClass("body-orange");
+// 	return false;
+// });
 
 /* ===== Our Services ===== */
 
@@ -138,25 +138,25 @@ $('.pwd-lost > .pwd-lost-q > a').on('click', function() {
 
 /* ===== Sign Up popovers ===== */
 
-$(function(){
-	$('#name').popover();
-});
+// $(function(){
+// 	$('#name').popover();
+// });
 
-$(function(){
-	$('#username').popover();
-});
+// $(function(){
+// 	$('#username').popover();
+// });
 
-$(function(){
-	$('#email').popover();
-});
+// $(function(){
+// 	$('#email').popover();
+// });
 
-$(function(){
-	$('#password').popover();
-});
+// $(function(){
+// 	$('#password').popover();
+// });
 
-$(function(){
-	$('#repeat-password').popover();
-});
+// $(function(){
+// 	$('#repeat-password').popover();
+// });
 
 // Smooth scrolling for UI elements page
 // =====================================
@@ -170,13 +170,3 @@ $(document).ready(function(){
    });
    return false;
 });
-
-// Google Analytics 
-
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-4400411-9', 'z8.ru');
-  ga('send', 'pageview');

@@ -11,6 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= yield :page_css %>
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,500italic,700italic' rel='stylesheet' type='text/css'>
@@ -33,10 +34,12 @@
 	<div class="wrapper">
 	
 	  <!-- Topic Header / breadcrumbs -->
-	  <% render 'layouts/topic_header' %>
+	  <%= yield :topic_header %>
 
 	
 	  <div class="container">
+    <%= render 'shared/flash' %>   
+      
 
 	  	<%= yield %>
 	  
@@ -51,5 +54,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= yield :page_js %>
 
 </body></html>

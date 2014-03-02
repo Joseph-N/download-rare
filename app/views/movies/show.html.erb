@@ -1,0 +1,140 @@
+<%= content_for :page_css do %>
+	<%= stylesheet_link_tag "prettyPhoto", "data-turbolinks-track" => true  %>
+<% end %>
+
+<%= content_for :page_js do %>
+	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "data-turbolinks-track" => true  %>
+	<script>
+	  $("a[rel^='prettyPhoto']").prettyPhoto({
+	  	deeplinking: false
+	  });
+
+	  $('div.raty').raty({
+	     number: 10,
+	     readOnly: true,
+	      path: '/assets',
+	     score: function() {
+	       return $(this).attr('data-score');
+	     }
+
+	  });
+
+	    $('#caroufredsel').carouFredSel({
+			responsive: true,
+			scroll : 4,
+			circular: true,
+			infinite: true,
+			items: {
+			  visible: {
+			      min: 2,
+			      max: 4
+			  }
+			},
+			prev: '#portfolio-next',
+			next: '#portfolio-prev',
+			auto: {
+			  play: false
+			}
+		});
+
+		$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({
+			slideshow:3000,
+			autoplay_slideshow: true,
+			deeplinking: false,
+			overlay_gallery: false,
+			show_title: false
+		});
+	</script>
+<% end %>
+
+<div class="container shop-item">
+<div class="row">
+		  <div class="col-sm-12">
+			<div class="row">
+			  <div class="col-sm-3">
+			    <div class="product-img">
+			    <%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
+				</div>
+			  </div>
+			  <div class="col-sm-9">
+			  <div class="row">
+			  <div class="col-md-8">
+
+			  <div class="row">
+			  <div class="col-md-9">
+				<h3 class="primary-font first-child"><%= @movie["original_title"] %></h3>
+				<div class="raty" data-score="<%= @movie["vote_average"] %>"></div>
+				<span class="text-muted reviews" style="margin-left: 1px">User Rating: <%= @movie["vote_average"]%></span>
+				</div>
+				<div class="col-md-3 text-right">
+				<%= link_to image_tag("imdb.png"), "http://www.imdb.com/title/#{@movie["imdb_id"]}", target: "_blank" %>
+				</div>
+				</div>
+								<p class="text-muted top-20">
+				  <%= @movie["overview"] %>
+				</p>
+				<div class="info-board info-board-green">
+					  <h4>Tagline</h4>
+					  <p><%= @movie["tagline"].present? ? @movie["tagline"] : "No tagline available for this movie" %></p>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto" %>
+					</div>
+					<div class="col-md-6">
+					<%= link_to raw('<i class="fa fa-download"></i> Download'), '#', class: "btn btn-lg btn-green btn-block" %>
+					</div>
+				</div>
+				</div>
+									<div class="col-md-4">
+				<h2 class="headline first-child text-color">
+			  <span class="border-color">Video Intro</span>
+			</h2>
+			</div>
+				</div>
+				
+			  </div>
+			</div>
+			
+			<!-- Item Description -->
+			<div class="row">
+			  <div class="col-sm-12">
+				<h3 class="headline text-color">
+				  <span class="border-color">Screenshots</span>
+	  				<span class="pull-right" id="controls">
+	  					<span id="portfolio-next" class="next black">
+            				<i class="fa fa-arrow-left"></i>
+        				</span>
+			            <span id="portfolio-prev" class="prev black">
+			                <i class="fa fa-arrow-right"></i>
+			            </span>
+					</span>
+				</h3>
+				<div class="row">
+				<div id="caroufredsel">
+
+				<% @backdrops.each do |image| %>
+								<div class="col-md-3 col-xs-12 col-sm-4">
+			    <div class="movie-item">
+			    <a href="<%= @tmdb.image_url("backdrop", "original", image["file_path"])%>" rel="prettyPhoto[gallery1]" title=""><%= image_tag(@tmdb.image_url("backdrop", "w300", image["file_path"]), class: "img-responsive center-block", title: "") if image['file_path'] %></a>
+
+				</div>
+			  </div>
+				
+				<% end %>
+				</div>
+				</div>
+			  </div>
+			</div> <!-- / .row -->
+			<div class="row">
+			  <div class="col-sm-8">
+			  <%= render 'shared/comments' %>
+
+			  </div>
+			  <div class="col-md-4">
+			  </div>
+			</div> <!-- / .row -->
+		  </div>
+		</div>
+		</div>

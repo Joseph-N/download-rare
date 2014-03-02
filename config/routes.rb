@@ -1,7 +1,20 @@
 Downloadrare::Application.routes.draw do
 
+  scope '/admin' do
+    devise_for :admins,  :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+  end
+
   root 'home#index'
-  get "home/index"
+  get '/search/movie' => 'search#movie', as: :search_movie
+  get '/search/tv' => 'search#tv', as: :search_tv
+
+  resources :movies
+  resources :tv_shows do
+    member do
+      get 'season/:season_id' => 'tv_shows#season', as: :season
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

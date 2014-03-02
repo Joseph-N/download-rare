@@ -9,27 +9,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to raw('<i class="fa fa-cloud-download"></i> Download Rare <span>Tiny Quality Downloads</span>'), root_path, class: "navbar-brand" %>
+      <%= link_to raw('<i class="fa fa-lg fa-cloud-download"></i> Download Rare <span>Tiny Quality Downloads</span>'), root_path, class: "navbar-brand" %>
     </div> <!-- / Navbar Header -->
 	
 	<!-- Navbar Links -->
     <div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav navbar-right">
 		<li><%= link_to "Home", root_path, class: "bg-hover-color" %></li>
-		<li class="dropdown">
-		  <a href="about-us.html#" class="dropdown-toggle bg-hover-color" data-toggle="dropdown">Movies <b class="caret"></b></a>
-		  <ul class="dropdown-menu">
-			<li><a href="about-us.html" class="bg-hover-color">About Us</a></li>
-			<li><a href="coming-soon.html" class="bg-hover-color">Coming Soon</a></li>
-		  </ul>
-		</li>
-		<li class="dropdown">
-		  <a href="about-us.html#" class="dropdown-toggle bg-hover-color" data-toggle="dropdown">Tv Shows <b class="caret"></b></a>
-		  <ul class="dropdown-menu">
-			<li><a href="blog.html" class="bg-hover-color">Blog</a></li>
-			<li><a href="blog-post.html" class="bg-hover-color">Blog Post</a></li>
-		  </ul>
-		</li>
+		<li><%= link_to "Movies", movies_path, class: "bg-hover-color" %></li>
+		<li><%= link_to "TV Shows", tv_shows_path, class: "bg-hover-color" %></li>
 	  </ul>
 	  
 	  <!-- Search Form (xs) -->

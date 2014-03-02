@@ -1,0 +1,47 @@
+<%= content_for :page_js do %>
+	<%= javascript_include_tag "jtruncate.pack", "data-turbolinks-track" => true  %>
+	<script>
+	$().ready(function() {
+		$('.overview').jTruncate({  
+	        length: 400,
+	        minTrail: 0,
+	        moreText: "Read More",
+	        lessText: "Read Less",
+	        moreAni: "fast",
+	        lesAni: "fast"
+	    }); 
+	});
+	</script>
+<% end %>
+<div class="row">
+  <div class="col-xs-12">
+	<h2 class="headline first-child text-color">
+	  <span class="border-color"><%= @show.name %>: season <%= params[:season_id] %></span>
+	</h2>
+  </div>
+
+  <% for episode in @season["episodes"]  %>
+  <div class="col-md-12">
+  	<div class="row">
+
+  		<div class="col-md-4">
+  		<div class="team-member text-center">
+  		<% if episode["still_path"] %>
+  			<%= image_tag(@tmdb.image_url("still", "w300", episode["still_path"]), class: "img-responsive center-block") %>
+  		<% else %>
+  			<%= image_tag("tv-placeholder.jpg", class: "img-responsive center-block" ) %>
+  		<% end %>
+  		<button type="button" class="btn btn-green btn-sm btn-block"><i class="fa fa-download"></i> Download</button>
+		</div>
+  			
+  		</div>
+  		<div class="col-md-8">
+  			<h4 class="text-color">
+  			Episode <%= episode["episode_number"] %>
+  			</h4>
+  			<div class="overview"><%= episode["overview"] %></div>
+  		</div>
+  	</div>
+  </div>
+  <% end %>
+</div>

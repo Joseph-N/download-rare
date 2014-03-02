@@ -1,0 +1,28 @@
+// Place all the styles related to the movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.top-20{
+	margin-top: 20px;
+}
+.movie-item{
+	margin-bottom: 30px;
+}
+
+.black{
+	padding: 5px;
+	cursor: pointer;
+	border: none;
+
+}
+
+#controls{
+	border: none;
+}
+
+.poster{
+	position: relative;
+}
+
+.bottom-20{
+	margin-bottom: 20px;
+}

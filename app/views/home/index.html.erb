@@ -1,2 +1,78 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+	   <% content_for :page_css do %>
+	   		<%= stylesheet_link_tag "flexslider", "data-turbolinks-track" => true  %>
+	   <% end %>
+
+	   <% content_for :page_js do %>
+	   		<%= javascript_include_tag "jquery.flexslider", "data-turbolinks-track" => true  %>
+	   		<script>
+	   		$(document).ready(function(){
+			    $('.flexslider').flexslider({
+				    animation: "slide"
+				  });
+			});
+	   		</script>
+	   <% end %>
+	    <div class="row">
+	    <div class="col-md-4">
+	    <div class="shop-product featured">
+	    	<%= link_to image_tag(@tmdb.image_url("poster", "w342", @featured.poster), class: "img-responsive"), movie_path(@featured) %>
+	</div>
+	    	
+	    </div>
+		  <div class="col-md-8">
+		  <h2 class="headline first-child text-color">
+			  <span class="border-color">Latest Shows</span>
+			</h2>
+		  <div class="flexslider">
+			  <ul class="slides">
+			  	<% @shows.each do |show| %>
+			<li>
+			<%= link_to image_tag(@tmdb.image_url("backdrop", "w780", show.backdrop), class: "img-responsive"), tv_show_path(show) %>
+			<div class="flex-caption">
+				<h4><%= show.name %></h4>
+				<p></p>
+			</div>
+			</li>
+			<% end %>
+			  </ul>
+			</div>
+		  </div>
+		</div> <!-- / .row -->
+
+
+		<div class="row">
+			<div class="col-md-12">
+		  <h2 class="headline first-child text-color">
+			  <span class="border-color">Recent Downloaded Movies</span>
+			</h2>		
+			</div>
+				  <% @movies.each do |movie| %>
+	  		<div class="col-md-3 col-sm-3 col-xs-6 bottom-20">
+			<div class="poster">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w342", movie.poster), class: "img-responsive"), movie_path(movie) %>
+			<div class="caption"><%= movie.title %></div>
+
+			</div>
+		  </div>
+	  <% end %>
+
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+		  <h2 class="headline first-child text-color">
+			  <span class="border-color">Recently Downloaded Episodes</span>
+			</h2>		
+			</div>
+
+			<% @shows.each do |show| %>
+	  		<div class="col-md-3 col-sm-3 col-xs-6 bottom-20">
+			<div class="poster">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w342", show.poster), class: "img-responsive"), tv_show_path(show) %>
+			<div class="caption"><%= show.name %></div>
+
+			</div>
+		  </div>
+	  <% end %>
+		</div>

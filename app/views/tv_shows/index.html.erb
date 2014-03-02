@@ -1,0 +1,63 @@
+	<% content_for :topic_header do %>
+		<!-- Topic Header -->
+		<div class="shop-jumbotron">
+		<div class="container">
+		  <div class="row">
+			<div class="col-sm-12">
+
+			  <h1 class="text-center">Search For TV Shows</h1>
+			  <h3 class="primary-font text-center">Search through thousands of shows here:</h3>
+
+				  <%= form_tag(tv_search_url, :method => "get", class: "form-inline text-center") do %>
+				  	<div class="form-group">
+				  		<label class="sr-only" for="shop-search">show</label>
+			  			<%= text_field_tag(:query, nil, :class => "form-control border-color col-sm-12", placeholder: "Enter show name") %>
+			  			<button type="submit" class="btn btn-color"><i class="fa fa-search"></i> Search</button>
+			  		</div>
+				  <% end %>
+			</div>
+		  </div> <!-- / .row -->
+
+		</div> <!-- / .container -->
+		</div> <!-- / .shop-jumbotron -->
+	<% end %>
+<div class="container">
+		  <div class="row">
+		  <div class="col-md-8">
+		  	<h2 class="headline first-child text-color">
+				<span class="border-color">
+					<% if params[:query] %>
+						<%= pluralize(@tv_shows.count, "Match") %> Found
+					<% else %>
+						Shows
+					<% end %>
+				</span>
+			</h2>
+						<div class="row">
+							  <% @tv_shows.each do |show| %>
+	  		<div class="col-sm-3">
+			<div class="poster">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w154", show.poster), class: "img-responsive"), tv_show_path(show) %>
+			  	<div class="caption">
+			  		<%= show.name %>
+			  	</div>
+			  <p>
+			  </p>
+
+			</div>
+		  </div>
+	  <% end %>
+
+
+
+	  </div>
+			</div>
+						<div class="col-md-4">
+				<h2 class="headline first-child text-color">
+			  <span class="border-color">Video Intro</span>
+			</h2>
+			</div>
+			</div>
+
+
+	  </div>
