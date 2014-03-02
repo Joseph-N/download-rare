@@ -7,6 +7,10 @@ class MoviesController < ApplicationController
   	end
   end
 
+  def new
+    @movie = Movie.new
+  end
+
   def show
     @record = Movie.friendly.find(params[:id])
     @movie = @tmdb_movie.find(@record.tmdb_id)
@@ -19,6 +23,8 @@ class MoviesController < ApplicationController
   	@movie = Movie.create(movie_params)
   	if @movie.save
   		redirect_to movies_path, notice: "Successfully saved movie"
+    else
+      render 'new'
   	end
   end
 

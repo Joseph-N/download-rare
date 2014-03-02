@@ -7,6 +7,10 @@ class TvShowsController < ApplicationController
   	end
   end
 
+  def new
+    @tv_show = TvShow.new
+  end
+
   def show
     @record = TvShow.friendly.find(params[:id])
     @show = @tmdb_tv.find(@record.tmdb_id)
@@ -15,9 +19,11 @@ class TvShowsController < ApplicationController
   end
 
   def create
-  	@show = TvShow.create(tv_show_params)
-  	if @show.save
+  	@tv_show = TvShow.create(tv_show_params)
+  	if @tv_show.save
   		redirect_to tv_shows_path, notice: "Successfully saved show"
+    else
+      render 'new'
   	end
   end
 

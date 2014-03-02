@@ -1,0 +1,9 @@
+<% if @tv_show.errors.any? %>
+	<div class="alert alert-danger alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	    <strong>Oh noo!</strong>
+	    <% @tv_show.errors.full_messages.each do |msg| %>
+			<p><%= msg %></p>
+		<% end %>
+	</div>
+<% end %>

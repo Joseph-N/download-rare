@@ -81,10 +81,10 @@
 			
 			<div class="row">
 				<% @show["seasons"].each do |season| %>
-				<% unless season["season_number"].eql? 0 %>
+				<% unless (season["season_number"].eql? 0) || (season["season_number"].nil?) %>
 					<div class="col-md-2">
 					<div class="poster">
-					<% if season["poster_path"] %>
+					<% if season["poster_path"]  %>
 						<%= link_to(image_tag(@tmdb.image_url("poster", "w154", season["poster_path"]), class: "img-responsive"), season_tv_show_path(season_id: season["season_number"])) %>
 					<% else %>
 						<%= link_to(image_tag("movie-placeholder.jpg", class: "img-responsive"),  season_tv_show_path(season_id: season["season_number"])) %>
