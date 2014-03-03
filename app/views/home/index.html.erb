@@ -15,7 +15,7 @@
 	    <div class="row">
 	    <div class="col-md-4">
 	    <div class="shop-product featured">
-	    	<%= link_to image_tag(@tmdb.image_url("poster", "w342", @featured.poster), class: "img-responsive"), movie_path(@featured) %>
+	    	<%= link_to image_tag(@tmdb.image_url("poster", "w342", @featured.poster), class: "img-responsive"), movie_path(@featured) unless @featured.nil? %>
 	</div>
 	    	
 	    </div>
@@ -25,6 +25,7 @@
 			</h2>
 		  <div class="flexslider">
 			  <ul class="slides">
+			  <% if @shows.any? %>
 			  	<% @shows.each do |show| %>
 			<li>
 			<%= link_to image_tag(@tmdb.image_url("backdrop", "w780", show.backdrop), class: "img-responsive"), tv_show_path(show) %>
@@ -33,6 +34,7 @@
 				<p></p>
 			</div>
 			</li>
+			<% end %>
 			<% end %>
 			  </ul>
 			</div>
@@ -46,6 +48,7 @@
 			  <span class="border-color">Recent Downloaded Movies</span>
 			</h2>		
 			</div>
+			<% if @movies.any? %>
 				  <% @movies.each do |movie| %>
 	  		<div class="col-md-3 col-sm-3 col-xs-6 bottom-20">
 			<div class="poster">
@@ -54,6 +57,7 @@
 
 			</div>
 		  </div>
+	  <% end %>
 	  <% end %>
 
 
@@ -66,6 +70,7 @@
 			</h2>		
 			</div>
 
+			<% if @shows.any? %>
 			<% @shows.each do |show| %>
 	  		<div class="col-md-3 col-sm-3 col-xs-6 bottom-20">
 			<div class="poster">
@@ -74,5 +79,6 @@
 
 			</div>
 		  </div>
+	  <% end %>
 	  <% end %>
 		</div>
