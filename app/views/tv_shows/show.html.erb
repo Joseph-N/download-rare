@@ -3,48 +3,7 @@
 <% end %>
 
 <%= content_for :page_js do %>
-	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "data-turbolinks-track" => true  %>
-	<script>
-	  $("a[rel^='prettyPhoto']").prettyPhoto({
-	  	deeplinking: false
-	  });
-
-	  $('div.raty').raty({
-	     number: 10,
-	     readOnly: true,
-	      path: '/assets',
-	     score: function() {
-	       return $(this).attr('data-score');
-	     }
-
-	  });
-
-	    $('#caroufredsel').carouFredSel({
-			responsive: true,
-			scroll : 4,
-			circular: true,
-			infinite: true,
-			items: {
-			  visible: {
-			      min: 1,
-			      max: 4
-			  }
-			},
-			prev: '#portfolio-next',
-			next: '#portfolio-prev',
-			auto: {
-			  play: false
-			}
-		});
-
-		$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({
-			slideshow:3000,
-			autoplay_slideshow: true,
-			deeplinking: false,
-			overlay_gallery: false,
-			show_title: false
-		});
-	</script>
+	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "init", "data-turbolinks-track" => true  %>
 <% end %>
 
 <div class="container shop-item">

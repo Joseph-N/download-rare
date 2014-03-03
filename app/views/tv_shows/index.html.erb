@@ -21,6 +21,21 @@
 		</div> <!-- / .container -->
 		</div> <!-- / .shop-jumbotron -->
 	<% end %>
+	<% content_for :page_js do %>
+		<%= javascript_include_tag "jquery.isotope.min" %>
+		<script>
+		    // $(function(){
+      
+		    //   var $container = $('#tv-shows');
+		      
+		    //   $container.isotope({
+		    //     itemSelector: '.show',
+		    //     layoutMode : 'fitRows'
+		    //   });
+		      
+		    // });
+		</script>
+	<% end %>
 <div class="container">
 		  <div class="row">
 		  <div class="col-md-8">
@@ -34,8 +49,23 @@
 				</span>
 			</h2>
 						<div class="row">
-							  <% @tv_shows.each do |show| %>
-	  		<div class="col-sm-3">
+						<div id="tv-shows">
+							  <% @tv_shows.each_with_index do |show, index| %>
+							  <% if (index.eql? 0 ) && !params[:query] %>
+							  	  		<div class="col-md-6 col-sm-4 show">
+			<div class="poster">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w342", show.poster), class: "img-responsive"), tv_show_path(show) %>
+			  	<div class="caption">
+			  		<%= show.name %>
+			  	</div>
+			  <p>
+			  </p>
+
+			</div>
+		  </div>
+
+							  <% else %>
+	  		<div class="col-md-3 col-sm-4 show">
 			<div class="poster">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w154", show.poster), class: "img-responsive"), tv_show_path(show) %>
 			  	<div class="caption">
@@ -46,10 +76,14 @@
 
 			</div>
 		  </div>
+		  <% if (index.eql? 4)  || ((index % 4).eql? 0 ) %>
+		  <div class='clearfix'></div>
+		  <% end %>
+		  <% end %>
 	  <% end %>
 
 
-
+</div>
 	  </div>
 			</div>
 						<div class="col-md-4">

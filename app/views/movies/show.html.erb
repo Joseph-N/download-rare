@@ -3,48 +3,7 @@
 <% end %>
 
 <%= content_for :page_js do %>
-	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "data-turbolinks-track" => true  %>
-	<script>
-	  $("a[rel^='prettyPhoto']").prettyPhoto({
-	  	deeplinking: false
-	  });
-
-	  $('div.raty').raty({
-	     number: 10,
-	     readOnly: true,
-	      path: '/assets',
-	     score: function() {
-	       return $(this).attr('data-score');
-	     }
-
-	  });
-
-	    $('#caroufredsel').carouFredSel({
-			responsive: true,
-			scroll : 4,
-			circular: true,
-			infinite: true,
-			items: {
-			  visible: {
-			      min: 2,
-			      max: 4
-			  }
-			},
-			prev: '#portfolio-next',
-			next: '#portfolio-prev',
-			auto: {
-			  play: false
-			}
-		});
-
-		$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({
-			slideshow:3000,
-			autoplay_slideshow: true,
-			deeplinking: false,
-			overlay_gallery: false,
-			show_title: false
-		});
-	</script>
+	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "init", "data-turbolinks-track" => true  %>
 <% end %>
 
 <div class="container shop-item">
@@ -63,8 +22,8 @@
 			  <div class="row">
 			  <div class="col-md-9">
 				<h3 class="primary-font first-child"><%= @movie["original_title"] %></h3>
-				<div class="raty" data-score="<%= @movie["vote_average"] %>"></div>
-				<span class="text-muted reviews" style="margin-left: 1px">User Rating: <%= @movie["vote_average"]%></span>
+				<div class="raty" data-score=""></div>
+				<span class="text-muted reviews" style="margin-left: 1px" id="imdb-rating" data-id="<%= @movie["imdb_id"] %>"></span>
 				</div>
 				<div class="col-md-3 text-right">
 				<%= link_to image_tag("imdb.png"), "http://www.imdb.com/title/#{@movie["imdb_id"]}", target: "_blank" %>

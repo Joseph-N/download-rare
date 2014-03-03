@@ -35,7 +35,16 @@
 			</h2>
 
 						<div class="row">
-	  <% @movies.each do |movie| %>
+	  <% @movies.each_with_index do |movie, index| %>
+	  		<% if (index.eql? 0 ) && !params[:query]%>
+	  		<div class="col-md-6 bottom-20">
+			<div class="poster">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w342", movie.poster), class: "img-responsive"), movie_path(movie) %>
+			<div class="caption"><%= movie.title %></div>
+
+			</div>
+		  </div>
+	  		<% else %>
 	  		<div class="col-md-3 col-sm-3 col-xs-6 bottom-20">
 			<div class="poster">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w185", movie.poster), class: "img-responsive"), movie_path(movie) %>
@@ -43,6 +52,10 @@
 
 			</div>
 		  </div>
+		  <% if (index.eql? 4)  || ((index % 4).eql? 0 )%>
+		  	<div class="clearfix"></div>
+		  <% end %>
+		  <% end %>
 	  <% end %>
 	  </div>
 			</div>
