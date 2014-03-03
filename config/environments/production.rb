@@ -77,4 +77,7 @@ Downloadrare::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # add vendor assets to precompile path
+  config.assets.precompile += %w( *.css *.js )
 end
