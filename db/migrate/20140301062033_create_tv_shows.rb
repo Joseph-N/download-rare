@@ -1,11 +1,13 @@
 class CreateTvShows < ActiveRecord::Migration
   def change
     create_table :tv_shows do |t|
-    	t.string :name
+    t.string :name
 		t.integer :tmdb_id, :unique => true
 		t.string :poster
 		t.string :backdrop
 		t.date :release_date
+    t.integer :number_of_episodes
+    t.integer :number_of_seasons
 
 		t.timestamps
     end

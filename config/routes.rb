@@ -1,6 +1,9 @@
+require 'sidekiq/web'
 Downloadrare::Application.routes.draw do
 
+  get "season/index"
   scope '/admin' do
+    mount Sidekiq::Web, at: "/sidekiq"
     devise_for :admins,  :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   end
 
@@ -10,8 +13,8 @@ Downloadrare::Application.routes.draw do
 
   resources :movies
   resources :tv_shows do
-    member do
-      get 'season/:season_id' => 'tv_shows#season', as: :season
+    resources :season, only: [:show] do
+      resources :episodes, only: [:update]
     end
   end
   

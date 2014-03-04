@@ -40,19 +40,20 @@
 			
 			<div class="row">
 				<% @show["seasons"].each do |season| %>
-				<% unless (season["season_number"].eql? 0) || (season["season_number"].nil?) %>
-					<div class="col-md-2">
+			
+					<% 	unless((season["season_number"].eql? 0) || (season["season_number"].nil?)) %>
+										<div class="col-md-2 bottom-20">
 					<div class="poster">
-					<% if season["poster_path"]  %>
-						<%= link_to(image_tag(@tmdb.image_url("poster", "w154", season["poster_path"]), class: "img-responsive"), season_tv_show_path(season_id: season["season_number"])) %>
+					<% if season["poster_path"] %>
+						<%= link_to(image_tag(@tmdb.image_url("poster", "w154", season["poster_path"]), class: "img-responsive"), tv_show_season_path(@record, season["season_number"])) %>
 					<% else %>
-						<%= link_to(image_tag("movie-placeholder.jpg", class: "img-responsive"),  season_tv_show_path(season_id: season["season_number"])) %>
+						<%= link_to(image_tag("movie-placeholder.jpg", class: "img-responsive"), tv_show_season_path(@record, season["season_number"])) %>
 					<% end %>
-					
-					<div class="caption">Season <%= season["season_number"] %></div>
+										<div class="caption">Season <%= season["season_number"] %></div>
 					</div>
 					</div>
 					<% end %>
+				
 				<% end %>
 
 			</div>

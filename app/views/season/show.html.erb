@@ -16,11 +16,11 @@
 <div class="row">
   <div class="col-xs-12">
 	<h2 class="headline first-child text-color">
-	  <span class="border-color"><%= @show.name %>: season <%= params[:season_id] %></span>
+	  <span class="border-color"><%= @tv_show.name %>: season <%= @season.season_number %></span>
 	</h2>
   </div>
-
-  <% for episode in @season["episodes"]  %>
+    <% for episode in @season_info["episodes"]  %>
+  	<% @episode = get_episode(@tv_show.id, @season.season_number, episode["episode_number"]) %>
   <div class="col-md-12">
   	<div class="row">
 
@@ -42,7 +42,24 @@
   		  <%= episode["name"] %>
   			</h4>
   			<div class="overview bottom-20"><%= episode["overview"] %></div>
-          <button type="button" class="btn btn-green"><i class="fa fa-download"></i> Download</button>
+        <% if admin_signed_in? %>
+         <% if @episode.download_link.nil? %>
+         <%= form_for([@tv_show, @season, @episode], html: { class: "form-inline" } ) do |f| %>
+	        <div class="form-group">
+	        	<%= f.text_field :download_link, class: "form-control" %>
+	        </div>
+	        <%= f.submit "Sumbit", class: "btn btn-default" %>
+        <% end %>
+        <% else %>
+        	<%= link_to @episode.download_link, @episode.download_link %>
+        <% end %>
+<% else %>
+        <% if episode_has_link?(@tv_show.id, @season.season_number, episode["episode_number"]) %>
+        	<button type="button" class="btn disabled"><i class="fa fa-download"></i> No Download link yet</button>
+        <% else %>
+        	<%= link_to raw('<i class="fa fa-download"></i> Download'), @episode.download_link, class: "btn btn-green" %>
+          <% end %>
+          <% end %>
   		</div>
   	</div>
      <hr>

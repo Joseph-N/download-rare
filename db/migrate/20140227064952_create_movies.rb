@@ -6,6 +6,7 @@ class CreateMovies < ActiveRecord::Migration
 		t.string :poster
 		t.string :backdrop
 		t.date :release_date
+    t.string :download_link
 
 		t.timestamps
     end

@@ -3,28 +3,23 @@
 		<span class="border-color">Search Results</span>
 	</h2>
 	<% @movies["results"].each do |movie| %>
-	<div class="col-sm-3">
+	<div class="row">
+	<div class="col-md-3">
 			<div class="shop-product">
-			  <a href="#">
 			  <% if movie["poster_path"] %>
 			  	<%= image_tag(@tmdb.image_url("poster", "w342", movie["poster_path"]), class: "img-responsive") %>
 			  <% else %>
 			  <%= image_tag("movie-placeholder.jpg", class: "img-responsive") %>
 			  <% end %>
-			  </a>
-			  <a href="#"><h5 class="primary-font"><%= movie["title"] %> (<%= movie["release_date"] %>)</h5></a>
 			  <p>
 				Rated <%= movie["vote_average"] %> / 10
 			  </p>
-			  <%= form_for @movie do |f| %>
-			  	<%= f.hidden_field :title, value: movie["title"] %>
-			  	<%= f.hidden_field :release_date, value: movie["release_date"] %>
-			  	<%= f.hidden_field :tmdb_id, value: movie["id"] %>
-			  	<%= f.hidden_field :poster, value: movie["poster_path"] %>
-			  	<%= f.hidden_field :backdrop, value: movie["backdrop_path"] %>
-			   	<%= f.submit "Save Movie", class: "btn btn-sm btn-color" %>
-			  <% end %>
 			</div>
+		  </div>
+		  <div class="col-md-9">
+		  <h4 class="primary-font"><%= movie["title"] %> (<%= movie["release_date"] %>)</h4>
+		  <%= render :partial => 'form', locals: { movie: movie } %>
+		  </div>
 		  </div>
 	<% end %>
 </div>

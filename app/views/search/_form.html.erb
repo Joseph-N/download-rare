@@ -1,0 +1,22 @@
+		  	<%= form_for @movie, html: { role: "form" } do |f| %>
+		  	<div class="form-group">
+			  	<%= f.text_field :title, value: movie["title"], class: "form-control", :readonly => true %>
+			  	</div>
+			  	<div class="form-group">
+			  	<%= f.text_field :release_date, value: movie["release_date"], class: "form-control", :readonly => true  %>
+			  	</div>
+			  	<div class="form-group">
+			  	<%= f.text_field :tmdb_id, value: movie["id"], class: "form-control", :readonly => true  %>
+			  	</div>
+			  	<div class="form-group">
+			  	<%= f.text_field :poster, value: movie["poster_path"], class: "form-control", :readonly => true  %>
+			  	</div>
+			  	<div class="form-group">
+			  	<%= f.text_field :backdrop, value: movie["backdrop_path"], class: "form-control", :readonly => true  %>
+			  	</div>
+			  	
+			  	<div class="form-group">
+			  	<%= f.text_field :download_link, class: "form-control", placeholder: "Download Link" %>
+			  	</div>
+			   	<%= f.submit "Save Movie", class: "btn btn-sm btn-color" %>
+			  <% end %>

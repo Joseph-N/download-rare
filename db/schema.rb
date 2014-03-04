@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302083520) do
+ActiveRecord::Schema.define(version: 20140303205405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,12 +34,24 @@ ActiveRecord::Schema.define(version: 20140302083520) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+  create_table "episodes", force: true do |t|
+    t.integer  "episode_number"
+    t.string   "download_link"
+    t.integer  "season_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "episodes", ["episode_number"], name: "index_episodes_on_episode_number", using: :btree
+  add_index "episodes", ["season_id"], name: "index_episodes_on_season_id", using: :btree
+
   create_table "movies", force: true do |t|
     t.string   "title"
     t.integer  "tmdb_id"
     t.string   "poster"
     t.string   "backdrop"
     t.date     "release_date"
+    t.string   "download_link"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.tsvector "tsv"
@@ -50,12 +62,24 @@ ActiveRecord::Schema.define(version: 20140302083520) do
   add_index "movies", ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true, using: :btree
   add_index "movies", ["tsv"], name: "movies_tsv_idx", using: :gin
 
+  create_table "seasons", force: true do |t|
+    t.integer  "season_number"
+    t.integer  "tv_show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "seasons", ["season_number"], name: "index_seasons_on_season_number", using: :btree
+  add_index "seasons", ["tv_show_id"], name: "index_seasons_on_tv_show_id", using: :btree
+
   create_table "tv_shows", force: true do |t|
     t.string   "name"
     t.integer  "tmdb_id"
     t.string   "poster"
     t.string   "backdrop"
     t.date     "release_date"
+    t.integer  "number_of_episodes"
+    t.integer  "number_of_seasons"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.tsvector "tsv"

@@ -3,6 +3,7 @@ class Movie < ActiveRecord::Base
   	friendly_id :title, use: :slugged
 
 	validates_uniqueness_of :tmdb_id
+	validates_presence_of :download_link
 
 	default_scope { order('created_at DESC') } 
 
@@ -18,7 +19,7 @@ class Movie < ActiveRecord::Base
 	# Selects search results with plain text title & body columns.
   	# Select columns are explicitly listed to avoid returning the long redundant tsv strings
   	def self.plain_tsearch(search_terms, limit = query_limit)
-    	select([:title, :poster, :release_date, :tmdb_id, :slug]).tsearch_query(search_terms, limit)
+    	select([:title, :poster, :release_date, :tmdb_id, :slug, :download_link]).tsearch_query(search_terms, limit)
   	end
 
 	def self.query_limit; 25; end
