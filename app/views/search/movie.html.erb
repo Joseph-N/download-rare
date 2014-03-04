@@ -2,24 +2,25 @@
 	<h2 class="headline first-child text-color">
 		<span class="border-color">Search Results</span>
 	</h2>
+</div>
+<div class="row">
 	<% @movies["results"].each do |movie| %>
-	<div class="row">
+
 	<div class="col-md-3">
-			<div class="shop-product">
+				<div class="shop-product">
 			  <% if movie["poster_path"] %>
 			  	<%= image_tag(@tmdb.image_url("poster", "w342", movie["poster_path"]), class: "img-responsive") %>
 			  <% else %>
 			  <%= image_tag("movie-placeholder.jpg", class: "img-responsive") %>
 			  <% end %>
+			  <strong><%= movie["title"] %> </strong>
 			  <p>
-				Rated <%= movie["vote_average"] %> / 10
+				(<%= movie["release_date"] %>)
 			  </p>
+			  <%= render :partial => 'form', locals: { movie: movie } %>
 			</div>
-		  </div>
-		  <div class="col-md-9">
-		  <h4 class="primary-font"><%= movie["title"] %> (<%= movie["release_date"] %>)</h4>
-		  <%= render :partial => 'form', locals: { movie: movie } %>
-		  </div>
-		  </div>
+
+	</div>
+
 	<% end %>
 </div>

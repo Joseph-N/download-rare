@@ -2,6 +2,8 @@
 	<h2 class="headline first-child text-color">
 		<span class="border-color">Search Results</span>
 	</h2>
+</div>
+<div class="row">
 	<% @shows["results"].each do |show| %>
 	<div class="col-sm-3">
 			<div class="shop-product">
@@ -12,10 +14,7 @@
 			  		<%= image_tag("movie-placeholder.jpg", class: "img-responsive") %>
 			  	<% end %>
 			  </a>
-			  <a href="#"><h5 class="primary-font"><%= show["name"] %> (<%= show["first_air_date"] %>)</h5></a>
-			  <p>
-				Rated <%= show["vote_average"] %> / 10
-			  </p>
+			  <h5 class="primary-font"><%= show["name"] %> (<%= show["first_air_date"] %>)</h5>
 			  <%= form_for @tv_show do |f| %>
 			  	<%= f.hidden_field :name, value: show["name"] %>
 			  	<%= f.hidden_field :release_date, value: show["first_air_date"] %>

@@ -65,7 +65,7 @@
 		  </div>
 
 							  <% else %>
-	  		<div class="col-md-3 col-sm-4 show">
+	  		<div class="col-md-3 col-sm-4 show bottom-20">
 			<div class="poster">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w154", show.poster), class: "img-responsive"), tv_show_path(show) %>
 			  	<div class="caption">
@@ -87,9 +87,11 @@
 	  </div>
 			</div>
 						<div class="col-md-4">
+						<%= render 'shared/google_ad' %>
 				<h2 class="headline first-child text-color">
-			  <span class="border-color">Video Intro</span>
+			  <span class="border-color">Like Us</span>
 			</h2>
+			 <%= render 'shared/facebook_likebox' %>
 			</div>
 			</div>
 

@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_filter :authenticate_admin!, only: [:create]
+  
   def index
   	if params[:query]
   		@movies = Movie.plain_tsearch(params[:query])

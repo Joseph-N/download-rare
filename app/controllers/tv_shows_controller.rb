@@ -1,4 +1,5 @@
 class TvShowsController < ApplicationController
+  before_filter :authenticate_admin!, only: [:create]
   def index
   	if params[:query]
   		@tv_shows = TvShow.plain_tsearch(params[:query])

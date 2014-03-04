@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+	before_filter :authenticate_admin!
+
 	def movie
 		@movies = @tmdb_movie.search(params[:query])
 		@movie = Movie.new		

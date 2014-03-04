@@ -1,4 +1,6 @@
 class EpisodesController < ApplicationController
+	before_filter :authenticate_admin!
+	
 	def update
 		@show = TvShow.find(params[:tv_show_id])
 		@season = Season.find(params[:season_id])

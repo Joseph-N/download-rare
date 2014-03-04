@@ -3,7 +3,10 @@ Downloadrare::Application.routes.draw do
 
   get "season/index"
   scope '/admin' do
-    mount Sidekiq::Web, at: "/sidekiq"
+    authenticate :admin do
+      mount Sidekiq::Web, at: "/sidekiq"
+    end
+    
     devise_for :admins,  :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   end
 
