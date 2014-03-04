@@ -31,6 +31,7 @@ gem "rest-client"
 gem 'friendly_id'
 gem 'sidekiq'
 gem 'sinatra', require: false
+gem "thin"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
