@@ -8,4 +8,8 @@ module SeasonHelper
 	def episode_has_link?(*args)
 		get_episode(*args).download_link.nil?
 	end
+
+	def add_download_class?(episode)
+		admin_signed_in? && !episode.download_link.nil?
+	end
 end

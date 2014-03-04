@@ -25,7 +25,7 @@
   	<div class="row">
 
   		<div class="col-md-4">
-  		<div class="poster bottom-20">
+  		<div class="poster bottom-20 <%= add_download_class?(@episode) ? "has-download" : "" %>">
   		<% if episode["still_path"] %>
   			<%= image_tag(@tmdb.image_url("still", "w300", episode["still_path"]), class: "img-responsive center-block") %>
   		<% else %>
@@ -46,12 +46,10 @@
          <% if @episode.download_link.nil? %>
          <%= form_for([@tv_show, @season, @episode], html: { class: "form-inline" } ) do |f| %>
 	        <div class="form-group">
-	        	<%= f.text_field :download_link, class: "form-control" %>
+	        	<%= f.text_field :download_link, class: "form-control", placeholder: "http://example.site" %>
 	        </div>
 	        <%= f.submit "Sumbit", class: "btn btn-default" %>
         <% end %>
-        <% else %>
-        	<%= link_to @episode.download_link, @episode.download_link %>
         <% end %>
 <% else %>
         <% if episode_has_link?(@tv_show.id, @season.season_number, episode["episode_number"]) %>
