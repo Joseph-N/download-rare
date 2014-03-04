@@ -6,7 +6,7 @@ class TvShow < ActiveRecord::Base
 
 	default_scope { order('created_at DESC') } 
 
-	has_many :seasons
+	has_many :seasons, dependent: :destroy
 
 	# Note that ActiveRecord ARel from() doesn't appear to accommodate "?"
 	# param placeholder, hence the need for manual parameter sanitization

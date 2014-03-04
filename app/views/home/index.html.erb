@@ -10,6 +10,7 @@
 			    $('.flexslider').flexslider({
 				    animation: "slide"
 				  });
+		      
 			});
 	   		</script>
 	   <% end %>
@@ -80,11 +81,15 @@
 			  <span class="border-color">Recently Downloaded Episodes</span>
 			</h2>		
 			</div>
+		</div>
+		
+		
 
+		<div class="row" id="tv-shows">
 			<% if @shows.any? %>
 			<% @shows.each_with_index do |show, index| %>
 			<% if index.eql? 0 %>
-	  		<div class="col-md-4  bottom-20">
+	  		<div class="col-md-4  bottom-20 show">
 			<div class="poster">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w342", show.poster), class: "img-responsive"), tv_show_path(show) %>
 			<div class="caption"><%= show.name %></div>
@@ -93,7 +98,7 @@
 		  </div>
 
 			<% else %>
-	  		<div class="col-md-2 bottom-20">
+	  		<div class="col-md-2 bottom-20 show">
 			<div class="poster">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w154", show.poster), class: "img-responsive"), tv_show_path(show) %>
 			<div class="caption"><%= show.name %></div>

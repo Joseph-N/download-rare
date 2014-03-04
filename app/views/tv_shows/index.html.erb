@@ -25,16 +25,19 @@
 	<% content_for :page_js do %>
 		<%= javascript_include_tag "jquery.isotope.min" %>
 		<script>
-		    // $(function(){
+			// $(document).ready(function(){
+
       
-		    //   var $container = $('#tv-shows');
+			// 	var $container = $('#tv-shows');
+
+			// 	$container.isotope({
+			// 		itemSelector: '.show',
+			// 		layoutMode: 'fitRows'
+			// 	});
+
+			// 	$(window).smartresize(isotope);
 		      
-		    //   $container.isotope({
-		    //     itemSelector: '.show',
-		    //     layoutMode : 'fitRows'
-		    //   });
-		      
-		    // });
+			// });
 		</script>
 	<% end %>
 <div class="container">
@@ -77,9 +80,6 @@
 
 			</div>
 		  </div>
-		  <% if (index.eql? 4)  || ((index % 4).eql? 0 ) %>
-		  <div style="clear: both;"></div>
-		  <% end %>
 		  <% end %>
 	  <% end %>
 
