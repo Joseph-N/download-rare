@@ -8,10 +8,10 @@
      <head>
     <%= favicon_link_tag '/favicon.ico' %>
 
-    <title>Downloadrare</title>
+    <title><%= yield(:title) %></title>
 
     <!-- Bootstrap core CSS -->
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all" %>
     <%= yield :page_css %>
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
@@ -54,7 +54,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application" %>
     <%= yield :page_js %>
 
 </body></html>

@@ -1,5 +1,7 @@
+<% title @tv_show.name %> 
+
 <%= content_for :page_js do %>
-	<%= javascript_include_tag "jtruncate.pack", "data-turbolinks-track" => true  %>
+	<%= javascript_include_tag "jtruncate.pack"  %>
 	<script>
 	$().ready(function() {
 		$('.overview').jTruncate({  

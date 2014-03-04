@@ -1,3 +1,5 @@
+<% title  @show["name"]  %>
+
 <%= provide(:prefix, "og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#") %>
 
 <%= content_for :meta_tags do %>
@@ -13,11 +15,11 @@
 <% end %>
 
 <%= content_for :page_css do %>
-	<%= stylesheet_link_tag "prettyPhoto", "data-turbolinks-track" => true  %>
+	<%= stylesheet_link_tag "prettyPhoto" %>
 <% end %>
 
 <%= content_for :page_js do %>
-	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "init", "data-turbolinks-track" => true  %>
+	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "init" %>
 <% end %>
 
 <div class="container shop-item">
