@@ -23,16 +23,21 @@
 	        lesAni: "fast"
 	    }); 
 
-    setTimeout(function() {
-          // scroll after 1 seconds
-          var elementClick = window.location.hash
-          var destination = $(elementClick).offset().top - 100;
+      var elementClick = window.location.hash
 
-          $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
-            window.location.hash = elementClick
-          });
-    }, 200);
-    $(elementClick).fadeTo('slow', 0.4).fadeTo('slow', 1.0);
+      if(elementClick.length > 0){
+        setTimeout(function() {
+              // scroll after 1 seconds            
+              var destination = $(elementClick).offset().top - 100;
+
+              $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
+                window.location.hash = elementClick
+              });
+        }, 200);
+
+        $(elementClick).fadeTo('slow', 0.4).fadeTo('slow', 1.0);
+
+      }
 	});
 	</script>
 <% end %>
