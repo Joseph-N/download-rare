@@ -12,19 +12,18 @@
 	        moreAni: "fast",
 	        lesAni: "fast"
 	    }); 
-
-    // animate scroll
-    var elementClick = window.location.hash
 	});
 
   $(window).load(function(){
     setTimeout(function() {
-          // scroll after 2 seconds
+          // scroll after 3 seconds
+          var elementClick = window.location.hash
           var destination = $(elementClick).offset().top - 100;
+
           $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
             window.location.hash = elementClick
           });
-    }, 2000);
+    }, 3000);
   })
 	</script>
 <% end %>
