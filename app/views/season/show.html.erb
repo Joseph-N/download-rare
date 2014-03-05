@@ -1,4 +1,4 @@
-<% title @tv_show.name %> 
+<% title "#{@tv_show.name} - Season #{@season.season_number}" %> 
 
 <%= content_for :page_js do %>
 	<%= javascript_include_tag "jtruncate.pack"  %>
@@ -18,10 +18,13 @@
 	});
 
   $(window).load(function(){
-        var destination = $(elementClick).offset().top - 100;
-        $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
+    setTimeout(function() {
+          // scroll after 2 seconds
+          var destination = $(elementClick).offset().top - 100;
+          $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
             window.location.hash = elementClick
-        });
+          });
+    }, 2000);
   })
 	</script>
 <% end %>
@@ -67,7 +70,7 @@
         <% if episode_has_link?(@tv_show.id, @season.season_number, episode["episode_number"]) %>
         	<button type="button" class="btn disabled"><i class="fa fa-download"></i> No Download link yet</button>
         <% else %>
-        	<%= link_to raw('<i class="fa fa-download"></i> Download'), @episode.download_link, class: "btn btn-green", title: "download #{@tv_show.name} #{@season.season_number} episode #{episode["episode_number"]}" %>
+        	<%= link_to raw('<i class="fa fa-download"></i> Download'), @episode.download_link, class: "btn btn-green", title: "download #{@tv_show.name} season #{@season.season_number} episode #{episode["episode_number"]}" %>
           <% end %>
           <% end %>
   		</div>
