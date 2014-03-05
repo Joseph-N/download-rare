@@ -5,12 +5,12 @@ class Tmdb
 
 	BASE_API_URL = "http://api.themoviedb.org/3"
 
-	@@config = ""
+	@@config = $redis.get("tmdb_config")
 
 	def initialize(api_key)
 		@api_key = api_key 
 		@params = { :api_key => @api_key }
-		if @@config.empty?
+		if @@config.nil?
 			set_config
 		end
 	end
@@ -27,10 +27,15 @@ class Tmdb
 		end
 	end
 
+	def hash(key)
+		Digest::MD5.hexdigest(key.to_s)
+	end
+
 
 	private
 		def set_config
 			@@config = fetch_url('configuration', @params) 
+			$redis.set("tmdb_config", @@config)
 		end
 
 		def fetch_url(path, params)
@@ -41,7 +46,16 @@ end
 class TmdbMovie < Tmdb
 	def find(id)
 		@params[:append_to_response] = "trailers,images"
-		contents = fetch_url("movie/#{id}",@params)
+
+		unless $redis.exists hash(id)
+			contents = fetch_url("movie/#{id}",@params)
+			# save to redis
+			$redis.set(hash(id), contents)
+			$redis.expire(hash(id), 86400)
+		else
+			contents = $redis.get(hash(id))
+		end
+
 		# we don't need this anymore
 		@params.delete(:append_to_response)
 
@@ -50,7 +64,14 @@ class TmdbMovie < Tmdb
 
 	def search(title)
 		@params[:query] = title
-		contents = fetch_url("search/movie", @params)
+
+		unless $redis.exists hash(title)
+			contents = fetch_url("search/movie", @params)
+			$redis.set(hash(title), contents)
+			$redis.expire(hash(title), 86400)
+		else
+			contents = $redis.get(hash(title))
+		end
 		# we don't need this anymore
 		@params.delete(:query)
 
@@ -61,13 +82,26 @@ end
 class TmdbTv < Tmdb
 	def find(id)
 		@params[:append_to_response] = "images"
-		contents = fetch_url("tv/#{id}", @params)
+		unless $redis.exists hash(id)			
+			contents = fetch_url("tv/#{id}", @params)
+			# save to redis
+			$redis.set(hash(id), contents)
+			$redis.expire(hash(id), 86400)
+		else
+			contents = $redis.get(hash(id))
+		end
 		JSON.parse(contents)
 	end
 
 	def search(title)
 		@params["query"] = title
-		contents =  fetch_url("search/tv", @params)
+		unless $redis.exists hash(title)
+			contents =  fetch_url("search/tv", @params)
+			$redis.set(hash(title), contents)
+			$redis.expire(hash(title), 86400)
+		else
+			contents = $redis.get(hash(title))
+		end
 		# we don't need this anymore
 		@params.delete(:query)
 
@@ -75,7 +109,15 @@ class TmdbTv < Tmdb
 	end
 
 	def find_season(tv_id, season_number)
-		contents = fetch_url("tv/#{tv_id}/season/#{season_number}", @params)
+		key = "#{tv_id}_#{season_number}"
+
+		unless $redis.exists hash(key)
+			contents = fetch_url("tv/#{tv_id}/season/#{season_number}", @params)
+			$redis.set(hash(key), contents)
+			$redis.expire(hash(key), 86400)
+		else
+			contents = $redis.get(hash(key))
+		end
 		JSON.parse(contents)
 	end
 end

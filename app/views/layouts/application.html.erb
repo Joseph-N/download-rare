@@ -4,7 +4,12 @@
     <meta charset="utf-8">
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= yield :meta_tags %>
+    <% if content_for?(:meta_tags)  %>
+      <%= yield :meta_tags %>
+    <% else %>
+       <meta name="description" content="Downloadrare collects all your favorite movies and tv shows from around the internet in a central location so that you never have to hop from one site to another looking to download your favorite movie or tv show">
+    <% end %>
+    
      <head>
     <%= favicon_link_tag '/favicon.ico' %>
 

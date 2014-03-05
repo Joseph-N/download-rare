@@ -32,6 +32,8 @@ gem 'friendly_id'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem "thin"
+gem 'redis'
+gem 'redis-namespace'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

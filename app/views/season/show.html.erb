@@ -1,5 +1,15 @@
 <% title "#{@tv_show.name} - Season #{@season.season_number}" %> 
 
+<%= content_for :meta_tags do %>
+  <meta property="fb:app_id"          content="286994061452571" /> 
+  <meta property="og:type"            content="video.movie" /> 
+  <meta property="og:url"             content="<%= request.url %>" /> 
+  <meta property="og:title"           content="<%= @season_info["name"] %>" /> 
+  <meta property="og:image"           content="<%= @tmdb.image_url("poster", "w342", @tv_show.poster) %>" /> 
+  <meta property="og:description"     content="<%= truncate(@season_info["overview"], length: 400)  %>" /> 
+  <meta name="description" content="<%= truncate(@season_info["overview"], length: 400) %>">
+<% end %>
+
 <%= content_for :page_js do %>
 	<%= javascript_include_tag "jtruncate.pack"  %>
 	<script>
@@ -12,19 +22,17 @@
 	        moreAni: "fast",
 	        lesAni: "fast"
 	    }); 
-	});
 
-  $(window).load(function(){
     setTimeout(function() {
-          // scroll after 3 seconds
+          // scroll after 1 seconds
           var elementClick = window.location.hash
           var destination = $(elementClick).offset().top - 100;
 
           $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
             window.location.hash = elementClick
           });
-    }, 3000);
-  })
+    }, 200);
+	});
 	</script>
 <% end %>
 <div class="row">
