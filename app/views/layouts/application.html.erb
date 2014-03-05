@@ -57,7 +57,10 @@
     <%= javascript_include_tag "application" %>
     <%= yield :page_js %>
     <% if Rails.env.production? %>
-      <%= render 'shared/google_analytics' %>
+      <!-- dont track when admin is signed in -->
+      <% unless admin_signed_in? %>
+        <%= render 'shared/google_analytics' %>
+      <% end %>
     <% end %>
 
 </body></html>
