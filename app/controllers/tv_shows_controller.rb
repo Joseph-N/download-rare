@@ -4,7 +4,7 @@ class TvShowsController < ApplicationController
   	if params[:query]
   		@tv_shows = TvShow.plain_tsearch(params[:query])
   	else
-  		@tv_shows = TvShow.all
+  		@tv_shows = TvShow.limit(13)
   	end
   end
 

@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   	if params[:query]
   		@movies = Movie.plain_tsearch(params[:query])
   	else
-  		@movies = Movie.all
+  		@movies = Movie.limit(13)
   	end
   end
 
