@@ -15,12 +15,14 @@
 
     // animate scroll
     var elementClick = window.location.hash
-      
-    var destination = $(elementClick).offset().top - 100;
-    $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
-        window.location.hash = elementClick
-    });
 	});
+
+  $(window).load(function(){
+        var destination = $(elementClick).offset().top - 100;
+        $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
+            window.location.hash = elementClick
+        });
+  })
 	</script>
 <% end %>
 <div class="row">
