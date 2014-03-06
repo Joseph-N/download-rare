@@ -14,7 +14,7 @@
 			  <% else %>
 			  <%= image_tag("movie-placeholder.jpg", class: "img-responsive") %>
 			  <% end %>
-			  <strong><%= movie["title"] %> </strong>
+			  <strong><%= movie["title"] %>(<%= movie["vote_average"] %> / 10) </strong>
 			  <p>
 				(<%= movie["release_date"] %>)
 			  </p>

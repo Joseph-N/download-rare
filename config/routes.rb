@@ -13,7 +13,7 @@ Downloadrare::Application.routes.draw do
   root 'home#index'
   get '/search/movie' => 'search#movie', as: :search_movie
   get '/search/tv' => 'search#tv', as: :search_tv
-
+  
   resources :movies
   resources :tv_shows do
     resources :season, only: [:show] do
