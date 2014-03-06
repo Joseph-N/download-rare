@@ -13,7 +13,7 @@
 <%= content_for :page_js do %>
 	<%= javascript_include_tag "jtruncate.pack"  %>
 	<script>
-	$().ready(function() {
+	$(document).ready(function() {
 		$('.overview').jTruncate({  
 	        length: 250,
 	        minTrail: 0,
@@ -22,7 +22,9 @@
 	        moreAni: "fast",
 	        lesAni: "fast"
 	    }); 
+	});
 
+  $(window).load(function(){
       var elementClick = window.location.hash
 
       if(elementClick.length > 0){
@@ -33,12 +35,12 @@
               $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100, function() {
                 window.location.hash = elementClick
               });
-        }, 200);
+        }, 1000);
 
         $(elementClick).fadeTo('slow', 0.4).fadeTo('slow', 1.0);
 
       }
-	});
+  });
 	</script>
 <% end %>
 <div class="row">
