@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   
   def index
   	if params[:query]
-  		@movies = Movie.plain_tsearch(params[:query])
+      @movies = Movie.plain_tsearch(params[:query]) 		
   	else
   		@movies = Movie.limit(13)
   	end

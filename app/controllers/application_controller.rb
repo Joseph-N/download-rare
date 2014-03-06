@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def init_shows
     @tmdb_tv = TmdbTv.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
   end 
+
+  def randomize(key)
+    Digest::MD5.hexdigest(key.to_s)
+  end
 end

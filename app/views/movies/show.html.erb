@@ -19,35 +19,44 @@
 <% end %>
 
 <%= content_for :page_js do %>
-	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "init" %>
+	<%= javascript_include_tag "jquery.raty", "jquery.prettyPhoto", "jquery.carouFredSel-6.2.1", "jtruncate.pack", "init" %>
+	<script>
+		$(document).ready(function() {
+			$('.overview').jTruncate({  
+		        length: 310,
+		        minTrail: 0,
+		        moreText: "Read More",
+		        lessText: "Read Less",
+		        moreAni: "fast",
+		        lesAni: "fast"
+		    }); 
+		});
+	</script>
 <% end %>
 
-<div class="container shop-item">
 <div class="row">
-		  <div class="col-sm-12">
-			<div class="row">
-			  <div class="col-sm-3">
-			    <div class="product-img">
-			    <%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
+	<div class="col-md-9">
+		<div class="row bottom-20">
+			<div class="shop-item col-md-4">
+					<div class="product-img">
+			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
+					</div>
+					<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
+			</div>
+			<div class="col-md-8">
+				<div class="row">
+			  		<div class="col-md-9">
+						<h3 class="primary-font first-child"><%= @movie["original_title"] %></h3>
+							<div class="raty" data-score=""></div>
+							<span class="text-muted reviews" style="margin-left: 1px" id="imdb-rating" data-id="<%= @movie["imdb_id"] %>"></span>
+					</div>
+					<div class="col-md-3 text-right">
+						<%= link_to image_tag("imdb.png"), "http://www.imdb.com/title/#{@movie["imdb_id"]}", target: "_blank" %>
+					</div>
 				</div>
-				<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
-			  </div>
-			  <div class="col-sm-9">
-			  <div class="row">
-			  <div class="col-md-8">
 
-			  <div class="row">
-			  <div class="col-md-9">
-				<h3 class="primary-font first-child"><%= @movie["original_title"] %></h3>
-				<div class="raty" data-score=""></div>
-				<span class="text-muted reviews" style="margin-left: 1px" id="imdb-rating" data-id="<%= @movie["imdb_id"] %>"></span>
-				</div>
-				<div class="col-md-3 text-right">
-				<%= link_to image_tag("imdb.png"), "http://www.imdb.com/title/#{@movie["imdb_id"]}", target: "_blank" %>
-				</div>
-				</div>
-								<p class="text-muted top-20">
-				  <%= @movie["overview"] %>
+				<p class="text-muted top-20">
+					<%= @movie["overview"] %>
 				</p>
 				<div class="info-board info-board-green">
 					  <h4>Tagline</h4>
@@ -62,57 +71,64 @@
 					<%= link_to raw('<i class="fa fa-download"></i> Download'), @record.download_link, class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie" %>
 					</div>
 				</div>
-				</div>
-									<div class="col-md-4">
-									<%= render 'shared/google_ad' %>
-				<h2 class="headline first-child text-color">
-			  <span class="border-color">Like Us</span>
+			</div>
+		</div>
+		<div class="row" style="padding-left: 15px;">
+			<h2 class="headline first-child text-color">
+		  		<span class="border-color">Sponsored</span>
 			</h2>
-			</div>
-				</div>
-				
-			  </div>
-			</div>
-			
-			<!-- Item Description -->
-			<div class="row">
-			  <div class="col-sm-12">
-				<h3 class="headline text-color">
-				  <span class="border-color">Screenshots</span>
-	  				<span class="pull-right" id="controls">
-	  					<span id="portfolio-next" class="next black">
-            				<i class="fa fa-arrow-left"></i>
-        				</span>
-			            <span id="portfolio-prev" class="prev black">
-			                <i class="fa fa-arrow-right"></i>
-			            </span>
-					</span>
-				</h3>
-				<div class="row">
-				<div id="caroufredsel">
 
-				<% @backdrops.each do |image| %>
-								<div class="col-md-3 col-xs-12 col-sm-4">
+			  	<%= render 'shared/google_ad_2' %>
+
+		</div>
+	</div>
+	<div class="col-md-3">
+		<%= render 'shared/google_ad' %>
+		<h2 class="headline first-child text-color">
+		  <span class="border-color">Like Us</span>
+		</h2>
+		<%= render 'shared/facebook_likebox_small' %>
+		
+	</div>
+</div>
+
+<!-- Screenshots -->
+<div class="row">
+  <div class="col-sm-12">
+	<h3 class="headline text-color">
+	  <span class="border-color">Screenshots</span>
+			<span class="pull-right" id="controls">
+				<span id="portfolio-next" class="next black">
+				<i class="fa fa-arrow-left"></i>
+			</span>
+            <span id="portfolio-prev" class="prev black">
+                <i class="fa fa-arrow-right"></i>
+            </span>
+		</span>
+	</h3>
+	<div class="row">
+		<div id="caroufredsel">
+
+		<% @backdrops.each do |image| %>
+			<div class="col-md-3 col-xs-12 col-sm-4">
 			    <div class="movie-item">
 			    <a href="<%= @tmdb.image_url("backdrop", "original", image["file_path"])%>" rel="prettyPhoto[gallery1]" title=""><%= image_tag(@tmdb.image_url("backdrop", "w300", image["file_path"]), class: "img-responsive center-block", title: "") if image['file_path'] %></a>
 
 				</div>
-			  </div>
-				
-				<% end %>
-				</div>
-				</div>
-			  </div>
-			</div> <!-- / .row -->
-			<div class="row">
-			  <div class="col-sm-8">
-			  <%= render 'shared/comments' %>
+			</div>
+		
+		<% end %>
+		</div>
+	</div>
+  </div>
+</div> <!-- / .row -->
 
-			  </div>
-			  <div class="col-md-4">
-			  <%= render 'shared/google_ad_1' %>
-			  </div>
-			</div> <!-- / .row -->
-		  </div>
-		</div>
-		</div>
+<div class="row">
+  <div class="col-sm-8">
+  <%= render 'shared/comments' %>
+
+  </div>
+  <div class="col-md-4">
+  <%= render 'shared/google_ad_1' %>
+  </div>
+</div> <!-- / .row -->

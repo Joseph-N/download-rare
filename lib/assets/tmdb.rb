@@ -64,14 +64,7 @@ class TmdbMovie < Tmdb
 
 	def search(title)
 		@params[:query] = title
-
-		unless $redis.exists hash(title)
-			contents = fetch_url("search/movie", @params)
-			$redis.set(hash(title), contents)
-			$redis.expire(hash(title), 86400)
-		else
-			contents = $redis.get(hash(title))
-		end
+		contents = fetch_url("search/movie", @params)
 		# we don't need this anymore
 		@params.delete(:query)
 
@@ -95,13 +88,7 @@ class TmdbTv < Tmdb
 
 	def search(title)
 		@params["query"] = title
-		unless $redis.exists hash(title)
-			contents =  fetch_url("search/tv", @params)
-			$redis.set(hash(title), contents)
-			$redis.expire(hash(title), 86400)
-		else
-			contents = $redis.get(hash(title))
-		end
+		contents =  fetch_url("search/tv", @params)
 		# we don't need this anymore
 		@params.delete(:query)
 
@@ -111,12 +98,12 @@ class TmdbTv < Tmdb
 	def find_season(tv_id, season_number)
 		key = "#{tv_id}_#{season_number}"
 
-		unless $redis.exists hash(key)
+		unless $redis.exists randomize(key)
 			contents = fetch_url("tv/#{tv_id}/season/#{season_number}", @params)
-			$redis.set(hash(key), contents)
-			$redis.expire(hash(key), 86400)
+			$redis.set(randomize(key), contents)
+			$redis.expire(randomize(key), 86400)
 		else
-			contents = $redis.get(hash(key))
+			contents = $redis.get(randomize(key))
 		end
 		JSON.parse(contents)
 	end

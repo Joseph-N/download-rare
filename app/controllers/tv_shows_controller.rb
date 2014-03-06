@@ -2,7 +2,7 @@ class TvShowsController < ApplicationController
   before_filter :authenticate_admin!, only: [:create]
   def index
   	if params[:query]
-  		@tv_shows = TvShow.plain_tsearch(params[:query])
+      @tv_shows = TvShow.plain_tsearch(params[:query])
   	else
   		@tv_shows = TvShow.limit(13)
   	end

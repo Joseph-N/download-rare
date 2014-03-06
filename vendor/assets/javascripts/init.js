@@ -41,14 +41,18 @@ $(document).ready(function(){
 	});
 });
 
+
 $(window).load(function(){
-	// set score with raty
-	$('div.raty').raty({
-		number: 10,
-		readOnly: true,
-		path: '/assets',
-		score: function() {
-			return $(this).attr('data-score');
-		}
-	});
-})
+	setTimeout(function(){
+		// set score with raty
+		$('div.raty').raty({
+			number: 10,
+			readOnly: true,
+			path: '/assets',
+			score: function() {
+				return $(this).attr('data-score');
+			}
+		});
+
+	}, 1000);
+});
