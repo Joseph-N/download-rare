@@ -98,12 +98,12 @@ class TmdbTv < Tmdb
 	def find_season(tv_id, season_number)
 		key = "#{tv_id}_#{season_number}"
 
-		unless $redis.exists randomize(key)
+		unless $redis.exists hash(key)
 			contents = fetch_url("tv/#{tv_id}/season/#{season_number}", @params)
-			$redis.set(randomize(key), contents)
-			$redis.expire(randomize(key), 86400)
+			$redis.set(hash(key), contents)
+			$redis.expire(hash(key), 86400)
 		else
-			contents = $redis.get(randomize(key))
+			contents = $redis.get(hash(key))
 		end
 		JSON.parse(contents)
 	end
