@@ -16,6 +16,18 @@
 
 <%= content_for :page_css do %>
 	<%= stylesheet_link_tag "prettyPhoto" %>
+	<style type="text/css">
+	.product-img.download:before{
+		content: "<%= pluralize(@record.download_count, 'download') %>";
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 3px 8px;
+		border-radius: 0 3px 0 3px;
+		background: #E35E54;
+		color: white;
+	}
+	</style>
 <% end %>
 
 <%= content_for :page_js do %>
@@ -37,11 +49,11 @@
 <div class="row">
 	<div class="col-md-9">
 		<div class="row bottom-20">
-			<div class="shop-item col-md-4">
-					<div class="product-img">
+			<div class="shop-product col-md-4">
+					<div class="product-img download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
-					</div>
-					<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
+					</div>	
+					<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>			
 			</div>
 			<div class="col-md-8">
 				<div class="row">

@@ -2,12 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .poster.has-download:before{
-content: "Downloadable";
-position: absolute;
-top: 0;
-right: 0;
-padding: 3px 8px;
-border-radius: 0 3px 0 3px;
-background: #E35E54;
-color: white;
+	content: "Downloadable";
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 3px 8px;
+	border-radius: 0 3px 0 3px;
+	background: #E35E54;
+	color: white;
 }
+
