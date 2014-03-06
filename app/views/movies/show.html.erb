@@ -68,7 +68,7 @@
 					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto" %>
 					</div>
 					<div class="col-md-6">
-					<%= link_to raw('<i class="fa fa-download"></i> Download'), @record.download_link, class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie" %>
+					<%= link_to raw('<i class="fa fa-download"></i> Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie" %>
 					</div>
 				</div>
 			</div>
