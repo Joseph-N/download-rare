@@ -21,6 +21,24 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#caroufredsel-shows').carouFredSel({
+		responsive: true,
+		scroll : 1,
+		circular: false,
+		infinite: true,
+		items: {
+		  visible: {
+		      min: 1,
+		      max: 4
+		  }
+		},
+		prev: '#portfolio-next',
+		next: '#portfolio-prev',
+		auto: {
+		  play: false
+		}
+	});
+
 	$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({
 		slideshow:3000,
 		autoplay_slideshow: true,

@@ -30,38 +30,36 @@
 			    <div class="product-img">
 			    <%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
 				</div>
-				<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
+				
 			  </div>
 			  <div class="col-sm-8">
 				<h3 class="primary-font first-child"><%= @show["name"] %></h3>
 				<div class="raty" data-score="<%= @show["vote_average"] %>"></div>
 				<span class="text-muted reviews" style="margin-left: 1px">Rated: <%= @show["vote_average"]%></span>
-				<p class="text-muted top-20">
-				  <%= truncate(@show["overview"], length: 700) %>
-				</p>
-				<div class="row">
-				<div class="col-md-12">
-				<%= render 'shared/google_ad' %>
-				</div>
-				</div>
-				
-			  </div>
-			</div>
+				<div class="bottom-20"></div>
+
+				<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
 
 			<!-- Tv show seasons -->
 			<div class="row">
 			  <div class="col-sm-12">
-				<h3 class="headline text-color">
+			  	<h3 class="headline text-color">
 				  <span class="border-color">Seasons</span>
+	  				<span class="pull-right" id="controls">
+	  					<span id="portfolio-next" class="next black">
+            				<i class="fa fa-arrow-left"></i>
+        				</span>
+			            <span id="portfolio-prev" class="prev black">
+			                <i class="fa fa-arrow-right"></i>
+			            </span>
+					</span>
 				</h3>
-			  </div>
-			</div> <!-- / .row -->
-			
-			<div class="row">
-				<% @show["seasons"].each do |season| %>
+				<div class="row">
+				<div id="caroufredsel-shows">
+								<% @show["seasons"].each do |season| %>
 			
 					<% 	unless((season["season_number"].eql? 0) || (season["season_number"].nil?)) %>
-										<div class="col-md-2 bottom-20">
+										<div class="col-md-3 col-sm-4 col-xs-4 bottom-20">
 					<div class="poster">
 					<% if season["poster_path"] %>
 						<%= link_to(image_tag(@tmdb.image_url("poster", "w154", season["poster_path"]), class: "img-responsive"), tv_show_season_path(@record, season["season_number"])) %>
@@ -75,11 +73,27 @@
 				
 				<% end %>
 
+
+				</div>
+				</div>
+			  </div>
+			</div> <!-- / .row -->
+			
+
+				<div class="row">
+
+				<div class="col-md-12">
+				<%= render 'shared/google_ad' %>
+				</div>
+				</div>
+				
+			  </div>
 			</div>
+
 			
 			
-			<!-- Item Description -->
-			<div class="row">
+			<!-- Item Description (todo) -->
+<!-- 			<div class="row">
 			  <div class="col-sm-12">
 				<h3 class="headline text-color">
 				  <span class="border-color">Screenshots</span>
@@ -99,7 +113,12 @@
 				</div>
 				</div>
 			  </div>
-			</div> <!-- / .row -->
+			</div> <!-- / .row --> 
+	
+									<p class="text-muted bottom-20">
+				  <%= @show["overview"] %>
+				</p>
+
 			<div class="row">
 			  <div class="col-sm-8">
 			  <%= render 'shared/comments' %>
