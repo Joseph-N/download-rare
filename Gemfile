@@ -34,6 +34,7 @@ gem 'sinatra', require: false
 gem "thin"
 gem 'redis'
 gem 'redis-namespace'
+gem 'whenever', :require => false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
