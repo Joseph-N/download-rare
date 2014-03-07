@@ -1,7 +1,7 @@
 class Episode < ActiveRecord::Base
-  belongs_to :season
+  belongs_to :season, :touch => true
 
   validates_presence_of :episode_number
 
-  default_scope { order('created_at DESC') } 
+  default_scope { order('updated_at DESC') } 
 end
