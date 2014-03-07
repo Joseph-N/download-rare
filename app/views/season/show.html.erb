@@ -51,6 +51,7 @@
   </div>
     <% for episode in @season_info["episodes"]  %>
   	<% @episode = get_episode(@tv_show.id, @season.season_number, episode["episode_number"]) %>
+    <% unless @episode.nil? %>
   <div class="col-md-12" id="episode<%= @episode.episode_number %>">
   	<div class="row">
 
@@ -93,5 +94,6 @@
   	</div>
      <hr>
   </div>
+  <% end %>
   <% end %>
 </div>
