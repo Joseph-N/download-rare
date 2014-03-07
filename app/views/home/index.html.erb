@@ -32,11 +32,11 @@
 			  	<% if season.updated_at != season.created_at %>
 			  	<% @episode = season.episodes.where("updated_at = ?", season.updated_at).first %>
 			<li>
-			<%= link_to image_tag(@tmdb.image_url("backdrop", "w780", season.tv_show.backdrop), class: "img-responsive"), tv_show_season_path(season.tv_show, season.season_number) + "#episode#{@episode.episode_number}" %>
+			<%= link_to image_tag(@tmdb.image_url("backdrop", "w780", season.tv_show.backdrop), class: "img-responsive"), tv_show_season_path(season.tv_show, season.season_number) %>
 			<div class="flex-caption">
 				<h4><%= season.tv_show.name %></h4>
 				<% unless  @episode.nil? %>
-				<p>Season <%= season.season_number %> Episode <%= @episode.episode_number  %></p>					
+				<p>Season <% season.season_number %> Episode <% @episode %></p>					
 				<% end %>
 				
 			</div>
