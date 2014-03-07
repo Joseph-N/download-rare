@@ -37,8 +37,9 @@
 				<div class="raty" data-score="<%= @show["vote_average"] %>"></div>
 				<span class="text-muted reviews" style="margin-left: 1px">Rated: <%= @show["vote_average"]%></span>
 				<div class="bottom-20"></div>
-
+				<%= render partial: 'shared/twitter_share' %>
 				<%= render partial: 'shared/facebook_like', locals: { url: request.url } %>
+
 
 			<!-- Tv show seasons -->
 			<div class="row">
@@ -46,10 +47,10 @@
 			  	<h3 class="headline text-color">
 				  <span class="border-color">Seasons</span>
 	  				<span class="pull-right" id="controls">
-	  					<span id="portfolio-next" class="next black">
+	  					<span id="portfolio-next-sn" class="next black">
             				<i class="fa fa-arrow-left"></i>
         				</span>
-			            <span id="portfolio-prev" class="prev black">
+			            <span id="portfolio-prev-sn" class="prev black">
 			                <i class="fa fa-arrow-right"></i>
 			            </span>
 					</span>
@@ -85,11 +86,11 @@
 
 			
 			
-			<!-- Item Description (todo) -->
-<!-- 			<div class="row">
+			<!-- backdrops -->
+			<div class="row">
 			  <div class="col-sm-12">
 				<h3 class="headline text-color">
-				  <span class="border-color">Screenshots</span>
+				  <span class="border-color">Backgrounds</span>
 	  				<span class="pull-right" id="controls">
 	  					<span id="portfolio-next" class="next black">
             				<i class="fa fa-arrow-left"></i>
@@ -102,11 +103,22 @@
 				<div class="row">
 				<div id="caroufredsel">
 
+		<% @backdrops.each do |image| %>
+			<div class="col-md-3 col-xs-12 col-sm-4">
+			    <div class="movie-item">
+			    <a href="<%= @tmdb.image_url("backdrop", "original", image["file_path"])%>" rel="prettyPhoto[gallery1]" title=""><%= image_tag(@tmdb.image_url("backdrop", "w300", image["file_path"]), class: "img-responsive center-block", title: "") if image['file_path'] %></a>
+
+				</div>
+			</div>
+		
+		<% end %>
+
+
 
 				</div>
 				</div>
 			  </div>
-			</div> <!-- / .row --> 
+			</div> <!-- / .row 
 	
 									<p class="text-muted bottom-20">
 				  <%= @show["overview"] %>

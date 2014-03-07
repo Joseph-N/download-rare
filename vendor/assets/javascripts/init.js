@@ -32,8 +32,8 @@ $(document).ready(function(){
 		      max: 4
 		  }
 		},
-		prev: '#portfolio-next',
-		next: '#portfolio-prev',
+		prev: '#portfolio-next-sn',
+		next: '#portfolio-prev-sn',
 		auto: {
 		  play: false
 		}

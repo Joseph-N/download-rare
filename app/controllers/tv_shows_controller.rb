@@ -15,6 +15,7 @@ class TvShowsController < ApplicationController
   def show
     @record = TvShow.friendly.find(params[:id])
     @show = @tmdb_tv.find(@record.tmdb_id)
+    @backdrops = @show["images"]["backdrops"]
   end
 
   def create
