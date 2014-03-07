@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="headline first-child text-color">
+	  <span class="border-color"><%= @show.name %>: season <%= @season.season_number %> Episode <%= @episode.episode_number %></span>
+	</h2>
+		 <%= form_for([@show, @season, @episode], html: { class: "" } ) do |f| %>
+	        <div class="form-group">
+	        	<%= f.text_field :download_link, class: "form-control", placeholder: "http://example.site" %>
+	        </div>
+	        <%= f.submit "Sumbit", class: "btn btn-default" %>
+        <% end %>
+	</div>
+</div>

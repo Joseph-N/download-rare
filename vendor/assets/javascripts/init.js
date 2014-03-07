@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 	$('#caroufredsel').carouFredSel({
 		responsive: true,
-		scroll : 4,
+		scroll : 1,
 		circular: true,
 		infinite: true,
 		items: {

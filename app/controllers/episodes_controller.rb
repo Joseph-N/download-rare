@@ -8,8 +8,16 @@ class EpisodesController < ApplicationController
 		if @episode.update_attributes(episode_params)	
 			@show.update_attribute(:updated_at, @episode.updated_at)
 			@season.update_attribute(:updated_at, @episode.updated_at)
+			flash[:notice] = "successfully updated episode"
+			
 			redirect_to tv_show_season_path(@show, @season.season_number)
 		end	
+	end
+
+	def edit
+		@show = TvShow.friendly.find(params[:tv_show_id])
+		@season = Season.find(params[:season_id])
+		@episode = Episode.find(params[:id])
 	end
 
 	private

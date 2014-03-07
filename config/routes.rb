@@ -19,9 +19,11 @@ Downloadrare::Application.routes.draw do
   resources :movies
   resources :tv_shows do
     resources :season, only: [:show] do
-      resources :episodes, only: [:update]
+      resources :episodes, only: [:update, :edit]
     end
   end
+
+  resources :search, only: [:index]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
