@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   
   def index
   	if params[:query]
-      @movies = Movie.plain_tsearch(params[:query]) 		
+      @movies = Movie.plain_tsearch(params[:query]).paginate(:page => params[:page], :per_page => 12) 		
   	else
   		@movies = Movie.paginate(:page => params[:page], :per_page => 12)
   	end
