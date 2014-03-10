@@ -17,11 +17,13 @@
 	    <div class="row">
 	    <div class="col-md-4">
 	    <div class="poster featured">
-	    	<%= link_to image_tag(@tmdb.image_url("poster", "w342", @featured.poster), class: "img-responsive"), movie_path(@featured) unless @featured.nil? %>
+	   <%  unless @featured.nil? %>
+	    	<%= link_to image_tag(@tmdb.image_url("poster", "w342", @featured.poster), class: "img-responsive"), movie_path(@featured)  %>
 	    	<div class="caption">
 	    	<%= @featured.title %>
 	    	<span class="pull-right"><%= pluralize(@featured.download_count, 'download') %></span>
 	    	</div>
+	    	<% end %>
 	</div>
 	    	
 	    </div>

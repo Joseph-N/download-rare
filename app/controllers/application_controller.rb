@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :init_movies, :init_shows
 
-
   require 'tmdb'
 
   def init_movies

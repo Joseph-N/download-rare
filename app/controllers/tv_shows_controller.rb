@@ -4,7 +4,7 @@ class TvShowsController < ApplicationController
   	if params[:query]
       @tv_shows = TvShow.plain_tsearch(params[:query])
   	else
-  		@tv_shows = TvShow.limit(13)
+  		@tv_shows = TvShow.paginate(:page => params[:page], :per_page => 12)
   	end
   end
 

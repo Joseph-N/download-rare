@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   	if params[:query]
       @movies = Movie.plain_tsearch(params[:query]) 		
   	else
-  		@movies = Movie.limit(13)
+  		@movies = Movie.paginate(:page => params[:page], :per_page => 12)
   	end
   end
 
@@ -24,6 +24,7 @@ class MoviesController < ApplicationController
   def create
   	@movie = Movie.create(movie_params)
   	if @movie.save
+      MovieWorker.perform_async(@movie.id)
   		redirect_to movies_path, notice: "Successfully saved movie"
     else
       render 'new'

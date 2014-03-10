@@ -7,16 +7,20 @@ namespace :shows do
 	  	@tv = TmdbTv.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
 
 		def remove_key_from_redis(key)
-			# delete redis key for show
 	  		$redis.del @tv.hash(key)
 		end
 
+		p "*****************************************************"
+		p "*     #{Time.now.strftime('%a %m %Y at %I:%M%p')}" + " "*24 + "*"
+		p "*****************************************************"
+		p ""
+
 	  	TvShow.all.each do |show|
 
-	  		p "Updating #{show.name}..."
+	  		p " Updating #{show.name}"
 
 	  		if remove_key_from_redis(show.tmdb_id).eql? 1
-	  			p "Successfully removed redis key for #{show.name}"
+	  			p "Remove redis key for show................................OK"
 	  		else
 	  			p "No key for #{show.name}"
 	  		end
@@ -29,7 +33,7 @@ namespace :shows do
 		  						     number_of_seasons: @show["number_of_seasons"]
 		  						    )
 
-		  	p "  --> updated number of seasons and episodes of #{show.name}...."
+		  	p "  --> Update seasons and episodes count..................OK"
 
 		  	# update seasons
 		  	@show["seasons"].each do |season|
@@ -38,13 +42,13 @@ namespace :shows do
 		  		end  
 		  	end
 
-		  	p "  --> updated seasons of #{show.name}"
+		  	p "  --> Update seasons.....................................OK"
 
 		  	# update season episodes
 		  	show.seasons.each do |season|
 
 		  		if remove_key_from_redis("#{season.tv_show.tmdb_id}_#{season.season_number}").eql? 1
-		  			p "     > Successfully removed redis key for #{season.tv_show.name} season #{season.season_number}"
+		  			p "     > Remove redis key for S0#{season.season_number}..........................OK"
 		  		else
 		  			p "     > No key for #{season.tv_show.name} season #{season.season_number}"
 		  		end
@@ -56,10 +60,10 @@ namespace :shows do
 		  		@season_info["episodes"].each do |episode|
 		  			season.episodes.where(episode_number: episode["episode_number"]).first_or_create
 		  		end
-		  		p "       > Successfully updated episodes list of #{season.tv_show.name}"
+		  		p "       > Update episode list.............................OK"
 		  	end
 
-		  	p "=" * 100
+		  	p "*" * 59
 	  	end
 
 	end
