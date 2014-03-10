@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="headline first-child text-color">
+	  <i class="fa fa-external-link-square"></i> <span class="border-color">Dead Links</span>
+	</h2>
+<table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @dead_links.any? %>
+	      <% for dead_link in @dead_links %>
+	        <tr>
+	          <td><%= dead_link.resource_id %></td>
+	          <% if dead_link.resource_type == "movie" %>
+	          	<% movie = get_movie(dead_link.resource_id) %>
+	          	<td><%= movie.title %></td>
+	          	<td><%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_movie_path(movie) %></td>
+	          <% elsif dead_link.resource_type == "episode" %>
+	          	<% episode = fetch_episode(dead_link.resource_id) %>
+	          	<td><%= "#{episode.season.tv_show.name} S0#{episode.season.season_number}E0#{episode.episode_number}" %></td>
+	          	<td><%= link_to raw('<i class="fa fa-pencil"></i> Edit'),  edit_tv_show_season_episode_path(episode.season.tv_show, episode.season, episode) %></td>
+	          <% end %>
+	        </tr>
+	       <% end %>
+	    <% else %>
+	    <td colspan="3">Hurray!! no dead links were found</td>
+       <% end %>
+      </tbody>
+    </table>
+	</div>
+</div>

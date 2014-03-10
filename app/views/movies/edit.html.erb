@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-md-12">
+		 <h3 class="primary-font text-center">Edit: <%= @movie.title %></h3>
+		<%= form_for(@movie) do |f| %>
+	        <div class="form-group">
+	        	<%= f.label :download_link %>
+	        	<%= f.text_area :download_link, class: "form-control", rows: 5 %>
+	        </div>
+	        <%= f.submit "Save Changes", class: "btn btn-green" %>
+	        
+	    <% end %>
+	</div>
+</div>

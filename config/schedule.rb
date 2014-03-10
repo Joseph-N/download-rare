@@ -5,3 +5,7 @@ every 1.day do
 	rake "shows:update"
 end
 
+
+every :monday, :at => '1am' do
+  rake "fetch:all_broken"
+end

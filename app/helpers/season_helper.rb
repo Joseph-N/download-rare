@@ -12,9 +12,4 @@ module SeasonHelper
 	def add_download_class?(episode)
 		admin_signed_in? && !episode.download_link.nil?
 	end
-
-	def get_file_size(download_link)
-		headers =  RestClient.head(download_link).headers
-		number_to_human_size(headers[:content_length]) 
-	end
 end

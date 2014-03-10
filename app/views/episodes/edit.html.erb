@@ -5,9 +5,9 @@
 	</h2>
 		 <%= form_for([@show, @season, @episode], html: { class: "" } ) do |f| %>
 	        <div class="form-group">
-	        	<%= f.text_field :download_link, class: "form-control", placeholder: "http://example.site" %>
+	        	<%= f.text_area :download_link, class: "form-control", placeholder: "http://example.site", rows: 4 %>
 	        </div>
-	        <%= f.submit "Sumbit", class: "btn btn-default" %>
+	        <%= f.submit "Sumbit", class: "btn btn-green" %>
         <% end %>
 	</div>
 </div>

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :init_movies, :init_shows
+  before_filter :init_movies, :init_shows, :deadlinks
 
   require 'tmdb'
 
@@ -18,5 +18,9 @@ class ApplicationController < ActionController::Base
 
   def randomize(key)
     Digest::MD5.hexdigest(key.to_s)
+  end
+
+  def deadlinks
+    @deadlinks = DeadLink.all
   end
 end

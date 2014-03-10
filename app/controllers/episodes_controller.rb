@@ -6,8 +6,10 @@ class EpisodesController < ApplicationController
 		@episode = Episode.find(params[:id])
 		@season = Season.find(params[:season_id])
 		if @episode.update_attributes(episode_params)
+			remove_episode_from_broken_links(@episode.id)
+
 			EpisodeWorker.perform_async(@episode.id)
-				
+
 			flash[:notice] = "successfully updated #{@show.name} S0#{@season.season_number}EP#{@episode.episode_number}"
 
 			redirect_to tv_show_season_path(@show, @season.season_number)
@@ -23,5 +25,12 @@ class EpisodesController < ApplicationController
 	private
 		def episode_params
 			params.require(:episode).permit(:download_link)
+		end
+
+		def remove_episode_from_broken_links(id)
+		    episode = DeadLink.find_by resource_id: id
+		    if episode.present?
+		      episode.destroy
+			end
 		end
 end

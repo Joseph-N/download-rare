@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_filter :authenticate_admin!, only: [:create]
+  before_filter :authenticate_admin!, only: [:create, :edit, :update]
   
   def index
   	if params[:query]
@@ -31,10 +31,30 @@ class MoviesController < ApplicationController
   	end
   end
 
+  def edit
+     @movie = Movie.friendly.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.friendly.find(params[:id])
+    if @movie.update_attribute(:download_link, params[:movie][:download_link])
+      remove_movie_from_broken_links(@movie.id)
+      
+      redirect_to @movie, :notice => "Successfully updated #{@movie.title}"
+    end
+  end
+
 
   private
-  	def movie_params
+  def movie_params
 		params.require(:movie).permit(:title, :tmdb_id, :poster, :backdrop, :release_date, :download_link)
 	end
+
+  def remove_movie_from_broken_links(id)
+    movie = DeadLink.find_by resource_id: id
+    if movie.present?
+      movie.destroy
+    end
+  end
 
 end

@@ -65,7 +65,7 @@
 			<div class="col-md-8">
 				<div class="row">
 			  		<div class="col-md-9">
-						<h3 class="primary-font first-child"><%= @movie["original_title"] %> (<%= return_year(@movie["release_date"]) %>)</h3>
+						<h3 class="primary-font first-child"><%= @movie["original_title"] %> (<%= return_year(@movie["release_date"]) %>) <%= link_to raw('<i class="fa fa-pencil"></i>'), '#', "data-toggle"=>"modal", "data-target"=>"#editMovie" if admin_signed_in? %></h3>
 							<div class="raty" data-score=""></div>
 							<span class="text-muted reviews" style="margin-left: 1px" id="imdb-rating" data-id="<%= @movie["imdb_id"] %>"></span>
 					</div>
@@ -151,3 +151,30 @@
   <%= render 'shared/google_ad_1' %>
   </div>
 </div> <!-- / .row -->
+
+
+<% if admin_signed_in? %>
+<!-- Modal -->
+<div class="modal fade" id="editMovie" tabindex="-1" role="dialog" aria-labelledby="editMovieLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Edit: <%= @movie["original_title"] %></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@record) do |f| %>
+        <div class="form-group">
+        	<%= f.label :download_link %>
+        	<%= f.text_area :download_link, class: "form-control", rows: 5 %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
