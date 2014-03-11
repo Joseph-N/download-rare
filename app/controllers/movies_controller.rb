@@ -37,8 +37,9 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.friendly.find(params[:id])
-    if @movie.update_attribute(:download_link, params[:movie][:download_link])
+    if @movie.update_attributes(movie_params)
       remove_movie_from_broken_links(@movie.id)
+      MovieWorker.perform_async(@movie.id)
       
       redirect_to @movie, :notice => "Successfully updated #{@movie.title}"
     end
@@ -47,7 +48,7 @@ class MoviesController < ApplicationController
 
   private
   def movie_params
-		params.require(:movie).permit(:title, :tmdb_id, :poster, :backdrop, :release_date, :download_link)
+		params.require(:movie).permit(:title, :tmdb_id, :poster, :backdrop, :release_date, :download_link, :magnetic_link, :torrent_file_link)
 	end
 
   def remove_movie_from_broken_links(id)

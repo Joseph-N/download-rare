@@ -48,7 +48,7 @@
 
 <div class="row">
 	<div class="col-md-9">
-		<div class="row bottom-20">
+		<div class="row">
 			<div class="shop-product col-md-4">
 					<div class="product-img download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
@@ -74,23 +74,42 @@
 					</div>
 				</div>
 
-				<p class="text-muted top-20">
+				<p class="text-muted top-20 overview">
 					<%= @movie["overview"] %>
 				</p>
 				<div class="info-board info-board-green">
 					  <h4>Tagline</h4>
 					  <p><%= @movie["tagline"].present? ? @movie["tagline"] : "No tagline available for this movie" %></p>
 				</div>
-				<br>
+
 				<div class="row">
-					<div class="col-md-6">
-					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto" %>
-					</div>
-					<div class="col-md-6">
-					<%= link_to raw('<i class="fa fa-download"></i> Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie" %>
+					<div class="col-md-12">
+					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto", title: "watch trailer" %>
 					</div>
 				</div>
+
 			</div>
+
+		</div>
+		<div class="row bottom-20 top-20">
+			<div class="col-md-5">
+			<%= link_to raw('<i class="fa fa-download"></i> Direct Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-primary btn-block", title: "download #{@movie["original_title"]} movie", style: "color: #fff;" %>
+			</div>
+			<% if @record.magnetic_link %>
+			<div class="col-md-1">
+				<%= link_to image_tag('magnet_link.png'), @record.magnetic_link, title: "Magnetic link" %>
+			</div>
+			<% end %>
+			<% if @record.torrent_file_link %>
+			<div class="col-md-6">
+				<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), @record.torrent_file_link, class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent" %>
+			</div>
+			<% end %>
+			<% if @record.magnetic_link.nil? && @record.torrent_file_link.nil? %>
+			<div>
+				<button type="button" class="btn btn-warning disabled btn-lg">No torrent links yet</button>
+			</div>
+			<% end %>
 		</div>
 		<div class="row" style="padding-left: 15px;">
 			<h2 class="headline first-child text-color">
@@ -163,17 +182,7 @@
         <h4 class="modal-title" id="myModalLabel">Edit: <%= @movie["original_title"] %></h4>
       </div>
       <div class="modal-body">
-        <%= form_for(@record) do |f| %>
-        <div class="form-group">
-        	<%= f.label :download_link %>
-        	<%= f.text_area :download_link, class: "form-control", rows: 5 %>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= f.submit "Save Changes", class: "btn btn-primary" %>
-      </div>
-      <% end %>
+      <%= render :partial => 'form', locals: { movie: @record } %>
     </div>
   </div>
 </div>

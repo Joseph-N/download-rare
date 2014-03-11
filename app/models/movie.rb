@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
   	friendly_id :title, use: :slugged
 
 	validates_uniqueness_of :tmdb_id
-	validates_presence_of :download_link
+	validates_presence_of :download_link, :magnetic_link, :torrent_file_link
 
 	default_scope { order('created_at DESC') } 
 
