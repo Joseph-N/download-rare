@@ -10,7 +10,7 @@
 	<div class="col-md-6 shop-product">
 	<div class="row">
 		<div class="col-md-6">
-							<div class="">
+			<div class="">
 			  <% if movie["poster_path"] %>
 			  	<%= image_tag(@tmdb.image_url("poster", "w342", movie["poster_path"]), class: "img-responsive") %>
 			  <% else %>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="col-md-6">
 		 <h4><%= movie["title"] %> </h4>
-		 <p>(<%= movie["vote_average"] %> / 10) &rarr;(<%= movie["release_date"] %>)</p>
+		 <p>(<%= movie["vote_average"] %> / 10) &rarr; (<%= movie["release_date"] %>)</p>
 			 <%= render :partial => 'form', locals: { movie: movie } %>
 		</div>
 	</div>

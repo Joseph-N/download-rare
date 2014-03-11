@@ -9,12 +9,13 @@ class MovieWorker
   	url = movie.download_link.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
 
   	# get headers
-	headers =  RestClient.head(url).headers 
+	  headers =  RestClient.head(url).headers 
 
-	#return content length header
-	size =  headers[:content_length]
+  	#return content length header
+  	size =  headers[:content_length]
 
-	#update movie
-	movie.update_attribute(:file_size, size)
+  	#update movie
+  	movie.update_attribute(:file_size, size)
+
   end
 end
