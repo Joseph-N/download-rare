@@ -27,7 +27,14 @@
 			  </ul>
 		</li>
 		<% end %>
-	  	</ul>	  
+	  	</ul>
+
+	  	<%= form_tag('/movies', :method => "get", class: "navbar-form navbar-left") do %>
+				  	<div class="form-group">
+			  			<%= text_field_tag(:query, nil, :class => "form-control", placeholder: "Search Movies", id: "s", style: "width: 350px;") %>
+			  		</div>
+		<% end %>	
+
 
     </div> <!-- / Navbar Links -->
 

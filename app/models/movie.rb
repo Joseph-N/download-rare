@@ -2,6 +2,9 @@ class Movie < ActiveRecord::Base
 	extend FriendlyId
   	friendly_id :title, use: :slugged
 
+  	after_save :load_into_soulmate
+  	before_destroy :remove_from_soulmate
+
 	validates_uniqueness_of :tmdb_id
 	validates_presence_of :download_link
 
@@ -23,4 +26,25 @@ class Movie < ActiveRecord::Base
   	end
 
 	def self.query_limit; 25; end
+
+	def self.search(title)
+    	all = Soulmate::Matcher.new("shows-and-movies").matches_for_term(title)
+    	all.collect { |c| { "id" => c["id"], "name" => c["term"], "permalink" => c["data"]["permalink"], "image" => c["data"]["image"], "type" => c["data"]["type"] } }
+  	end
+
+	private
+
+	def load_into_soulmate
+		loader = Soulmate::Loader.new("shows-and-movies")
+	   	loader.add("term" => title, "id" => self.id, "data" => {
+	   			"permalink" => Rails.application.routes.url_helpers.movie_path(self),
+	   			"image" => "http://image.tmdb.org/t/p/w45#{poster}",
+	   			"type" => "movie"
+	   	})
+	end
+
+	def remove_from_soulmate
+	    loader = Soulmate::Loader.new("shows-and-movies")
+	    loader.remove("id" => self.id)
+	end
 end

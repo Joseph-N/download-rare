@@ -37,6 +37,7 @@ gem 'redis-namespace'
 gem 'whenever', :require => false
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
+gem 'soulmate'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
