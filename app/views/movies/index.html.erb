@@ -29,6 +29,8 @@
 				<span class="border-color">
 					<% if params[:query] %>
 						<%= pluralize(@movies.count, "Match") %> Found
+					<% elsif params[:genre] %>
+						<%= params[:genre] %> Movies (<%= @movies.count %>)
 					<% else %>
 						Movies
 					<% end %>
@@ -55,10 +57,22 @@
 			  <span class="border-color">Sponsored</span>
 			</h2>
 						<%= render 'shared/google_ad' %>
+									 				<h2 class="headline first-child text-color">
+			  <span class="border-color">Genres</span>
+			</h2>
+									 <ul class="nav nav-pills nav-stacked">
+									 	 <li class="<%= "active" if params[:genre].nil? %>"><%= link_to "All", movies_path %></li>
+									 	<% @genres.each do |genre| %>
+			 
+			  <li  class="<%= params[:genre] == genre ? "active" : "" %>"><%= link_to genre, movies_path(genre: genre)%></li>
+		    	
+		<% end %>
+		</ul>
 				<h2 class="headline first-child text-color">
 			  <span class="border-color">Like Us</span>
 			</h2>
 			 <%= render 'shared/facebook_likebox' %>
+
 			</div>
 			</div>
 

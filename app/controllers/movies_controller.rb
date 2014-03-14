@@ -3,7 +3,12 @@ class MoviesController < ApplicationController
   
   def index
       # @movies = Movie.plain_tsearch(params[:query]).paginate(:page => params[:page], :per_page => 12) 
-      @movies = Movie.paginate(:page => params[:page], :per_page => 12)
+      if params[:genre]
+        @movies = Movie.where("? = ANY (genres)", params[:genre]).paginate(:page => params[:page], :per_page => 12)
+      else
+        @movies = Movie.paginate(:page => params[:page], :per_page => 12)
+      end
+      @genres = fetch_genres.flatten.uniq
 
   end
 
@@ -53,6 +58,14 @@ class MoviesController < ApplicationController
     if movie.present?
       movie.destroy
     end
+  end
+
+  def fetch_genres
+    genres = []
+    Movie.all.each do |movie|
+      genres << movie.genres
+    end
+    genres
   end
 
 end

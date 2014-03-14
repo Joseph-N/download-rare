@@ -6,6 +6,7 @@ every 1.day do
 end
 
 
-every :monday, :at => '1am' do
+every 2.days do
   rake "fetch:all_broken"
 end
+
