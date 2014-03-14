@@ -8,6 +8,19 @@ background:#E35E54;
 color:#FFF;
 padding:3px 8px;
 }
+/* styling for submit icon*/
+#search-btn {
+color: #393939;
+font-size: 15px;
+font-weight: 600;
+position: relative;
+left: -40px;
+top: -1px;
+background: transparent;
+transition: color 0.25s linear;
+}
+
+/* sytling for autocomplete */
 
 #soulmate {
 background-color:#fafafa;
