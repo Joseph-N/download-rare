@@ -28,7 +28,7 @@ class TvShow < ActiveRecord::Base
 
 	def self.query_limit; 25; end
 
-	private
+#	private
 
 	def load_into_soulmate
 		loader = Soulmate::Loader.new("shows")

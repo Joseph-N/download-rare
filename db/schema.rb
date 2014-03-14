@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314121428) do
+ActiveRecord::Schema.define(version: 20140314131803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(version: 20140314121428) do
     t.string   "slug"
     t.integer  "download_count"
     t.integer  "file_size"
-    t.text     "magnetic_link"
-    t.string   "torrent_file_link"
     t.tsvector "tsv"
     t.string   "genres",            array: true
     t.string   "imdb_id"
+    t.text     "magnetic_link"
+    t.string   "torrent_file_link"
   end
 
   add_index "movies", ["slug"], name: "index_movies_on_slug", unique: true, using: :btree
