@@ -1,4 +1,4 @@
-<% title "All Movies" %> 
+<% title(params[:genre].nil? ? "All Movies" : "#{params[:genre]} Movies")  %> 
 <% if admin_signed_in? %>
 	<% content_for :topic_header do %>
 		<!-- Topic Header -->
@@ -24,6 +24,28 @@
 <% end %>
 	<div class="container">
 		  <div class="row">
+										<div class="col-md-4">
+													<h2 class="headline first-child text-color">
+			  <span class="border-color">Sponsored</span>
+			</h2>
+						<%= render 'shared/google_ad' %>
+									 				<h2 class="headline first-child text-color">
+			  <span class="border-color">Genres</span>
+			</h2>
+									 <ul class="nav nav-pills nav-stacked">
+									 	 <li class="<%= "active" if params[:genre].nil? %>"><%= link_to "All", movies_path %></li>
+									 	<% @genres.each do |genre| %>
+			 
+			  <li  class="<%= params[:genre] == genre ? "active" : "" %>"><%= link_to genre, movies_path(genre: genre)%></li>
+		    	
+		<% end %>
+		</ul>
+				<h2 class="headline first-child text-color">
+			  <span class="border-color">Like Us</span>
+			</h2>
+			 <%= render 'shared/facebook_likebox' %>
+
+			</div>
 		  <div class="col-md-8">
 		  	<h2 class="headline first-child text-color">
 				<span class="border-color">
@@ -46,34 +68,14 @@
 
 			</div>
 		  </div>
+		  <%= (index % 3) == 0 %>
 	  <% end %>
 	  </div>
 	  <div class="col-md-12">
 	  	<%= will_paginate @movies, renderer: BootstrapPagination::Rails %>
 	  </div>
 			</div>
-									<div class="col-md-4">
-													<h2 class="headline first-child text-color">
-			  <span class="border-color">Sponsored</span>
-			</h2>
-						<%= render 'shared/google_ad' %>
-									 				<h2 class="headline first-child text-color">
-			  <span class="border-color">Genres</span>
-			</h2>
-									 <ul class="nav nav-pills nav-stacked">
-									 	 <li class="<%= "active" if params[:genre].nil? %>"><%= link_to "All", movies_path %></li>
-									 	<% @genres.each do |genre| %>
-			 
-			  <li  class="<%= params[:genre] == genre ? "active" : "" %>"><%= link_to genre, movies_path(genre: genre)%></li>
-		    	
-		<% end %>
-		</ul>
-				<h2 class="headline first-child text-color">
-			  <span class="border-color">Like Us</span>
-			</h2>
-			 <%= render 'shared/facebook_likebox' %>
 
-			</div>
 			</div>
 
 	  </div>
