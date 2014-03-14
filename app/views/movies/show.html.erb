@@ -83,8 +83,11 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto", title: "watch trailer" %>
+					</div>
+					<div class="col-md-6">
+						<%= link_to raw('<i class="fa fa-download"></i> Direct Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-primary btn-block", title: "download #{@movie["original_title"]} movie", style: "color: #fff;" %>
 					</div>
 				</div>
 
@@ -93,16 +96,16 @@
 		</div>
 		<div class="row bottom-20 top-20">
 			<div class="col-md-5">
-			<%= link_to raw('<i class="fa fa-download"></i> Direct Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-primary btn-block", title: "download #{@movie["original_title"]} movie", style: "color: #fff;" %>
+				
 			</div>
 
-			<% unless @torrent_info["status"] == "fail" %>
+			<% unless (@record.magnetic_link || @record.torrent_file_link).nil? %>
 			<div class="col-md-1">
-				<%= link_to image_tag('magnet_link.png'), @torrent_info["MovieList"][0]["TorrentMagnetUrl"], title: "Magnetic link" %>
+				<%= link_to image_tag('magnet_link.png'), download_path(resource: "movie", id: @record.id, type: "magnetic_link"), title: "Magnetic link" %>
 			</div>
 
 			<div class="col-md-6">
-				<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), @torrent_info["MovieList"][0]["TorrentUrl"], class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent" %>
+				<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), download_path(resource: "movie", id: @record.id, type: "torrent_file"), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent" %>
 			</div>
 			<% else %>
 			<div class="col-md-7">
