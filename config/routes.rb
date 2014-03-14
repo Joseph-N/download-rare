@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 Downloadrare::Application.routes.draw do
 
+  mount Soulmate::Server, :at => "/autocomplete"
+
   get "season/index"
   scope '/admin' do
     authenticate :admin do

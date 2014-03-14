@@ -27,24 +27,19 @@ class Movie < ActiveRecord::Base
 
 	def self.query_limit; 25; end
 
-	def self.search(title)
-    	all = Soulmate::Matcher.new("shows-and-movies").matches_for_term(title)
-    	all.collect { |c| { "id" => c["id"], "name" => c["term"], "permalink" => c["data"]["permalink"], "image" => c["data"]["image"], "type" => c["data"]["type"] } }
-  	end
 
 	private
 
 	def load_into_soulmate
-		loader = Soulmate::Loader.new("shows-and-movies")
+		loader = Soulmate::Loader.new("movies")
 	   	loader.add("term" => title, "id" => self.id, "data" => {
 	   			"permalink" => Rails.application.routes.url_helpers.movie_path(self),
-	   			"image" => "http://image.tmdb.org/t/p/w45#{poster}",
-	   			"type" => "movie"
+	   			"image" => "http://image.tmdb.org/t/p/w45#{poster}"
 	   	})
 	end
 
 	def remove_from_soulmate
-	    loader = Soulmate::Loader.new("shows-and-movies")
+	    loader = Soulmate::Loader.new("movies")
 	    loader.remove("id" => self.id)
 	end
 end

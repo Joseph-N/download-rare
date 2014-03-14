@@ -5,15 +5,13 @@
 		<div class="shop-jumbotron">
 		<div class="container">
 		  <div class="row">
-			<div class="col-sm-12">
+			<div class="col-md-12">
 
 			  <h1 class="text-center">Search For Movies</h1>
-			  <h3 class="primary-font text-center">Search through thousands of movies here:</h3>
-
-				  <%= form_tag(movie_search_url, :method => "get", class: "form-inline text-center") do %>
+			  				  <%= form_tag(movie_search_url, :method => "get", class: "form-inline text-center") do %>
 				  	<div class="form-group">
-				  		<label class="sr-only" for="shop-search">Movie</label>
-			  			<%= text_field_tag(:query, nil, :class => "form-control border-color col-sm-12", placeholder: "Enter movie name") %>
+				  		<label class="sr-only" for="shop-search">show</label>
+			  			<%= text_field_tag(:query, nil, :class => "form-control border-color", placeholder: "Enter show name") %>
 			  			<button type="submit" class="btn btn-color"><i class="fa fa-search"></i> Search</button>
 			  		</div>
 				  <% end %>

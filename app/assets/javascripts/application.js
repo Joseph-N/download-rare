@@ -17,6 +17,6 @@
 //= require scrolltopcontrol
 //= require jquery.sticky
 //= require jquery-migrate-1.2.1.min
-//= require jquery.autocomplete
+//= require jquery.soulmate
 //= require custom
 //= require_tree .

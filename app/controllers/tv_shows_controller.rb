@@ -1,12 +1,8 @@
 class TvShowsController < ApplicationController
   before_filter :authenticate_admin!, only: [:create]
   def index
-  	if params[:q]
       # @tv_shows = TvShow.plain_tsearch(params[:query]).paginate(:page => params[:page], :per_page => 12)
-      render :json => TvShow.search(params["q"])   
-  	else
-  		@tv_shows = TvShow.paginate(:page => params[:page], :per_page => 12)
-  	end
+      @tv_shows = TvShow.paginate(:page => params[:page], :per_page => 12)
   end
 
   def new

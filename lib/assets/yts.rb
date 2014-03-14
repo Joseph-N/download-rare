@@ -8,8 +8,10 @@ class Yts
 		unless $redis.exists hash(imdb_id)
 			contents = RestClient.get BASE_API_URL, { :params => { :keywords => imdb_id, :quality => '720p'} }
 			# save to redis
-			$redis.set(hash(imdb_id), contents)
-			$redis.expire(hash(imdb_id), 86400)
+			unless JSON.parse(contents)["status"] == "fail"
+			        $redis.set(hash(imdb_id), contents)
+			        $redis.expire(hash(imdb_id), 86400)
+			end
 		else
 			contents = $redis.get(hash(imdb_id))
 		end
