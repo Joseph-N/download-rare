@@ -58,7 +58,7 @@
 						<div id="tv-shows">
 							  <% @tv_shows.each do |show| %>
 	  		<div class="col-md-3 col-sm-4 show bottom-20">
-			<div class="poster">
+			<div class="poster-sm">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w154", show.poster), class: "img-responsive"), tv_show_path(show) %>
 			  	<div class="caption">
 			  		<%= show.name %>

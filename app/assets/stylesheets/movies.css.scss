@@ -19,8 +19,12 @@
 	border: none;
 }
 
-.poster{
+.poster, .poster-sm{
 	position: relative;
+}
+
+.poster-sm img{
+	height: 205px;
 }
 
 .bottom-20{

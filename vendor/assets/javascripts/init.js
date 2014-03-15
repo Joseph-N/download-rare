@@ -10,7 +10,7 @@ $(document).ready(function(){
 		infinite: true,
 		items: {
 		  visible: {
-		      min: 1,
+		      min: 4,
 		      max: 4
 		  }
 		},
@@ -28,7 +28,7 @@ $(document).ready(function(){
 		infinite: true,
 		items: {
 		  visible: {
-		      min: 1,
+		      min: 4,
 		      max: 4
 		  }
 		},
