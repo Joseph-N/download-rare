@@ -70,6 +70,14 @@ class TmdbMovie < Tmdb
 
 		JSON.parse(contents)
 	end
+
+	def search_by_imdb_id(imdb_id)
+		@params[:external_source] = "imdb_id"
+		contents = fetch_url("find/#{imdb_id}", @params)
+		@params.delete(:external_source)
+
+		JSON.parse(contents)
+	end
 end
 
 class TmdbTv < Tmdb
