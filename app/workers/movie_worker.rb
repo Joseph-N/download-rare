@@ -16,14 +16,18 @@ class MovieWorker
   	# fetch the move
   	movie = Movie.find(movie_id)
 
-  	# escape url
-  	url = movie.download_link.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
+    if movie.download_link.present?
+    	# escape url
+    	url = movie.download_link.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
 
-  	# get headers
-	  headers =  RestClient.head(url).headers 
+    	# get headers
+  	  headers =  RestClient.head(url).headers 
 
-  	#return content length header
-  	size =  headers[:content_length]
+    	#return content length header
+    	size =  headers[:content_length]
+    else
+      size = nil
+    end
 
 
     #-----------------------GET GENRE  & IMDB ID OF MOVIE ----------------------#

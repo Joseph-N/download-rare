@@ -6,7 +6,6 @@ class Movie < ActiveRecord::Base
   	before_destroy :remove_from_soulmate
 
 	validates_uniqueness_of :tmdb_id
-	validates_presence_of :download_link
 
 	default_scope { order('created_at DESC') } 
 
