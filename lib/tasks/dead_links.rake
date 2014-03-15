@@ -4,7 +4,7 @@ namespace :fetch do
 		movie_count = Movie.all.count
 		dead_links = 0
 
-		Movie.all.each do |movie|
+		Movie.where.not("download_link = ?","") .each do |movie|
 	      url = movie.download_link.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
 
 	      begin
