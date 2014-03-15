@@ -33,7 +33,7 @@
 			  <span class="border-color">Genres</span>
 			</h2>
 									 <ul class="nav nav-pills nav-stacked">
-									 	 <li class="<%= "active" if params[:genre].nil? %>"><%= link_to "All", movies_path %></li>
+									 	 <li class="<%= "active" unless params[:genre].present? %>"><%= link_to "All", movies_path %></li>
 									 	<% @genres.each do |genre| %>
 			 
 			  <li  class="<%= params[:genre] == genre ? "active" : "" %>"><%= link_to genre, movies_path(genre: genre)%></li>
