@@ -17,13 +17,13 @@
 <%= content_for :page_css do %>
 	<%= stylesheet_link_tag "prettyPhoto" %>
 	<style type="text/css">
-	.product-img.download:before{
+	.download:before{
 		content: "<%= number_to_human_size(@record.file_size) %>";
 		position: absolute;
 		top: 0;
-		right: 0;
+		right: 15px;
 		padding: 3px 8px;
-		border-radius: 0 3px 0 3px;
+		border-radius: 0 0 0 3px;
 		background: #E35E54;
 		color: white;
 	}
@@ -55,8 +55,8 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="shop-product col-md-4">
-					<div class="product-img download">
+			<div class="col-md-4">
+					<div class="download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
 					</div>					
 								
@@ -101,23 +101,47 @@
 
 		</div>
 		<div class="row top-20">
-			<div class="col-md-5">
-				
-			</div>
+			<div class="col-md-12">
+							<% unless (@record.magnetic_link || @record.torrent_file_link).nil? %>
+			<table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+        	<td colspan="3"><strong>Torrent info</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Size</td>
+          <td colspan="2"><%= @torrent["Size"] %></td>
+        </tr>
+        <tr>
+          <td>Quality</td>
+          <td colspan="2"><%= @torrent["Quality"] %></td>
+        </tr>
+        <tr>
+          <td>Seeders</td>
+          <td colspan="2"><%= @torrent["TorrentSeeds"] %></td>
+        </tr>
+        <tr>
+          <td>Peers</td>
+          <td colspan="2"><%= @torrent["TorrentPeers"] %></td>
+        </tr>
+        <tr>
+          <td>Download</td>
+          <td>
+          	<%= link_to image_tag('magnet_link.png'), download_path(resource: "movie", id: @record.id, type: "magnetic_link"), title: "Magnetic link" %>
+          </td>
+          <td>
+          	<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), download_path(resource: "movie", id: @record.id, type: "torrent_file"), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-			<% unless (@record.magnetic_link || @record.torrent_file_link).nil? %>
-			<div class="col-md-1">
-				<%= link_to image_tag('magnet_link.png'), download_path(resource: "movie", id: @record.id, type: "magnetic_link"), title: "Magnetic link" %>
-			</div>
-
-			<div class="col-md-6">
-				<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), download_path(resource: "movie", id: @record.id, type: "torrent_file"), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent" %>
-			</div>
 			<% else %>
-			<div class="col-md-7">
 				<button type="button" class="btn btn-warning btn-block btn-lg disabled">No torrent links were found.</button>
-			</div>
 			<% end %>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-3">

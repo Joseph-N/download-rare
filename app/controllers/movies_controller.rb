@@ -21,6 +21,7 @@ class MoviesController < ApplicationController
     @movie = @tmdb_movie.find(@record.tmdb_id)
     @trailer = @movie["trailers"]["youtube"][0]["source"] unless @movie["trailers"]["youtube"][0].nil?
     @backdrops = @movie["images"]["backdrops"]
+    @torrent = @yts.find(@record.imdb_id)["MovieList"][0] if @record.magnetic_link
   end
 
   def create
