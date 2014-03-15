@@ -3,6 +3,7 @@ set :environment, 'production'
 
 every 1.day do
 	rake "shows:update"
+	command "backup perform -t downloadrare_db"
 end
 
 every 2.days do
@@ -12,4 +13,5 @@ end
 every :friday, :at => '12pm' do
 	rake "movies:hunt"
 end
+
 

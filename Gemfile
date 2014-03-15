@@ -39,6 +39,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
+gem 'backup'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
