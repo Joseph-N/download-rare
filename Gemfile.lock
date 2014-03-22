@@ -57,8 +57,6 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    dropbox-sdk (1.6.3)
-      json
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
@@ -184,7 +182,6 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0)
   devise
-  dropbox-sdk
   friendly_id
   jbuilder (~> 1.2)
   jquery-rails
