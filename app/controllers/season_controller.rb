@@ -12,7 +12,7 @@ class SeasonController < ApplicationController
   	@season = @tv_show.seasons.find(params[:id])
   	@season.update_attributes(season_params)
   	CrawlerWorker.perform_async(@season.id, params[:season][:base_url])
-  	redirect_to tv_show_season_path(@tv_show, @season), notice: "success"
+  	redirect_to tv_show_season_path(@tv_show, @season.season_number), notice: "success"
   end
 
   private
