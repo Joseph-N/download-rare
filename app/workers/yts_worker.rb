@@ -4,7 +4,7 @@ require "tmdb"
 
 class YtsWorker
 	include Sidekiq::Worker
-	sidekiq_options :queue => :crawler, :retry => false, :backtrace => true
+	sidekiq_options :queue => :yts, :retry => false, :backtrace => true
   
   	def perform(imdb_id)
   		@movie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")

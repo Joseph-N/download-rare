@@ -44,11 +44,25 @@
 	</script>
 <% end %>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-12">
 	<h2 class="headline first-child text-color">
 	  <span class="border-color"><%= @tv_show.name %>: season <%= @season.season_number %></span>
 	</h2>
+
+   <% if admin_signed_in? %>
+
+             <%= form_for([@tv_show, @season], html: { class: "" } ) do |f| %>
+          <div class="form-group">
+            <%= f.text_field :base_url, class: "form-control", placeholder: "base url for this season", style: "width: 100%" %>
+          </div>
+          <%= f.submit "Sumbit", class: "btn btn-default" %>
+          <% end %>
+  
+  <% end %>
+
   </div>
+<div class="clearfix" style="margin-bottom: 20px;"></div>
+
     <% for episode in @season_info["episodes"] %>
   	<% @episode = get_episode(@tv_show.id, @season.season_number, episode["episode_number"]) %>
     <% unless @episode.nil? %>
@@ -80,11 +94,11 @@
   			<div class="overview bottom-20"><%= episode["overview"] %></div>
         <% if admin_signed_in? %>
          <% if @episode.download_link.nil? %>
-         <%= form_for([@tv_show, @season, @episode], html: { class: "form-inline" } ) do |f| %>
-	        <div class="form-group col-md-10">
-	        	<%= f.text_field :download_link, class: "form-control", placeholder: "http://example.site", style: "width: 100%;" %>
+         <% form_for([@tv_show, @season, @episode], html: { class: "form-inline" } ) do |f| %>
+	        <div class="form-group">
+	        	<% f.text_field :download_link, class: "form-control", placeholder: "http://example.site", style: "width: 100%;" %>
 	        </div>
-	        <%= f.submit "Sumbit", class: "btn btn-default" %>
+	        <% f.submit "Sumbit", class: "btn btn-default" %>
         <% end %>
         <% else %>
         <%= link_to @episode.download_link, @episode.download_link %>

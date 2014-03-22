@@ -1,0 +1,13 @@
+---
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:concurrency: 25
+:timeout: 30
+:queues:
+  - [crawler, 7]
+  - [default, 4]
+  - [seasons, 3]
+  - [yts, 5]
+  - [movie, 7]
+  - [tv, 5]

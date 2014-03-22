@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314131803) do
+ActiveRecord::Schema.define(version: 20140322200434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140314131803) do
     t.datetime "updated_at"
     t.integer  "download_count"
     t.integer  "file_size"
+    t.boolean  "approved",       default: false
   end
 
   add_index "episodes", ["episode_number"], name: "index_episodes_on_episode_number", using: :btree
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140314131803) do
     t.integer  "tv_show_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "base_url"
   end
 
   add_index "seasons", ["season_number"], name: "index_seasons_on_season_number", using: :btree

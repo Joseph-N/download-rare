@@ -3,6 +3,7 @@ require 'tmdb'
 
 class MovieWorker
   include Sidekiq::Worker
+  sidekiq_options :queue => :movie, :retry => false, :backtrace => true
   
   def perform(movie_id)
 
@@ -52,7 +53,9 @@ class MovieWorker
 
     #------------ Finally update movie ----------------------------#
     #update movie
-    movie.update_attributes(:file_size => size, :genres => genres, :imdb_id => imdb_id,
+    movie.update_attributes(:backdrop => movie_detail["backdrop_path"],
+                            :poster => movie_detail["poster_path"],
+                            :file_size => size, :genres => genres, :imdb_id => imdb_id,
                             :magnetic_link => magnetic_link, :torrent_file_link => torrent_file_link)
 
   end
