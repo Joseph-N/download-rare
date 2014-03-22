@@ -11,7 +11,7 @@
   };
   
   $('#search-input').soulmate({
-    url: window.location.origin + '/autocomplete/search',
+    url: '/autocomplete/search',
     types: ['movies','shows'],
     renderCallback: render,
     selectCallback: select,
