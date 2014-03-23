@@ -5,9 +5,9 @@
 :concurrency: 25
 :timeout: 30
 :queues:
-  - [crawler, 7]
-  - [default, 4]
-  - [seasons, 3]
+  - [crawler, 5]
+  - [default, 7]
+  - [seasons, 4]
   - [yts, 5]
-  - [movie, 7]
+  - [movie, 3]
   - [tv, 5]
