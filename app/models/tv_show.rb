@@ -7,7 +7,7 @@ class TvShow < ActiveRecord::Base
 
 	validates_uniqueness_of :tmdb_id
 
-	default_scope { order('created_at DESC') } 
+	default_scope { order('updated_at DESC') } 
 
 	has_many :seasons, dependent: :destroy
 
