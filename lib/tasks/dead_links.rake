@@ -1,7 +1,7 @@
 namespace :fetch do
 	desc "Fetches for dead links for movies and shows"	
 	task :dead_movie_links =>  [:environment] do
-		movie_count = Movie.all.count
+		movie_count = Movie.where.not("download_link = ?","").count
 		dead_links = 0
 
 		Movie.where.not("download_link = ?","") .each do |movie|
@@ -19,7 +19,9 @@ namespace :fetch do
 	      rescue
 	      	dead_links += 1
 	      	DeadLink.where(resource_id: movie.id, resource_type: "movie").first_or_create!;
-	      	p "#{movie.title}(id: #{movie.id}) has a dead link"	      	
+	      	message =  "#{movie.title}(id: #{movie.id}) has a dead link"
+          NotifierWorker.perform_async(message)
+          p message
 	      end
 	    end
 
@@ -49,8 +51,9 @@ namespace :fetch do
 			rescue
 				dead_links +=1
 				DeadLink.where(resource_id: episode.id, resource_type: "episode").first_or_create!;
-				p "Episode(id: #{episode.id}) of #{episode.season.tv_show.name} S0#{episode.season.season_number}E#{episode.episode_number} has a dead link"
-
+				message =  "Episode(id: #{episode.id}) of #{episode.season.tv_show.name} S0#{episode.season.season_number}E#{episode.episode_number} has a dead link"
+        NotifierWorker.perform_async(message)
+        p message
 			end  
 		end
 		p "Scanned: #{episode_count} episodes"
