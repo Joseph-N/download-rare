@@ -10,7 +10,7 @@ class NotifierWorker
     Subject: Found Broken Links
 
     #{msg}
-    MESSAGE_END
+MESSAGE_END
 
     Net::SMTP.start('localhost') do |smtp|
       smtp.send_message message, 'brokenlinks@downloadrare.com','admin@downloadrare.com'
