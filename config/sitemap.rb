@@ -19,7 +19,7 @@ SitemapGenerator::Sitemap.create do
 
     # add seasons
     show.seasons.each do |season|
-      add tv_show_season_path(show, season), :changefreq => 'daily', :lastmod => season.updated_at
+      add tv_show_season_path(show, season.season_number), :changefreq => 'daily', :lastmod => season.updated_at
     end
   end
 
