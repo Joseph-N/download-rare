@@ -15,8 +15,11 @@ Downloadrare::Application.routes.draw do
   root 'home#index'
   get '/search/movie' => 'search#movie', as: :search_movie
   get '/search/tv' => 'search#tv', as: :search_tv
+  get '/search' => 'search#index', as: :search_index
 
   get '/download' => 'downloads#index', as: :download
+
+  get '/advanced_search' => 'movies#index', as: :advanced_search
   
   resources :movies
   resources :tv_shows do
@@ -25,7 +28,7 @@ Downloadrare::Application.routes.draw do
     end
   end
 
-  resources :search, only: [:index]
+  resources :searches
   resources :dead_links
   
   # The priority is based upon order of creation: first created -> highest priority.

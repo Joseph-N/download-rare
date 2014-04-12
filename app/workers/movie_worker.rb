@@ -3,7 +3,7 @@ require 'tmdb'
 
 class MovieWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :movie, :retry => false, :backtrace => true
+  sidekiq_options :queue => :movie, :backtrace => true
   
   def perform(movie_id)
 
@@ -14,7 +14,7 @@ class MovieWorker
     @yts = Yts.new
 
     #-----------------------GET SIZE OF MOVIE FROM SERVER HEADERS----------------------#
-  	# fetch the move
+  	# fetch the movie
   	movie = Movie.find(movie_id)
 
     if movie.download_link.present?
@@ -50,13 +50,18 @@ class MovieWorker
     magnetic_link = torrent_detail["status"].eql?("fail") ? nil : torrent_detail["MovieList"][0]["TorrentMagnetUrl"]
     torrent_file_link = torrent_detail["status"].eql?("fail") ? nil : torrent_detail["MovieList"][0]["TorrentUrl"]
 
+    #-------------------GET IMDBRATING OF MOVIE-----------------------------------#
+    imdb_data =  JSON.parse(RestClient.get "http://www.omdbapi.com/?i=#{imdb_id}")
+    rating = imdb_data["imdbRating"]
+
 
     #------------ Finally update movie ----------------------------#
     #update movie
     movie.update_attributes(:backdrop => movie_detail["backdrop_path"],
                             :poster => movie_detail["poster_path"],
                             :file_size => size, :genres => genres, :imdb_id => imdb_id,
-                            :magnetic_link => magnetic_link, :torrent_file_link => torrent_file_link)
+                            :magnetic_link => magnetic_link, :torrent_file_link => torrent_file_link,
+                            :imdb_rating => rating)
 
   end
 end

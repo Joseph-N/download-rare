@@ -5,11 +5,11 @@ class MoviesController < ApplicationController
       # @movies = Movie.plain_tsearch(params[:query]).paginate(:page => params[:page], :per_page => 12) 
       if params[:genre]
         @movies = Movie.where("? = ANY (genres)", params[:genre]).paginate(:page => params[:page], :per_page => 36)
-      else
+      else       
         @movies = Movie.paginate(:page => params[:page], :per_page => 36)
       end
       @genres = fetch_genres.flatten.uniq
-
+      @search = Search.new
   end
 
   def new
@@ -68,5 +68,14 @@ class MoviesController < ApplicationController
     end
     genres
   end
+
+  # def perform_search(params)
+  #   if params[:year].present? && !params[:title].present? && !params[:genre].present? && !params[:rating].present? 
+  #     Movie.year(params[:year]).paginate(:page => params[:page], :per_page => 36)
+  #   elsif params[:title].present? && !params[:title].present? && !params[:genre].present? && !params[:rating].present? 
+  #     Movie.year(params[:year]).paginate(:page => params[:page], :per_page => 36)
+      
+  #   # Movie.where("title iLike ? AND release_date = ? AND  ? = ANY (genres) AND imdb_rating > ?", "%#{params[:title]}%", params[:year].to_date, params[:genre], params[:rating].to_f).paginate(:page => params[:page], :per_page => 36)
+  # end
 
 end

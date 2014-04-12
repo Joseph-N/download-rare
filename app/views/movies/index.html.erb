@@ -29,17 +29,34 @@
 			  <span class="border-color">Sponsored</span>
 			</h2>
 						<%= render 'shared/google_ad' %>
-									 				<h2 class="headline first-child text-color">
-			  <span class="border-color">Genres</span>
+						<div class="sign-form">
+			<h2 class="headline first-child text-color">
+			  <span class="border-color">Advanced Search</span>
 			</h2>
-									 <ul class="nav nav-pills nav-stacked">
-									 	 <li class="<%= "active" unless params[:genre].present? %>"><%= link_to "All", movies_path %></li>
-									 	<% @genres.each do |genre| %>
-			 
-			  <li  class="<%= params[:genre] == genre ? "active" : "" %>"><%= link_to genre, movies_path(genre: genre)%></li>
-		    	
-		<% end %>
-		</ul>
+						<%= form_for(@search) do |f| %>
+					<div class="form-group">
+						<%= f.label :title %>
+						<%= f.text_field :title, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<%= f.label :year %>
+						<%= f.select :year, options_for_year, { prompt: "Select Year" }, {class: "form-control"} %>
+					</div>
+					<div class="form-group">
+				  		<%= f.label :genre %>
+				  		<%= f.select :genre, @genres, { prompt: "Select Genre" }, {class: "form-control"} %>
+			  		</div>
+			  		<div class="form-group">
+			  			<%= f.label :rating %>
+			  			<%= f.select :rating, options_for_rating, { prompt: "Select Rating" },{ class: "form-control",  }%>
+			  		</div>
+			  		<div class="form-group">
+			  			<%= f.submit "Submit", class: "btn btn-green btn-block" %>
+			  		</div>
+			<% end %>
+		</div>
+		<br>
+
 				<h2 class="headline first-child text-color">
 			  <span class="border-color">Like Us</span>
 			</h2>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322200434) do
+ActiveRecord::Schema.define(version: 20140412154551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,11 +72,22 @@ ActiveRecord::Schema.define(version: 20140322200434) do
     t.string   "imdb_id"
     t.text     "magnetic_link"
     t.string   "torrent_file_link"
+    t.float    "imdb_rating"
   end
 
+  add_index "movies", ["imdb_rating", "genres", "release_date"], name: "index_movies_on_imdb_rating_and_genres_and_release_date", using: :btree
   add_index "movies", ["slug"], name: "index_movies_on_slug", unique: true, using: :btree
   add_index "movies", ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true, using: :btree
   add_index "movies", ["tsv"], name: "movies_tsv_idx", using: :gin
+
+  create_table "searches", force: true do |t|
+    t.string   "title"
+    t.string   "year"
+    t.string   "genre"
+    t.float    "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "seasons", force: true do |t|
     t.integer  "season_number"

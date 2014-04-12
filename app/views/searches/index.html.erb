@@ -1,0 +1,15 @@
+<% title "Searches" %>
+<div class="row">
+		<h2 class="headline first-child text-color">
+	<span class="border-color">Search Terms</span>
+</h2>
+  <% @searches.each do |search| %>
+  <div class="col-md-12">
+  	<p><strong>Title: </strong> <%= search.title %></p>
+  	<p><strong>Year: </strong> <%= search.year %></p>
+  	<p><strong>Genre: </strong> <%= search.genre %></p>
+  	<p><strong>Rating: </strong> <%= search.rating %></p>
+  	<hr>
+  </div>
+  <% end %>
+</div>
