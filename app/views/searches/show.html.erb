@@ -4,10 +4,10 @@
 	<span class="border-color">Found <%= @search.movies.count %> Matches</span>
 </h2>
 
-    <p><strong>Title: </strong> <%= @search.title.present? ? @search.title : "None" %>
-      <strong>Year: </strong> <%= @search.year.present? ? @search.year : "None" %>
-      <strong>Genre: </strong> <%= @search.genre.present? ? @search.genre : "None" %>
-      <strong>Rating: </strong> <%= @search.rating.present? ? @search.rating : "None" %>
+    <p><strong>Title: </strong> <%= @search.title.present? ? @search.title : "*" %>&nbsp;&nbsp;
+      <strong>Year: </strong> <%= @search.year.present? ? @search.year : "*" %>&nbsp;&nbsp;
+      <strong>Genre: </strong> <%= @search.genre.present? ? @search.genre : "*" %>&nbsp;&nbsp;
+      <strong>Rating: </strong> <%= @search.rating.present? ? "+#{@search.rating}" : "*" %>&nbsp;&nbsp;
     </p>
     <hr>
     <% @search.movies.each do |movie| %>
