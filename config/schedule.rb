@@ -13,4 +13,6 @@ every :friday, :at => '4am' do
 	rake "movies:hunt", :output => { :standard => '/home/Jose/download-rare/log/movie_hunter.log' }
 end
 
-
+every :hour do 
+  command "cd $HOME/scripts && ./process_checker.sh sidekiq", :output => { :standard => '/home/Jose/download-rare/log/sidekiq-restarter.log' }
+end
