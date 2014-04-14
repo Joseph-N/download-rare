@@ -1,7 +1,7 @@
 every 1.day, :at => '1am'  do
 	rake "shows:update", :output => { :standard => 'shows-update.log' }
 	command "backup perform -t downloadrare_db", :output => { :standard => '/home/Jose/download-rare/log/db_backup.log' }
-	rake "rake episodes:fetch_links", :output => { :standard => '/home/Jose/download-rare/log/episode_links.log' }
+	rake "episodes:fetch_links", :output => { :standard => '/home/Jose/download-rare/log/episode_links.log' }
 end
 
 every 2.days do
