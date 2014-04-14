@@ -1,6 +1,6 @@
 class SeasonsWorker
 	include Sidekiq::Worker
-	sidekiq_options :queue => :seasons, :retry => false, :backtrace => true
+	sidekiq_options :queue => :seasons, :backtrace => true
   
   	def perform(season_id, episode_number, url)
       season = Season.find(season_id)
