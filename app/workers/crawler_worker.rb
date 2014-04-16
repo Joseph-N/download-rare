@@ -19,16 +19,25 @@ class CrawlerWorker
         episode_number = index +=1
         SeasonsWorker.perform_async(season_id, episode_number, full_url)
       end
-    end
 
     # for http://dl1.m-dl.in/
-    if doc.css("a+ a").size > 0      
+    elsif doc.css("a+ a").size > 0      
       doc.css("a+ a").each_with_index do |entry, index|
         full_url = url + entry["href"]
         episode_number = index +=1
         SeasonsWorker.perform_async(season_id, episode_number, full_url)
       end
-    end
 
+    # for http://dl1.m-dl.in/ other differently formated pages
+    elsif doc.css("a").size > 0      
+      doc.css("a").each_with_index do |entry, index|
+        format = entry["href"].split('.').last
+        unless format.eql?('php')
+          full_url = url + entry["href"]
+          episode_number = index +=1
+          SeasonsWorker.perform_async(season_id, episode_number, full_url)
+        end
+      end
+    end
   end
 end
