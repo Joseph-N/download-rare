@@ -79,5 +79,5 @@ Downloadrare::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # add vendor assets to precompile path
-  config.assets.precompile += %w( *.css *.js )
+  config.assets.precompile += %w( vendor.css vendor.js )
 end

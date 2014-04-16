@@ -14,8 +14,6 @@
 //= require jquery_ujs
 // require turbolinks
 //= require bootstrap.min
-//= require scrolltopcontrol
-//= require jquery.sticky
 //= require jquery-migrate-1.2.1.min
 //= require jquery.soulmate
 //= require custom
