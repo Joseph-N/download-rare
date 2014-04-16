@@ -69,13 +69,4 @@ class MoviesController < ApplicationController
     genres
   end
 
-  # def perform_search(params)
-  #   if params[:year].present? && !params[:title].present? && !params[:genre].present? && !params[:rating].present? 
-  #     Movie.year(params[:year]).paginate(:page => params[:page], :per_page => 36)
-  #   elsif params[:title].present? && !params[:title].present? && !params[:genre].present? && !params[:rating].present? 
-  #     Movie.year(params[:year]).paginate(:page => params[:page], :per_page => 36)
-      
-  #   # Movie.where("title iLike ? AND release_date = ? AND  ? = ANY (genres) AND imdb_rating > ?", "%#{params[:title]}%", params[:year].to_date, params[:genre], params[:rating].to_f).paginate(:page => params[:page], :per_page => 36)
-  # end
-
 end

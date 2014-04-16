@@ -1,5 +1,3 @@
-require 'tmdb'
-
 class TvWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :tv, :retry => false, :backtrace => true

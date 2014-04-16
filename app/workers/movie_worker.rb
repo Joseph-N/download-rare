@@ -1,6 +1,3 @@
-require 'yts'
-require 'tmdb'
-
 class MovieWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :movie, :backtrace => true
@@ -11,7 +8,7 @@ class MovieWorker
     @movie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
 
     # new yts instance
-    @yts = Yts.new
+    @yts = YtsTorrents.new
 
     #-----------------------GET SIZE OF MOVIE FROM SERVER HEADERS----------------------#
   	# fetch the movie

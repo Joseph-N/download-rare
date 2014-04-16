@@ -1,10 +1,5 @@
 require 'sidekiq/web'
 Downloadrare::Application.routes.draw do
-
-  mount RailsAdmin::Engine => '/administration', as: 'rails_admin'
-  mount Soulmate::Server, :at => "/autocomplete"
-
-  get "season/index"
   scope '/admin' do
     authenticate :admin do
       mount Sidekiq::Web, at: "/sidekiq"
@@ -12,6 +7,12 @@ Downloadrare::Application.routes.draw do
     
     devise_for :admins,  :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   end
+  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Soulmate::Server, :at => "/autocomplete"
+
+  get "season/index"
+
 
   root 'home#index'
   get '/search/movie' => 'search#movie', as: :search_movie

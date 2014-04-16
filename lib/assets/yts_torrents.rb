@@ -1,4 +1,4 @@
-class Yts
+class YtsTorrents
 	require "json"
 	require "rest-client"
 

@@ -1,7 +1,6 @@
 namespace :shows do
 	desc "update tv shows"	
 	task :update =>  [:environment] do
-		require 'tmdb'
 
 		# new TmdbTv instance
 	  	@tv = TmdbTv.new("29588c40b1a3ef6254fd1b6c86fbb9a9")

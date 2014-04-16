@@ -21,6 +21,6 @@ module Downloadrare
     # config.i18n.default_locale = :de
 
     # autoload lib directory
-    config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
+    # config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
   end
 end

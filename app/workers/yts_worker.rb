@@ -1,7 +1,3 @@
-require "json"
-require "rest-client"
-require "tmdb"
-
 class YtsWorker
 	include Sidekiq::Worker
 	sidekiq_options :queue => :yts, :backtrace => true
@@ -16,7 +12,10 @@ class YtsWorker
   			# i'm only interested in movies released above year 2000
   			if movie_details["release_date"].to_date >= 14.years.ago
   				# create the movie
-  				movie = Movie.where(:tmdb_id => movie_details["id"]).first_or_create!
+  				movie = Movie.where(:title => movie_details["original_title"],
+                              :tmdb_id => movie_details["id"],
+                              :poster => movie_details["poster_path"],
+                              :backdrop => movie_details["backdrop_path"]).first_or_create!
   				MovieWorker.perform_async(movie.id)
   			end
   		end

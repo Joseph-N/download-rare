@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   	@tmdb = Tmdb.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
     @tmdb_movie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
     @tmdb_tv = TmdbTv.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
-    @yts = Yts.new
+    @yts = YtsTorrents.new
   end 
 
   def randomize(key)

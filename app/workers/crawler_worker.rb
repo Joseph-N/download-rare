@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'nokogiri'
-require 'open-uri'
-
 class CrawlerWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :crawler, :backtrace => true
