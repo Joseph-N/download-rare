@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 Downloadrare::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/administration', as: 'rails_admin'
   mount Soulmate::Server, :at => "/autocomplete"
 
   get "season/index"

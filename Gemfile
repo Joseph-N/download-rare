@@ -42,6 +42,7 @@ gem 'soulmate', :require => 'soulmate/server'
 gem 'backup'
 gem 'nokogiri', '~> 1.6.1'
 gem 'sitemap_generator'
+gem 'rails_admin', '~> 0.6.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
