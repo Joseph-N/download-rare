@@ -3,11 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  require File.expand_path('../../../lib/assets/tmdb', __FILE__)
-  require File.expand_path('../../../lib/assets/tmdb_tv', __FILE__)
-  require File.expand_path('../../../lib/assets/tmdb_movie', __FILE__)
-  require File.expand_path('../../../lib/assets/yts', __FILE__)
-
   before_filter :init_tmdb, :deadlinks
 
 
