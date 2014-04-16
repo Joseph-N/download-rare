@@ -33,7 +33,7 @@ class CrawlerWorker
       doc.css("a").each_with_index do |entry, index|
         format = entry["href"].split('.').last
         unless format.eql?('php')
-          full_url = url + entry["href"]
+          full_url = url + entry["href"].sub("./","")
           episode_number = index +=1
           SeasonsWorker.perform_async(season_id, episode_number, full_url)
         end
