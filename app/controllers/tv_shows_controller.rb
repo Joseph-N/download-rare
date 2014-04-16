@@ -2,7 +2,7 @@ class TvShowsController < ApplicationController
   before_filter :authenticate_admin!, only: [:create]
   def index
       # @tv_shows = TvShow.plain_tsearch(params[:query]).paginate(:page => params[:page], :per_page => 12)
-      @tv_shows = TvShow.paginate(:page => params[:page], :per_page => 12)
+      @tv_shows = TvShow.paginate(:page => params[:page], :per_page => 20)
   end
 
   def new

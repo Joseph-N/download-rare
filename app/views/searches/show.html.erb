@@ -10,7 +10,7 @@
       <strong>Rating: </strong> <%= @search.rating.present? ? "+#{@search.rating}" : "*" %>&nbsp;&nbsp;
     </p>
     <hr>
-    <% @search.movies.each do |movie| %>
+    <% @movies.each do |movie| %>
         <div class="col-md-3 bottom-20">
       <div class="poster">
           <%= link_to image_tag(@tmdb.image_url("poster", "w342", movie.poster), class: "img-responsive"), movie_path(movie) %>
@@ -19,4 +19,7 @@
       </div>
       </div>
     <% end %>
+    <div class="col-md-12">
+      <%= will_paginate @movies, renderer: BootstrapPagination::Rails %>
+    </div>
 </div>

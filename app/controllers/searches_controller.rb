@@ -11,6 +11,7 @@ class SearchesController < ApplicationController
 
 	def show
 		@search = Search.find(params[:id])
+		@movies = @search.movies.paginate(:page => params[:page], :per_page => 20)
 	end
 
 	private
