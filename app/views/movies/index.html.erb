@@ -25,10 +25,10 @@
 	<div class="container">
 		  <div class="row">
 										<div class="col-md-4">
-						<div class="sign-form">
-			<h2 class="headline first-child text-color">
+														<h2 class="headline first-child text-color">
 			  <span class="border-color">Advanced Search</span>
 			</h2>
+						<div class="sign-form">
 						<%= form_for(@search) do |f| %>
 					<div class="form-group">
 						<%= f.label :title %>
@@ -63,6 +63,11 @@
 			</h2>
 			 <%= render 'shared/facebook_likebox' %>
 
+						<h2 class="headline first-child text-color">
+			  <span class="border-color">Follow</span>
+			</h2>
+
+			 <%= render 'shared/google_plus_follow' %>
 			</div>
 		  <div class="col-md-8">
 		  	<h2 class="headline first-child text-color">
