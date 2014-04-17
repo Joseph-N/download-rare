@@ -1,7 +1,9 @@
 class SearchesController < ApplicationController
-	before_filter :authenticate_admin!, only: [:index]
+	before_filter :authenticate_admin!, only: [:movie, :tv]
+	
 	def index
-		@searches = Search.all
+		@shows = TvShow.plain_tsearch(params[:query])
+		@movies = Movie.plain_tsearch(params[:query]) 
 	end
 
 	def create
@@ -12,6 +14,16 @@ class SearchesController < ApplicationController
 	def show
 		@search = Search.find(params[:id])
 		@movies = @search.movies.paginate(:page => params[:page], :per_page => 20)
+	end
+
+	def movie
+		@movies = @tmdb_movie.search(params[:query])
+		@movie = Movie.new		
+	end
+
+	def tv
+		@shows = @tmdb_tv.search(params[:query])
+		@tv_show = TvShow.new
 	end
 
 	private

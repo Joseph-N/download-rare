@@ -30,7 +30,7 @@
 		<% end %>
 	  	</ul>
 
-	  	<%= form_tag(search_index_path, :method => "get", class: "navbar-form navbar-left hidden-sm hidden-md") do %>
+	  	<%= form_tag(searches_path, :method => "get", class: "navbar-form navbar-left hidden-sm hidden-md") do %>
 				  	<div class="form-group">
 			  			<%= text_field_tag(:query, nil, :class => "form-control", placeholder: "Search Movies & Shows",  id: "search-input", "autocomplete" => "off", style: "width: 310px;") unless admin_signed_in? %>
 			  			<button type="submit" id="search-btn" class="btn"><i class="fa fa-search"></i></button>

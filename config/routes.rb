@@ -1,5 +1,7 @@
 require 'sidekiq/web'
 Downloadrare::Application.routes.draw do
+  root 'home#index'
+
   scope '/admin' do
     authenticate :admin do
       mount Sidekiq::Web, at: "/sidekiq"
@@ -10,18 +12,7 @@ Downloadrare::Application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Soulmate::Server, :at => "/autocomplete"
-
-  get "season/index"
-
-
-  root 'home#index'
-  get '/search/movie' => 'search#movie', as: :search_movie
-  get '/search/tv' => 'search#tv', as: :search_tv
-  get '/search' => 'search#index', as: :search_index
-
-  get '/download' => 'downloads#index', as: :download
-
-  get '/advanced_search' => 'movies#index', as: :advanced_search
+ 
   
   resources :movies
   resources :tv_shows do
@@ -30,8 +21,15 @@ Downloadrare::Application.routes.draw do
     end
   end
 
-  resources :searches
+  resources :searches do
+    collection do
+      get :tv
+      get :movie
+    end 
+  end
   resources :dead_links
+  get '/download' => 'downloads#index', as: :download
+  get '/advanced_search' => 'movies#index', as: :advanced_search
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

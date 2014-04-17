@@ -8,7 +8,7 @@
 			<div class="col-md-12">
 
 			  <h1 class="text-center">Search For Movies</h1>
-			  				  <%= form_tag(movie_search_url, :method => "get", class: "form-inline text-center") do %>
+			  				  <%= form_tag(movie_searches_path, :method => "get", class: "form-inline text-center") do %>
 				  	<div class="form-group">
 				  		<label class="sr-only" for="shop-search">show</label>
 			  			<%= text_field_tag(:query, nil, :class => "form-control border-color", placeholder: "Enter show name") %>
