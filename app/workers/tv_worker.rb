@@ -1,6 +1,6 @@
 class TvWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :tv, :retry => false, :backtrace => true
+  sidekiq_options :queue => :tv, :retry => 3, :backtrace => true
   
   def perform(tv_show_id)
   	# new TmdbTv instance

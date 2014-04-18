@@ -1,6 +1,6 @@
 class CrawlerWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :crawler, :retry => false, :backtrace => true
+  sidekiq_options :queue => :crawler, :retry => 5, :backtrace => true
   
   def perform(season_id, url)
 

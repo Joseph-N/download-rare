@@ -1,6 +1,6 @@
 class YtsWorker
 	include Sidekiq::Worker
-	sidekiq_options :queue => :yts, :retry => false, :backtrace => true
+	sidekiq_options :queue => :yts, :retry => 3, :backtrace => true
   
   	def perform(imdb_id)
   		@movie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
@@ -16,7 +16,7 @@ class YtsWorker
                               :tmdb_id => movie_details["id"],
                               :poster => movie_details["poster_path"],
                               :backdrop => movie_details["backdrop_path"]).first_or_create
-  				MovieWorker.perform_async(movie.id)
+          MovieWorker.perform_in(2.minutes, movie.id)
   			end
   		end
   	end

@@ -28,7 +28,7 @@ namespace :movies do
   			unless contents["status"].eql?("fail")
   				contents["MovieList"].each do |movie|
   					p "Sending #{movie["MovieTitle"]} to save queue"
-  					YtsWorker.perform_async(movie["ImdbCode"])
+  					YtsWorker.perform_in(2.minutes, movie["ImdbCode"])
   				end
   			else
   				p "All done!"
