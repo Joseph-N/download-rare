@@ -7,7 +7,7 @@ class Movie < ActiveRecord::Base
 
 	validates_uniqueness_of :tmdb_id
 
-	default_scope { order('release_date DESC') } 
+	default_scope { order('created_at DESC') } 
 
 	# Note that ActiveRecord ARel from() doesn't appear to accommodate "?"
 	# param placeholder, hence the need for manual parameter sanitization
