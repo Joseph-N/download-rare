@@ -1,6 +1,6 @@
 class MovieWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :movie, :backtrace => true
+  sidekiq_options :queue => :movie, :retry => false, :backtrace => true
   
   def perform(movie_id)
 
