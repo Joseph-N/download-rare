@@ -87,7 +87,7 @@
 	  		<div class="col-md-3 bottom-20">
 			<div class="poster-sm">
 			  	<%= link_to image_tag(@tmdb.image_url("poster", "w185", movie.poster), class: "img-responsive"), movie_path(movie) %>
-			<div class="caption"><%= movie.title %> (<%= movie.release_date.strftime('%Y') %>)</div>
+			<div class="caption"><%= movie.title %> (<%= movie.release_date.strftime('%Y') unless movie.release_date.nil? %>)</div>
 
 			</div>
 		  </div>
