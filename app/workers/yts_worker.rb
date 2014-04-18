@@ -15,7 +15,7 @@ class YtsWorker
   				movie = Movie.where(:title => movie_details["original_title"],
                               :tmdb_id => movie_details["id"],
                               :poster => movie_details["poster_path"],
-                              :backdrop => movie_details["backdrop_path"]).first_or_create!
+                              :backdrop => movie_details["backdrop_path"]).first_or_create
   				MovieWorker.perform_async(movie.id)
   			end
   		end
