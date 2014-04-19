@@ -1,6 +1,8 @@
 class CrawlerWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :crawler, :retry => 5, :backtrace => true
+  sidekiq_options :queue => :crawler, :retry => 5, :backtrace => true 
+  
+  require 'open-uri'
   
   def perform(season_id, url)
 
