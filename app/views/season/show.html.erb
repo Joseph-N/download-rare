@@ -82,7 +82,8 @@
             <% if admin_signed_in? %>
             <span class="pull-right"><%= pluralize(@episode.download_count, "download") %></span>
             <% else %>
-             <span class="pull-right"><%= number_to_human_size() %></span>
+            <!-- file size goes here -->
+             <span class="pull-right"></span>
             <% end %>
           </div>
 		</div>
