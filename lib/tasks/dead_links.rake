@@ -31,13 +31,13 @@ namespace :fetch do
 		end
 
 		task :dead_tv_links =>  [:environment] do
-			episode_count = Episode.where.not("download_link is ?", nil).count
+			episode_count = DownloadLink.count
 			dead_links = 0
 
-			Episode.where.not("download_link is ?", nil).each do |episode|
-				p "Scanning #{episode.season.tv_show.name} S0#{episode.season.season_number}E#{episode.episode_number}"
+			DownloadLink.find_each do |link|
+				p "Scanning #{link.episode.season.tv_show.name} S0#{link.episode.season.season_number}E#{link.episode.episode_number}"
 				# escape url
-				url = episode.download_link.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
+				url = link.url.gsub(/\{|\}|\||\\|\^|\[|\]|`|\s+/) { |m| CGI::escape(m) }
 
 				# get headers
 				begin
@@ -47,13 +47,13 @@ namespace :fetch do
 					size =  headers[:content_length]
 
 					#update episode
-					episode.update_attribute(:file_size, size)
+					link.update_attribute(:file_size, size)
 				      
 				rescue => e
 					if e.response.code == 404 || e.response.code == 401 
 						dead_links +=1
-						DeadLink.where(resource_id: episode.id, resource_type: "episode").first_or_create!;
-						p "Episode(id: #{episode.id}) of #{episode.season.tv_show.name} S0#{episode.season.season_number}E#{episode.episode_number} has a dead link"		        
+						DeadLink.where(resource_id: link.episode.id, resource_type: "episode").first_or_create!
+						p "Episode(id: #{link.episode.id}) of #{link.episode.season.tv_show.name} S0#{link.episode.season.season_number}E#{link.episode.episode_number} has a dead link"		        
 					end  
 				end
 			end

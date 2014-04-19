@@ -6,8 +6,8 @@ class SeasonsWorker
       season = Season.find(season_id)
       episode = season.episodes.where("episode_number = ?", episode_number).first
       if episode.present?
-      	download_link = episode.download_links.create!(url: url)
-      	DownloadLinksWorker.perform_async(download_link.id)
+      	download_link = episode.download_links.where(:url => url).first_or_create!
+      	DownloadLinksWorker.perform_in(4.minutes, download_link.id)
       end
   	end
 end

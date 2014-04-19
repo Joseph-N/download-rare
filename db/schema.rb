@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419055027) do
+ActiveRecord::Schema.define(version: 20140419171317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,12 +62,10 @@ ActiveRecord::Schema.define(version: 20140419055027) do
 
   create_table "episodes", force: true do |t|
     t.integer  "episode_number"
-    t.string   "download_link"
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "download_count"
-    t.integer  "file_size"
     t.boolean  "approved",       default: false
   end
 
