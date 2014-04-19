@@ -8,8 +8,6 @@ class EpisodesController < ApplicationController
 		if @episode.update_attributes(episode_params)
 			remove_episode_from_broken_links(@episode.id)
 
-			EpisodeWorker.perform_async(@episode.id)
-
 			flash[:notice] = "successfully updated #{@show.name} S0#{@season.season_number}EP#{@episode.episode_number}"
 
 			redirect_to tv_show_season_path(@show, @season.season_number)

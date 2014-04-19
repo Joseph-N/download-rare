@@ -16,7 +16,8 @@ Downloadrare::Application.routes.draw do
   
   resources :movies
   resources :tv_shows do
-    resources :season, only: [:show, :update] do
+    resources :season, only: [:show] do
+      resources :base_urls
       resources :episodes, only: [:update, :edit]
     end
   end

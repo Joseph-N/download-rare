@@ -14,9 +14,11 @@ class DownloadsController < ApplicationController
 			@movie.increment!(:download_count)			
 		elsif params[:resource] == "episode"
 			@episode = Episode.find(params[:id])
+			@download_link = DownloadLink.find(params[:link_id])
 			@episode.increment!(:download_count)
+
 			
-			redirect_to @episode.download_link
+			redirect_to @download_link.url
 		end				
 	end
 end

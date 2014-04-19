@@ -49,16 +49,17 @@
 	  <span class="border-color"><%= @tv_show.name %>: season <%= @season.season_number %></span>
 	</h2>
 
-   <% if admin_signed_in? %>
-
-             <%= form_for([@tv_show, @season], html: { class: "" } ) do |f| %>
-          <div class="form-group">
-            <%= f.text_field :base_url, class: "form-control", placeholder: "base url for this season", style: "width: 100%" %>
+    <% if admin_signed_in? %>
+      <% if @base_urls.any? %>
+        <%= render @base_urls %>
+      <% end %>
+      <%= form_for([@tv_show, @season, BaseUrl.new], html: { class: "" } ) do |f| %>
+        <div class="form-group">
+          <%= f.text_field :url, class: "form-control", placeholder: "add base url", style: "width: 100%" %>
           </div>
           <%= f.submit "Sumbit", class: "btn btn-default" %>
-          <% end %>
-  
-  <% end %>
+      <% end %>
+    <% end %>
 
   </div>
 <div class="clearfix" style="margin-bottom: 20px;"></div>
@@ -93,23 +94,46 @@
   			</h4>
   			<div class="overview bottom-20"><%= episode["overview"] %></div>
         <% if admin_signed_in? %>
-         <% if @episode.download_link.nil? %>
-         <% form_for([@tv_show, @season, @episode], html: { class: "form-inline" } ) do |f| %>
-	        <div class="form-group">
-	        	<% f.text_field :download_link, class: "form-control", placeholder: "http://example.site", style: "width: 100%;" %>
-	        </div>
-	        <% f.submit "Sumbit", class: "btn btn-default" %>
-        <% end %>
-        <% else %>
-        <%= link_to @episode.download_link, @episode.download_link %>
-        <% end %>
+          <% if @episode.download_links.any? %>
+            <% for link in @episode.download_links %>
+              <%= link_to link.url, link.url %>
+            <% end %>
+          <% end %>
 <% else %>
-        <% if episode_has_link?(@tv_show.id, @season.season_number, episode["episode_number"]) %>
-        	<button type="button" class="btn disabled"><i class="fa fa-download"></i> No Download link yet</button>
-        <% else %>
-        	<%= link_to raw('<i class="fa fa-download"></i> Download'), download_path(resource: "episode", id: @episode.id), class: "btn btn-green", title: "download #{@tv_show.name} season #{@season.season_number} episode #{episode["episode_number"]}", rel: "nofollow" %>
-          <% end %>
-          <% end %>
+        <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Download Link</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @episode.download_links.any? %>
+        <% x = 0 %>
+        <% for link in @episode.download_links %>
+          <tr>
+            <td><%= x+=1 %></td>
+            <td>
+                 <%= link_to raw("<i class='fa fa-download'></i> Download Link #{x}"), download_path(resource: "episode", id: @episode.id, link_id: link.id), title: "download #{@tv_show.name} season #{@season.season_number} episode #{episode["episode_number"]}", rel: "nofollow" %>
+            </td>
+            <td>
+              <%= number_to_human_size(link.file_size) %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+                      <tr>
+                        <td>1</td>
+                        <td colspan="2">
+                         <button type="button" class="btn disabled"><i class="fa fa-download"></i> No Download link yet</button>
+                       </td>
+                      </tr>
+      <% end %>
+  <% end %>
+      </tbody>
+    </table>
+        	
   		</div>
   	</div>
      <hr>
