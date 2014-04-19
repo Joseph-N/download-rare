@@ -5,6 +5,7 @@ class CrawlerWorker
   require 'open-uri'
   
   def perform(season_id, url)
+    wait = [1,2,3,4]
 
     doc = Nokogiri::HTML(open(url))
 
@@ -15,7 +16,7 @@ class CrawlerWorker
       doc.css("br+ a").each_with_index do |entry, index|
         full_url = base_url + entry["href"]
         episode_number = index +=1
-        SeasonsWorker.perform_async(season_id, episode_number, full_url)
+        SeasonsWorker.perform_in(wait.sample.minutes, season_id, episode_number, full_url)
       end
 
     # for http://dl1.m-dl.in/
@@ -23,7 +24,7 @@ class CrawlerWorker
       doc.css("a+ a").each_with_index do |entry, index|
         full_url = url + entry["href"]
         episode_number = index +=1
-        SeasonsWorker.perform_async(season_id, episode_number, full_url)
+        SeasonsWorker.perform_in(wait.sample.minutes, season_id, episode_number, full_url)
       end
 
     # for http://dl1.m-dl.in/ other differently formated pages
@@ -33,7 +34,7 @@ class CrawlerWorker
         unless format.eql?('php')
           full_url = url + entry["href"].sub("./","")
           episode_number = index +=1
-          SeasonsWorker.perform_async(season_id, episode_number, full_url)
+          SeasonsWorker.perform_in(wait.sample.minutes, season_id, episode_number, full_url)
         end
       end
     end
