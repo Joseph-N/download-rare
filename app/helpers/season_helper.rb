@@ -10,6 +10,6 @@ module SeasonHelper
 	end
 
 	def add_download_class?(episode)
-		admin_signed_in? && !episode.download_link.nil?
+		admin_signed_in? && episode.download_links.any?
 	end
 end
