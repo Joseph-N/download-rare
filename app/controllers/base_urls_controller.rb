@@ -1,13 +1,13 @@
 class BaseUrlsController < ApplicationController
 	def create
 		@show = TvShow.friendly.find(params[:tv_show_id])
-		@season = @show.seasons.where("season_number = ?", params[:season_id]).first
+		@season = Season.find(params[:season_id])
 		@base_url = @season.base_urls.create(base_url_params)
 		if @base_url.save
 			CrawlerWorker.perform_in(2.minutes, @season.id, @base_url.url)
-			redirect_to tv_show_season_path(@show, @season), notice: "success"
+			redirect_to tv_show_season_path(@show, @season.season_number), notice: "success"
 		else
-			redirect_to tv_show_season_path(@show, @season), alert: "URL Must be unique | present"
+			redirect_to tv_show_season_path(@show, @season.season_number), alert: "URL Must be unique | present"
 		end
 	end
 
