@@ -83,6 +83,7 @@ Downloadrare::Application.configure do
 
   # send emails on exception
   config.middleware.use ExceptionNotification::Rack,
+  :ignore_crawlers => %w{Googlebot bingbot},
   :email => {
     :email_prefix => "[Error] ",
     :sender_address => %{"Error Notifier" <notifier@downloadrare.com>},
