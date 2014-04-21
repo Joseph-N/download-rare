@@ -28,29 +28,7 @@
 														<h2 class="headline first-child text-color">
 			  <span class="border-color">Advanced Search</span>
 			</h2>
-						<div class="sign-form">
-						<%= form_for(@search) do |f| %>
-					<div class="form-group">
-						<%= f.label :title %>
-						<%= f.text_field :title, class: "form-control" %>
-					</div>
-					<div class="form-group">
-						<%= f.label :year %>
-						<%= f.select :year, options_for_year, { prompt: "Select Year" }, {class: "form-control"} %>
-					</div>
-					<div class="form-group">
-				  		<%= f.label :genre %>
-				  		<%= f.select :genre, @genres, { prompt: "Select Genre" }, {class: "form-control"} %>
-			  		</div>
-			  		<div class="form-group">
-			  			<%= f.label :rating %>
-			  			<%= f.select :rating, options_for_rating, { prompt: "Select Rating" },{ class: "form-control",  }%>
-			  		</div>
-			  		<div class="form-group">
-			  			<%= f.submit "Submit", class: "btn btn-green btn-block" %>
-			  		</div>
-			<% end %>
-		</div>
+			<%= render 'shared/search' %>
 		<br>
 			<h2 class="headline first-child text-color">
 			  <span class="border-color">Sponsored</span>

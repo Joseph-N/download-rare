@@ -1,0 +1,23 @@
+<div class="sign-form">
+		<%= form_for(Search.new) do |f| %>
+	<div class="form-group">
+		<%= f.label :title %>
+		<%= f.text_field :title, class: "form-control", value: name ||= nil %>
+	</div>
+	<div class="form-group">
+		<%= f.label :year %>
+		<%= f.select :year, options_for_year, { prompt: "Select Year", :selected =>  year ||= nil }, {class: "form-control"} %>
+	</div>
+	<div class="form-group">
+  		<%= f.label :genre %>
+  		<%= f.select :genre, @genres, { prompt: "Select Genre", :selected =>  genre ||= nil }, {class: "form-control"} %>
+		</div>
+		<div class="form-group">
+			<%= f.label :rating %>
+			<%= f.select :rating, options_for_rating, { prompt: "Select Rating", :selected =>  rating ||= nil},{ class: "form-control",  }%>
+		</div>
+		<div class="form-group">
+			<%= f.submit "Submit", class: "btn btn-green btn-block" %>
+		</div>
+<% end %>
+</div>

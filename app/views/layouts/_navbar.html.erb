@@ -22,6 +22,7 @@
 		<li class="dropdown">
 				<%= link_to raw('Admin <b class="caret"></b>'), "#", "data-toggle" => "dropdown", class: "dropdown-toggle bg-hover-color" %>
 			  <ul class="dropdown-menu">
+			  	<li><%= link_to "Dashboard", "/admin", class: "bg-hover-color" %></li>
 			  	<li><%= link_to raw("Dead Links <span class='badge pull-right'> #{@deadlinks.count}</span>"), dead_links_path, class: "bg-hover-color" %></li>
 			  	<li><%= link_to "Sidekiq", '/admin/sidekiq', class: "bg-hover-color" %></li>
 			  	<li><%= link_to "Log Out", destroy_admin_session_path, method: :delete, class: "bg-hover-color" %></li>

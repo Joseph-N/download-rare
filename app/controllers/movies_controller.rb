@@ -9,7 +9,6 @@ class MoviesController < ApplicationController
         @movies = Movie.paginate(:page => params[:page], :per_page => 36)
       end
       @genres = fetch_genres.flatten.uniq
-      @search = Search.new
   end
 
   def new
@@ -60,13 +59,4 @@ class MoviesController < ApplicationController
       movie.destroy
     end
   end
-
-  def fetch_genres
-    genres = []
-    Movie.all.each do |movie|
-      genres << movie.genres
-    end
-    genres
-  end
-
 end

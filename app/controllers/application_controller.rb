@@ -20,4 +20,12 @@ class ApplicationController < ActionController::Base
   def deadlinks
     @deadlinks = DeadLink.all
   end
+
+  def fetch_genres
+    genres = []
+    Movie.all.each do |movie|
+        genres << movie.genres
+    end
+    genres
+  end
 end
