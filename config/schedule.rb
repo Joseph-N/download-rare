@@ -11,6 +11,7 @@ end
 
 every :friday, :at => '4am' do
 	rake "movies:hunt", :output => { :standard => '/home/Jose/download-rare/log/movie_hunter.log' }
+	rake "log:clear",  :output => { :standard => '/home/Jose/download-rare/log/log_sweeper.log' }  
 end
 
 every :hour do 
