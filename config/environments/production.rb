@@ -59,11 +59,11 @@ Downloadrare::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( vendor.css vendor.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -76,8 +76,16 @@ Downloadrare::Application.configure do
   # config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = ::Logger::Formatter.new  
 
-  # add vendor assets to precompile path
-  config.assets.precompile += %w( vendor.css vendor.js )
+  # use sendmail
+  config.action_mailer.delivery_method = :sendmail
+
+  # send emails on exception
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Error] ",
+    :sender_address => %{"Error Notifier" <notifier@downloadrare.com>},
+    :exception_recipients => %w{admin@downloadrare.com}
+  }
 end

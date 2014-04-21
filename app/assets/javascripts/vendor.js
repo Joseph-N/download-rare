@@ -5,7 +5,6 @@
 //= require jquery.prettyPhoto
 //= require jquery.raty
 //= require jtruncate.pack
-//= require lightbox-2.6.min
 //= require scrolltopcontrol
 //= require jquery.sticky
 
