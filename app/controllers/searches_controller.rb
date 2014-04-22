@@ -1,5 +1,10 @@
 class SearchesController < ApplicationController
 	before_filter :authenticate_admin!, only: [:movie, :tv]
+
+	def index
+		@shows = TvShow.plain_tsearch(params[:query])
+		@movies = Movie.plain_tsearch(params[:query]) 
+	end
 	
 	def create
 		@search = Search.create(search_params)

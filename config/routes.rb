@@ -22,7 +22,7 @@ Downloadrare::Application.routes.draw do
     end
   end
 
-  resources :searches, except: [:index] do
+  resources :searches do
     collection do
       get :tv
       get :movie

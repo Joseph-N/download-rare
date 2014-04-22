@@ -1,0 +1,30 @@
+<% title "Search Movies & Shows" %>
+  <div class="row">
+      <h2 class="headline first-child text-color">
+    <span class="border-color">Movie Results</span>
+  </h2>
+    <% @movies.each do |movie| %>
+        <div class="col-md-3 bottom-20">
+      <div class="poster">
+          <%= link_to image_tag(@tmdb.image_url("poster", "w342", movie.poster), class: "img-responsive"), movie_path(movie) %>
+      <div class="caption"><%= movie.title %></div>
+
+      </div>
+      </div>
+    <% end %>
+    </div>
+
+  <div class="row">
+      <h2 class="headline first-child text-color">
+    <span class="border-color">TV shows Results</span>
+  </h2>
+    <% @shows.each do |show| %>
+        <div class="col-md-3 bottom-20">
+      <div class="poster">
+          <%= link_to image_tag(@tmdb.image_url("poster", "w342", show.poster), class: "img-responsive"), tv_show_path(show) %>
+      <div class="caption"><%= show.name %></div>
+
+      </div>
+      </div>
+    <% end %>
+    </div>
