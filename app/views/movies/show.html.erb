@@ -58,7 +58,8 @@
 			<div class="col-md-4">
 					<div class="download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
-					</div>					
+					</div>	
+			<%= link_to "Similar Movies", similar_movie_path(@record), class: "top-20 btn btn-lg btn-green btn-block"%>				
 								
 			</div>
 			<div class="col-md-8">
@@ -156,7 +157,7 @@
 <div class="row">
   <div class="col-sm-12">
 	<h3 class="headline text-color">
-	  <span class="border-color">Screenshots</span>
+	  <span class="border-color">Image Gallery</span>
 			<span class="pull-right" id="controls">
 				<span id="portfolio-next" class="next black">
 				<i class="fa fa-arrow-left"></i>

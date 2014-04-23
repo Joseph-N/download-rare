@@ -10,5 +10,6 @@
   - [seasons, 4]
   - [yts, 5]
   - [movie, 3]
-  - [download_links, 5]
+  - [file_size, 3]
   - [tv, 5]
+  - [similar_movies, 2]

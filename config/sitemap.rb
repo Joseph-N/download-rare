@@ -8,6 +8,9 @@ SitemapGenerator::Sitemap.create do
   # Add all movies
   Movie.find_each do |movie|
     add movie_path(movie), :lastmod => movie.updated_at
+
+    # add similar movies
+    add similar_movie_path(movie), :lastmod => movie.updated_at
   end
 
   # Add TvShows

@@ -1,6 +1,6 @@
-class DownloadLinksWorker
+class FileSizeWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :download_links, :retry => 5, :backtrace => true 
+  sidekiq_options :queue => :file_size, :retry => 5, :backtrace => true 
   
   def perform(id)
     # fetch the move

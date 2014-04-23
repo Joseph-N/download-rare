@@ -14,7 +14,11 @@ Downloadrare::Application.routes.draw do
   mount Soulmate::Server, :at => "/autocomplete"
  
   
-  resources :movies
+  resources :movies do
+    member do
+      get 'similar'
+    end
+  end
   resources :tv_shows do
     resources :season, only: [:show] do
       resources :base_urls

@@ -47,6 +47,11 @@ class MoviesController < ApplicationController
     end
   end
 
+  def similar
+    @movie = Movie.friendly.find(params[:id])
+    @similar_movies = Movie.where(tmdb_id: @movie.similar_movies).paginate(:page => params[:page], :per_page => 36)
+  end
+
 
   private
   def movie_params

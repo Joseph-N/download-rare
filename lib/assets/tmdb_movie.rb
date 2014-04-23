@@ -33,4 +33,12 @@ class TmdbMovie < Tmdb
 
 		JSON.parse(contents)
 	end
+
+	def similar_movies(id, page=1)
+		@params[:page] = page
+		contents = fetch_url("movie/#{id}/similar_movies", @params)
+		@params.delete(:page)
+		
+		JSON.parse(contents)
+	end
 end
