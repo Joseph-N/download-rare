@@ -8,13 +8,13 @@ namespace :movies do
 
 		page_no = 0
 		results = tmdbMovie.similar_movies(movie.tmdb_id)
-		total_pages = results["total_pages"]
-		
-		until page_no == total_pages do
+
+		# only 5 pages		
+		until page_no == 5 do
 			page_no +=1
 
 			SimilarMoviesWorker.perform_async(movie.id, page_no)
-			# pause 10 seconds before continuing
+			# pause 1 seconds before continuing
 			sleep 1
 		
 		end
