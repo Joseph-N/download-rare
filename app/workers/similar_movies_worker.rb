@@ -39,7 +39,7 @@ class SimilarMoviesWorker
 		else
 			tmdb_ids.each do |id|
 				unless movie.similar_movies.include?(id)
-					movie.similar_movies += id
+					movie.similar_movies += [id]
 				end
 			end
 		end
