@@ -14,7 +14,7 @@ namespace :movies do
 
 				SimilarMoviesWorker.perform_in(wait_min.sample.minutes, movie.id, page_no)
 				# pause 10 seconds before continuing
-				sleep 10
+				sleep 1
 			
 			end
 			p "Saved similar movies for >>> #{movie.title} <<< Total Pages: #{total_pages}"
