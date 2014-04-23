@@ -46,8 +46,5 @@ class SimilarMoviesWorker
 
 		#save movie
 		movie.save!
-
-		# pause 5 seconds before continuing
-		sleep 10
 	end
 end
