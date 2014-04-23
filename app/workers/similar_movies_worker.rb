@@ -37,7 +37,11 @@ class SimilarMoviesWorker
 		if movie.similar_movies.nil?
 			movie.similar_movies = tmdb_ids
 		else
-			movie.similar_movies += tmdb_ids
+			tmdb_ids.each do |id|
+				unless movie.similar_movies.include?(id)
+					movie.similar_movies += id
+				end
+			end
 		end
 
 		#save movie
