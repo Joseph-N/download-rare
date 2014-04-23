@@ -2,10 +2,10 @@ class SimilarMoviesWorker
 	include Sidekiq::Worker
 	sidekiq_options :queue => :similar_movies, :retry => 3, :backtrace => true
 
-	def perform(id, page_no)
-		# initialize tmdbmove
-		tmdbMovie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
+	# initialize tmdbmove
+	@@tmdbMovie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
 
+	def perform(id, page_no)
 		# find the movie with the given id
 		movie = Movie.find(id)
 
@@ -16,7 +16,7 @@ class SimilarMoviesWorker
 		tmdb_ids = []
 
 		# get similar movies
-		similar_movies = tmdbMovie.similar_movies(movie.tmdb_id, page_no)
+		similar_movies = @@tmdbMovie.similar_movies(movie.tmdb_id, page_no)
 		similar_movies["results"].collect do |result|
 			result_date =  result["release_date"].to_date 
 			result_id = result["id"]
