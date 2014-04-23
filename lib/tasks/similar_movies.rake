@@ -3,7 +3,8 @@ namespace :movies do
 	task :fetch_similar => [:environment] do
 		tmdbMovie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
 
-		movie = Movie.where("? = ANY (similar_movies)","")
+		movie = Movie.where(:similar_movies => nil).first
+
 
 		page_no = 0
 		results = tmdbMovie.similar_movies(movie.tmdb_id)

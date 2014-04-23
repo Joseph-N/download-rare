@@ -1,6 +1,6 @@
 class SimilarMoviesWorker
 	include Sidekiq::Worker
-	sidekiq_options :queue => :similar_movies, :retry => 3, :backtrace => true
+	sidekiq_options :queue => :similar_movies, :retry => 1, :backtrace => true
 
 	# initialize tmdbmove
 	@@tmdbMovie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
