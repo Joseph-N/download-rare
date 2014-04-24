@@ -15,7 +15,7 @@ namespace :movies do
 		else
 			total_pages = results["total_pages"] >= 1000 ? 1000 : results["total_pages"]
 			
-			until page_no == to do
+			until page_no == total_pages do
 				page_no +=1
 				p "Fetching results page ----> #{page_no}"
 				SimilarMoviesWorker.perform_async(movie.id, page_no)		
