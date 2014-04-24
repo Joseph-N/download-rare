@@ -81,7 +81,7 @@ Downloadrare::Application.configure do
   # use sendmail
   config.action_mailer.delivery_method = :sendmail
 
-  send emails on exception
+  #  send emails on exception
   config.middleware.use ExceptionNotification::Rack,
   :ignore_crawlers => %w{Googlebot bingbot},
   :email => {
