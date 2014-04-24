@@ -35,10 +35,7 @@ class TmdbMovie < Tmdb
 	end
 
 	def similar_movies(id, page=1)
-		@params[:page] = page
-		contents = fetch_url("movie/#{id}/similar_movies", @params)
-		@params.delete(:page)
-		
+		contents = RestClient.get "http://api.themoviedb.org/3/movie/#{id}/similar_movies?page=#{page}&api_key=29588c40b1a3ef6254fd1b6c86fbb9a9"
 		JSON.parse(contents)
 	end
 end
