@@ -14,7 +14,7 @@ every :friday, :at => '4am' do
 	rake "log:clear",  :output => { :standard => '/home/Jose/download-rare/log/log_sweeper.log' }  
 end
 
-every :hour do 
+every 15.minutes do 
 	rake "movies:fetch_similar", :output => { :standard => '/home/Jose/download-rare/log/similar_movies.log' }
   	command "cd $HOME/scripts && ./process_checker.sh sidekiq", :output => { :standard => '/home/Jose/download-rare/log/sidekiq-restarter.log' }
 end

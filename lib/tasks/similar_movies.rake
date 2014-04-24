@@ -8,15 +8,12 @@ namespace :movies do
 
 		page_no = 0
 		results = tmdbMovie.similar_movies(movie.tmdb_id)
-		total_pages = results["total_pages"]
+		total_pages = results["total_pages"] >= 1000 ? 1000 : results["total_pages"]
 		
-		until page_no == total_pages do
+		until page_no == to do
 			page_no +=1
 			p "Fetching results page ----> #{page_no}"
-			SimilarMoviesWorker.perform_async(movie.id, page_no)
-			# pause 10 seconds before continuing
-			sleep 1
-		
+			SimilarMoviesWorker.perform_async(movie.id, page_no)		
 		end
 		p "Saved similar movies for >>> #{movie.title} <<< Total Pages: #{total_pages}"
 	end
