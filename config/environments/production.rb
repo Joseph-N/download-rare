@@ -81,12 +81,12 @@ Downloadrare::Application.configure do
   # use sendmail
   config.action_mailer.delivery_method = :sendmail
 
-  # send emails on exception
-  # config.middleware.use ExceptionNotification::Rack,
-  # :ignore_crawlers => %w{Googlebot bingbot},
-  # :email => {
-  #   :email_prefix => "[Error] ",
-  #   :sender_address => %{"Error Notifier" <notifier@downloadrare.com>},
-  #   :exception_recipients => %w{admin@downloadrare.com}
-  # }
+  send emails on exception
+  config.middleware.use ExceptionNotification::Rack,
+  :ignore_crawlers => %w{Googlebot bingbot},
+  :email => {
+    :email_prefix => "[Error] ",
+    :sender_address => %{"Error Notifier" <notifier@downloadrare.com>},
+    :exception_recipients => %w{admin@downloadrare.com}
+  }
 end
