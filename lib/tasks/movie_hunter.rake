@@ -11,7 +11,7 @@ namespace :movies do
 				{ :quality => '720p',
 				  :set => count,
 				  :limit => 50,
-				  :rating => 4,
+				  :rating => 1,
 				  :sort => "date",
 				  :order => "desc" 
 				} 
