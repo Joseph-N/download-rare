@@ -13,7 +13,7 @@ class YtsWorker
   			if movie_details["release_date"].to_date >= 14.years.ago
           # find match
           match = Movie.where(:tmdb_id =>  movie_details["id"]).first
-          if match.any?
+          if match.present?
             movie = match.update_attributes(:poster => movie_details["poster_path"],
                                             :backdrop => movie_details["backdrop_path"])
           else
