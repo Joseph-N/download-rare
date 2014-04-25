@@ -58,7 +58,7 @@ class MovieWorker
                             :poster => movie_detail["poster_path"],
                             :file_size => size, :genres => genres, :imdb_id => imdb_id,
                             :magnetic_link => magnetic_link, :torrent_file_link => torrent_file_link,
-                            :imdb_rating => rating)
+                            :imdb_rating => rating, :release_date => movie_detail["release_date"])
 
   end
 end

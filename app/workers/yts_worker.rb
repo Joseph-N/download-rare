@@ -13,8 +13,7 @@ class YtsWorker
   			if movie_details["release_date"].to_date >= 14.years.ago
   				# create the movie
   				movie = Movie.where(:title => movie_details["original_title"],
-                              :tmdb_id => movie_details["id"],
-                              :release_date => movie_detail["release_date"]).first_or_create
+                              :tmdb_id => movie_details["id"]).first_or_create
           MovieWorker.perform_in(2.minutes, movie.id)
   			end
   		end
