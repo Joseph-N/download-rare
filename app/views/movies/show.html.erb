@@ -155,7 +155,7 @@
 			  <span class="border-color">Similar Movies</span>
 			</h2>
 	</div>
-			<% if @record.similar_movies.any? %>
+			<% if @similar_movies %>
 				<% @similar_movies.each do |movie|%>
 					  		<div class="col-md-2">
 			<div class="poster-sm">
