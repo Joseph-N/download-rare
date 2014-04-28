@@ -21,6 +21,8 @@ class MoviesController < ApplicationController
     @trailer = @movie["trailers"]["youtube"][0]["source"] unless @movie["trailers"]["youtube"][0].nil?
     @backdrops = @movie["images"]["backdrops"]
     @torrent = @yts.find(@record.imdb_id)["MovieList"][0] if @record.magnetic_link
+    @genres = fetch_genres.flatten.uniq
+    @similar_movies = Movie.where(:tmdb_id => @record.similar_movies.sample(6))
   end
 
   def create

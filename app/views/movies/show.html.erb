@@ -42,6 +42,14 @@
 		        moreAni: "fast",
 		        lesAni: "fast"
 		    }); 
+
+		    $('#torrent-info').popover({
+		    	html: true,
+		    	content: $('.row.top-20.torrent-info').html(),
+		    	placement: 'top',
+		    	container: 'body',
+		    	trigger: 'hover'
+		    })
 		});
 	</script>
 <% end %>
@@ -59,7 +67,7 @@
 					<div class="download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
 					</div>	
-			<%= link_to "Similar Movies", similar_movie_path(@record), class: "top-20 btn btn-lg btn-green btn-block"%>				
+						<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block top-20", rel: "prettyPhoto", title: "#{@record.title} trailer" %>				
 								
 			</div>
 			<div class="col-md-8">
@@ -86,63 +94,20 @@
 					  <hr>
 
 				<div class="row">
-					<div class="col-md-6">
-					<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block", rel: "prettyPhoto", title: "watch trailer" %>
+					<div class="col-md-2">
+				
+					<%= link_to image_tag('magnet_link.png'), download_path(resource: "movie", id: @record.id, type: "magnetic_link"), title: "Magnetic link", rel: "nofollow" %>
 					</div>
-					<div class="col-md-6">
-						<% if @record.download_link.present? %>
-						<%= link_to raw('<i class="fa fa-download"></i> Direct Download'), download_path(resource: "movie", id: @record.id), class: "btn btn-lg btn-primary btn-block", title: "download #{@movie["original_title"]} movie", style: "color: #fff;", rel: "nofollow"  %>
-						<% else %>
-						<%= link_to "Direct link not available", '#', class: "btn btn-lg btn-primary btn-block disabled", style: "color: #fff;" %>
-						<% end %>
+					<div class="col-md-7">
+						<%= link_to raw("<i class='fa fa-file'></i> Download Torrent File"), download_path(resource: "movie", id: @record.id, type: "torrent_file"), class: "btn btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent", rel: "nofollow"  %>
+					</div>
+					<div class="col-md-3" style="margin-top: 6px;">
+						<%= link_to raw("<i class='fa fa-info-circle'></i> Torrent Info"), '#', id: "torrent-info", title: "Torrent Info"  %>
 					</div>
 				</div>
 
 			</div>
 
-		</div>
-		<div class="row top-20">
-			<div class="col-md-12">
-							<% unless (@record.magnetic_link || @record.torrent_file_link).nil? %>
-			<table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-        	<td colspan="3"><strong>Torrent info</strong></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Size</td>
-          <td colspan="2"><%= @torrent["Size"] %></td>
-        </tr>
-        <tr>
-          <td>Quality</td>
-          <td colspan="2"><%= @torrent["Quality"] %></td>
-        </tr>
-        <tr>
-          <td>Seeders</td>
-          <td colspan="2"><%= @torrent["TorrentSeeds"] %></td>
-        </tr>
-        <tr>
-          <td>Peers</td>
-          <td colspan="2"><%= @torrent["TorrentPeers"] %></td>
-        </tr>
-        <tr>
-          <td>Download</td>
-          <td>
-          	<%= link_to image_tag('magnet_link.png'), download_path(resource: "movie", id: @record.id, type: "magnetic_link"), title: "Magnetic link", rel: "nofollow" %>
-          </td>
-          <td>
-          	<%= link_to raw("<i class='fa fa-file'></i> Download Torrent"), download_path(resource: "movie", id: @record.id, type: "torrent_file"), class: "btn btn-lg btn-green btn-block", title: "download #{@movie["original_title"]} movie torrent", rel: "nofollow"  %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-			<% else %>
-				<button type="button" class="btn btn-warning btn-block btn-lg disabled">No torrent links were found.</button>
-			<% end %>
-			</div>
 		</div>
 	</div>
 	<div class="col-md-3">
@@ -185,6 +150,45 @@
 </div> <!-- / .row -->
 
 <div class="row">
+	<div class="col-md-12">
+											<h2 class="headline first-child text-color">
+			  <span class="border-color">Similar Movies</span>
+			</h2>
+	</div>
+			<% if @record.similar_movies.any? %>
+				<% @similar_movies.each do |movie|%>
+					  		<div class="col-md-2">
+			<div class="poster-sm">
+			  	<%= link_to image_tag(@tmdb.image_url("poster", "w185", movie.poster), class: "img-responsive"), movie_path(movie) %>
+			<div class="caption"><%= movie.title %> (<%= movie.release_date.strftime('%Y') unless movie.release_date.nil? %>)</div>
+
+			</div>
+		  </div>
+				<% end %>
+				<div class="col-md-12 top-20">
+					<%= link_to "View All", similar_movie_path(@record), class: "btn btn-green"%>
+				</div>
+				<% else %>
+				<div class="col-md-12">
+					<p>No similar Movies found!</p>
+				</div>
+			<% end %>
+</div>
+
+
+		<div class="row top-20 torrent-info hidden">
+			<div class="col-md-12">
+				<% unless (@record.magnetic_link || @record.torrent_file_link).nil? %>
+					<p><strong>Size: </strong> <%= @torrent["Size"] %></p>
+					<p><strong>Quality: </strong> <%= @torrent["Quality"] %></p>
+					<p><strong>Seeders: </strong> <%= @torrent["TorrentSeeds"] %></p>
+					<p><strong>Peers: </strong> <%= @torrent["TorrentPeers"] %></p>
+
+   				<% end %>
+			</div>
+		</div>
+
+<div class="row top-20">
   <div class="col-sm-8">
   <%= render 'shared/comments' %>
 
