@@ -9,7 +9,6 @@
   <meta property="og:title"       		content="<%= @show["name"] %>" /> 
   <meta property="og:image"       		content="<%= @tmdb.image_url("poster", "w342", @record.poster) %>" /> 
   <meta property="og:description" 		content="<%= truncate(@show["overview"], length: 400)  %>" /> 
-  <meta property="video:duration" 		content="<%= @show["episode_run_time"][0] %>" />
   <meta property="video:release_date"	content="<%= @show["first_air_date"] %>" />
   <meta name="description" content="<%= truncate(@show["overview"], length: 400) %>">
 <% end %>
