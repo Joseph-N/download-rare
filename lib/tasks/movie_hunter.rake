@@ -20,7 +20,7 @@ namespace :movies do
 	  	end
 
 		# adjust accordingly
-		sets = (0..10).to_a
+		sets = (0..500).to_a
 
   		sets.each do |set|
   			contents = call_yts_api(set+=1)
