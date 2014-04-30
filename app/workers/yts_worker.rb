@@ -13,10 +13,15 @@ class YtsWorker
 			movie_details = results["movie_results"][0]
 			# i'm only interested in movies released above year 2000
 			if movie_details["release_date"].to_date >= 14.years.ago
-				# create the movie
-				movie = Movie.where(:title => movie_details["original_title"],
-                            :tmdb_id => movie_details["id"]).first_or_create
-        MovieWorker.perform_in(2.minutes, movie.id)
+        # search for match
+        match = Movie.where(:tmdb_id => movie_details["id"])
+
+        unless match.any?
+          # create the movie
+          movie = Movie.create(:title => movie_details["original_title"],
+                              :tmdb_id => movie_details["id"])
+          MovieWorker.perform_in(2.minutes, movie.id)
+        end
 			end
 		end
 	end
