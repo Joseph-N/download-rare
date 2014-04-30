@@ -19,8 +19,8 @@ namespace :movies do
 			JSON.parse(raw_data)
 	  	end
 
-		# very big set just in case
-		sets = (0..100000).to_a
+		# adjust accordingly
+		sets = (0..10).to_a
 
   		sets.each do |set|
   			contents = call_yts_api(set+=1)

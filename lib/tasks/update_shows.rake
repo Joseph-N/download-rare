@@ -14,7 +14,7 @@ namespace :shows do
 		p "*****************************************************"
 		p ""
 
-	  	TvShow.all.each do |show|
+	  	TvShow.find_each do |show|
 
 	  		p " Updating #{show.name}"
 
@@ -28,8 +28,9 @@ namespace :shows do
 		  	@show = @tv.find(show.tmdb_id)
 
 		  	# update record
-		  	show.update_attributes(number_of_episodes: @show["number_of_episodes"],
-		  						     number_of_seasons: @show["number_of_seasons"]
+		  	show.update_attributes(poster: @show["poster_path"],
+		  							number_of_episodes: @show["number_of_episodes"],
+		  						    number_of_seasons: @show["number_of_seasons"]
 		  						    )
 
 		  	p "  --> Update seasons and episodes count..................OK"

@@ -1,4 +1,4 @@
-namespace :movies do
+namespace :movie do
 	desc "Fetches for similar movies of a given movie"
 	task :fetch_similar => [:environment] do
 		tmdbMovie = TmdbMovie.new("29588c40b1a3ef6254fd1b6c86fbb9a9")
