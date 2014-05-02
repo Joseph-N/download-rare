@@ -44,7 +44,6 @@ gem 'nokogiri', '~> 1.6.1'
 gem 'sitemap_generator'
 gem 'rails_admin', '~> 0.6.2'
 gem 'exception_notification'
-gem "letter_opener", :group => :development
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -55,6 +54,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "letter_opener"
 end
 
 group :production do

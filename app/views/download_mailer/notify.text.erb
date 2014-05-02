@@ -1,0 +1,14 @@
+<% if @movie %>
+Type: Movie
+Title: <%= @movie.title %>
+Downloaded through: <%= @download_type %>
+Total downloads to date: <%= @movie.download_count %> Downloads!
+  
+<% end %>
+<% if @episode %>
+Type: Episode
+Title: <%= @episode.season.tv_show.name %> S0<%= @episode.season.season_number %>E<%= @episode.episode_number %>
+Downloaded through: <%= @download_type %>
+Total downloads to date: <%= @episode.download_count %> Downloads!
+  
+<% end %>
