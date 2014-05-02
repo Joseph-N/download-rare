@@ -3,9 +3,16 @@ namespace :episodes do
 	task :fetch_links =>  [:environment] do
 		wait = [1,2,3,4,5,6]
 
-		BaseUrl.find_each do |base_url|			
-			CrawlerWorker.perform_in(wait.sample.minutes, base_url.season.id, base_url.url)
-			p "Fetch links for #{base_url.season.tv_show.name} S0#{base_url.season.season_number} Episodes.........OK"
+		TvShow.find_each do |show|
+			# only update latest season
+			latest_season = show.seasons.last
+
+			p "Fetching new episodes of #{latest_season.tv_show.name} S0#{latest_season.season_number}"
+
+			# check new episodes of latest season
+			latest_season.base_urls.each do |base_url|
+				CrawlerWorker.perform_in(wait.sample.minutes, latest_season.id, base_url.url)
+			end
 		end
 	end
 end

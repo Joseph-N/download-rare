@@ -3,5 +3,5 @@ class Season < ActiveRecord::Base
 	has_many :base_urls, dependent: :destroy
 	has_many :episodes, dependent: :destroy
 
-  default_scope { order('created_at ASC') } 
+    default_scope { order('created_at ASC') } 
 end
