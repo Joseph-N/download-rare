@@ -22,10 +22,9 @@ class CrawlerWorker
 
     # for http://192.0.135.29/ parent directory
     elsif doc.css("tr+ tr a").size > 0
-      base_url = "http://192.0.135.29/media/Television/"
 
       doc.css("tr+ tr a").each_with_index do |entry, index|
-        full_url = base_url + entry["href"]
+        full_url = url + entry["href"]
         episode_number = index +=1
         SeasonsWorker.perform_in(wait.sample.minutes, season_id, episode_number, full_url)
       end      
