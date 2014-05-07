@@ -1,6 +1,10 @@
 module MoviesHelper
 	def return_year(string_date)
-		string_date.nil? ? string_date.to_date.strftime('%Y') : "N/A"
+		unless string_date.nil?
+			string_date.to_date.strftime('%Y')
+		else
+			"N/A"
+		end
 	end
 
 	def options_for_rating
