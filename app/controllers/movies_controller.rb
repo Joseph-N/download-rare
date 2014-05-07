@@ -18,7 +18,9 @@ class MoviesController < ApplicationController
   def show
     @record = Movie.friendly.find(params[:id])
     @movie = @tmdb_movie.find(@record.tmdb_id)
-    @trailer = @movie["trailers"]["youtube"][0]["source"] unless @movie["trailers"]["youtube"][0].nil?
+    if @movie["trailers"]
+      @trailer = @movie["trailers"]["youtube"][0]["source"] unless @movie["trailers"]["youtube"][0].nil?
+    end
     @backdrops = @movie["images"]["backdrops"]
     @torrent = @yts.find(@record.imdb_id)["MovieList"][0] if @record.magnetic_link
     @genres = fetch_genres.flatten.uniq
