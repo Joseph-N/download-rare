@@ -116,7 +116,7 @@
           <tr>
             <td><%= x+=1 %></td>
             <td>
-                 <%= link_to raw("<i class='fa fa-download'></i> Download Link #{x}"), download_path(resource: "episode", id: @episode.id, link_id: link.id), title: "download #{@tv_show.name} season #{@season.season_number} episode #{episode["episode_number"]}", rel: "nofollow" %>
+                 <%= link_to raw("<i class='fa fa-download'></i> Download Link #{x} &rarr; #{URI.parse(link.url).host}"), download_path(resource: "episode", id: @episode.id, link_id: link.id), title: "download #{@tv_show.name} season #{@season.season_number} episode #{episode["episode_number"]}", rel: "nofollow" %>
             </td>
             <td>
               <%= number_to_human_size(link.file_size) %>
