@@ -35,7 +35,7 @@
 	<script>
 		$(document).ready(function() {
 			$('.overview').jTruncate({  
-		        length: 310,
+		        length: 500,
 		        minTrail: 0,
 		        moreText: "Read More",
 		        lessText: "Read Less",
@@ -67,7 +67,9 @@
 					<div class="download">
 			    		<%= image_tag(@tmdb.image_url("poster", "w342", @record.poster), class: "img-responsive") %>
 					</div>	
-						<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block top-20", rel: "prettyPhoto", title: "#{@record.title} trailer" %>				
+						<%= link_to raw('<i class="fa fa-youtube-play"></i> Watch Trailer'), "https://www.youtube.com/watch?v=#{@trailer}", class: "btn btn-lg btn-default btn-block top-20", rel: "prettyPhoto", title: "#{@record.title} trailer" %>	
+						<br>
+						<%= link_to "Download Subtitles", @record.subtitle_url, class: "btn btn-lg btn-orange btn-block", target: "_blank" if @record.subtitle_url %>			
 								
 			</div>
 			<div class="col-md-8">

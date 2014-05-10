@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423120314) do
+ActiveRecord::Schema.define(version: 20140510191946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20140423120314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "download_count"
-    t.boolean  "approved",       default: false
   end
 
   add_index "episodes", ["episode_number"], name: "index_episodes_on_episode_number", using: :btree
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140423120314) do
     t.string   "torrent_file_link"
     t.float    "imdb_rating"
     t.string   "similar_movies",    array: true
+    t.string   "subtitle_url"
   end
 
   add_index "movies", ["imdb_rating", "genres", "release_date"], name: "index_movies_on_imdb_rating_and_genres_and_release_date", using: :btree

@@ -3,6 +3,7 @@ class Movie < ActiveRecord::Base
   	friendly_id :title, use: :slugged
 
   	after_save :load_into_soulmate
+  	before_save :add_subtitle_url
   	before_destroy :remove_from_soulmate
 
 	validates_uniqueness_of :tmdb_id
@@ -40,5 +41,9 @@ class Movie < ActiveRecord::Base
 	def remove_from_soulmate
 	    loader = Soulmate::Loader.new("movies")
 	    loader.remove("id" => self.id)
+	end
+
+	def add_subtitle_url
+		self.subtitle_url = "http://www.yifysubtitles.com/movie-imdb/#{self.imdb_id}"		
 	end
 end
