@@ -6,6 +6,8 @@ class SearchesController < ApplicationController
 			@shows = TvShow.plain_tsearch(params[:query])
 			@movies = Movie.plain_tsearch(params[:query]) 
 		end
+		@shows = nil
+		@movies = nil
 	end
 	
 	def create

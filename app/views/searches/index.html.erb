@@ -6,6 +6,7 @@
           <span class="border-color">Movie Results</span>
         </h2>
         <%= render 'shared/google_ad_2' %>
+        <% unless @movies.nil? %>
           <% @movies.each do |movie| %>
               <div class="col-md-3 bottom-20">
             <div class="poster">
@@ -15,12 +16,14 @@
             </div>
             </div>
           <% end %>
+          <% end %>
           </div>
           <div class="row">
             <h2 class="headline first-child text-color">
               <span class="border-color">TV shows Results</span>
             </h2>
             <%= render 'shared/google_ad_1' %>
+            <% unless @shows.nil? %>
               <% @shows.each do |show| %>
                   <div class="col-md-3 bottom-20">
                 <div class="poster">
@@ -29,6 +32,7 @@
 
                 </div>
                 </div>
+              <% end %>
               <% end %>
               </div>
         </div>
