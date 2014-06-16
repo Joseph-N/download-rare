@@ -5,9 +5,10 @@ class SearchesController < ApplicationController
 		if params[:query]
 			@shows = TvShow.plain_tsearch(params[:query])
 			@movies = Movie.plain_tsearch(params[:query]) 
+		else
+			@shows = nil
+			@movies = nil
 		end
-		@shows = nil
-		@movies = nil
 	end
 	
 	def create
