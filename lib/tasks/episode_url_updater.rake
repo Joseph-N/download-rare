@@ -7,11 +7,15 @@ namespace :episodes do
 			# only update latest season
 			latest_season = show.seasons.last
 
-			p "Fetching new episodes of #{latest_season.tv_show.name} S0#{latest_season.season_number}"
+			unless latest_season.nil?
+				puts "Fetching new episodes of #{latest_season.tv_show.name} S0#{latest_season.season_number}"
 
-			# check new episodes of latest season
-			latest_season.base_urls.each do |base_url|
-				CrawlerWorker.perform_in(wait.sample.minutes, latest_season.id, base_url.url)
+				# check new episodes of latest season
+				latest_season.base_urls.each do |base_url|
+					CrawlerWorker.perform_in(wait.sample.minutes, latest_season.id, base_url.url)
+				end
+			else
+				puts "No latest season for #{show.name}"
 			end
 		end
 	end

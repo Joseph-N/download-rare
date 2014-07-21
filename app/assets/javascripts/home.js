@@ -15,7 +15,7 @@
     types: ['movies','shows'],
     renderCallback: render,
     selectCallback: select,
-    minQueryLength: 2,
+    minQueryLength: 1,
     maxResults: 12
   });
 }).call(this);
